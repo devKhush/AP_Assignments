@@ -1,3 +1,6 @@
+import java.util.Date;
+import java.util.Scanner;
+
 public class LectureSlides implements LectureMaterials{
     String title;
     int numOfSlides;
@@ -26,5 +29,24 @@ public class LectureSlides implements LectureMaterials{
             System.out.println("Date of upload: "+currentSlide.dateOfUpload);
             System.out.println("Uploaded by: "+currentSlide.uploadedByInstructor);
         }
+    }
+
+    @Override
+    public void addLectureMaterial(Course course, Instructor instructor){
+        Scanner scan = new Scanner(System.in);
+        System.out.printf("Enter topic of slides: ");
+        String title = scan.nextLine().trim();
+        System.out.printf("Enter number of slides: ");
+        int slideNum = Integer.parseInt(scan.nextLine().trim());
+        String[] slideContent = new String[slideNum];
+        for(int i=0; i<slideNum; i++){
+            System.out.printf("Content of slide %d: ",i+1);
+            String contentIth = scan.nextLine().trim();
+            slideContent[i] = contentIth;
+        }
+        Date date = new Date();
+        String currentDate = date.toString();
+        LectureSlides newSlide = new LectureSlides(title, slideNum, currentDate, instructor.name, slideContent);
+        course.lectureSlides.put(currentDate, newSlide);
     }
 }

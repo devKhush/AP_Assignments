@@ -27,40 +27,63 @@ public class Instructor implements CourseMember{
     public void logOut(){
     }
 
-    public void addLectureSlides(Course course, Instructor instructor){
+    public void addLectureMaterials(Course course){
         Scanner scan = new Scanner(System.in);
-        System.out.printf("Enter topic of slides: ");
-        String title = scan.nextLine().trim();
-        System.out.printf("Enter number of slides: ");
-        int slideNum = Integer.parseInt(scan.nextLine().trim());
-        String[] slideContent = new String[slideNum];
-        for(int i=0; i<slideNum; i++){
-            System.out.printf("Content of slide %d: ",i+1);
-            String contentIth = scan.nextLine().trim();
-            slideContent[i] = contentIth;
+        System.out.println(("1. Add Lecture Slide\n" +
+                "2. Add Lecture Video"));
+        int option = Integer.parseInt(scan.nextLine().trim());
+        if (option==1){
+            LectureSlides dummy = new LectureSlides("", 0, "", "", new String[0]);
+            dummy.addLectureMaterial(course, this);
         }
-        Date date = new Date();
-        String currentDate = date.toString();
-        LectureSlides newSlide = new LectureSlides(title, slideNum, currentDate, instructor.name, slideContent);
-        course.lectureSlides.put(currentDate, newSlide);
+        else if (option==2){
+            LectureVideo dummy = new LectureVideo("", "", "", "");
+            dummy.addLectureMaterial(course, this);
+        }
     }
 
-    public void addLectureVideo(Course course, Instructor instructor){
+    public void addAssessmentByInstructor(Course course){
         Scanner scan = new Scanner(System.in);
-        System.out.printf("Enter topic of video: ");
-        String title = scan.nextLine().trim();
-        System.out.printf("Enter filename of video: ");
-        String fileName = scan.nextLine();
-        int fileNameLength = fileName.length();
-        while(!((fileName.charAt(fileNameLength-1)=='4')&&(fileName.charAt(fileNameLength-2)=='p')&&(fileName.charAt(fileNameLength-3)=='m')&&(fileName.charAt(fileNameLength-4)=='.'))){
-            System.out.println("Incorrect file format.Enter correct video file extension \".mp4\"");
-            fileName = scan.nextLine();
-            fileNameLength = fileName.length();
+        System.out.println("1. Add Assignment");
+        System.out.println("2. Add Quiz");
+        int option = Integer.parseInt(scan.nextLine().trim());
+        if (option==1){
+            Assignment dummy = new Assignment("XYZ", 0);
+            dummy.addAssessment(course);
         }
-        Date date = new Date();
-        String currentDate = date.toString();
-        LectureVideo newVideo = new LectureVideo(title, currentDate, instructor.name, fileName);
-        course.lectureVideos.put(currentDate, newVideo);
+        else if (option==2){
+            Quiz dummy = new Quiz("XYZ");
+            dummy.addAssessment(course);
+        }
     }
 
+    public void closeAssessmentByInstructor(Course course){
+        Scanner scan = new Scanner(System.in);
+        Assessment currentAssessment;
+        System.out.println("List of Open Assessments: ");
+        for(int id : course.allAssessments.keySet()){
+            currentAssessment = course.allAssessments.get(id);
+            if (currentAssessment instanceof Assignment currentAssignment){
+                if (currentAssignment.isOpen) {
+                    System.out.printf("ID: %d, Assignment: %s, Max Marks: %d \n", id, currentAssignment.problemStatement, currentAssignment.maxMarks);
+                    System.out.println("--------------------");
+                }
+            }
+            else if (currentAssessment instanceof Quiz currentQuiz){
+                if (currentQuiz.isOpen) {
+                    System.out.printf("ID: %d, Question: %s\n", id, currentQuiz.question);
+                    System.out.println("--------------------");
+                }
+            }
+        }
+        System.out.printf("Enter id of assessment to close: ");
+        int id = Integer.parseInt(scan.nextLine().trim());
+        Assessment assessmentToBeClosed =  course.allAssessments.get(id);
+        if (assessmentToBeClosed instanceof Assignment assignmentToBeClosed){
+            new Assignment("XYZ", 0).closeAssessment(course,id);
+        }
+        else if (assessmentToBeClosed instanceof Quiz quizToBeClosed){
+            new Quiz("XYZ").closeAssessment(course, id);
+        }
+    }
 }

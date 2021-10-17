@@ -1,3 +1,6 @@
+import java.util.Date;
+import java.util.Scanner;
+
 public class LectureVideo implements LectureMaterials{
     String title;
     String videoFileName;
@@ -23,7 +26,22 @@ public class LectureVideo implements LectureMaterials{
         }
     }
 
-    public void addLectureMaterials(Course course){
-
+    @Override
+    public void addLectureMaterial(Course course, Instructor instructor){
+        Scanner scan = new Scanner(System.in);
+        System.out.printf("Enter topic of video: ");
+        String title = scan.nextLine().trim();
+        System.out.printf("Enter filename of video: ");
+        String fileName = scan.nextLine();
+        int fileNameLength = fileName.length();
+        while(!((fileName.charAt(fileNameLength-1)=='4')&&(fileName.charAt(fileNameLength-2)=='p')&&(fileName.charAt(fileNameLength-3)=='m')&&(fileName.charAt(fileNameLength-4)=='.'))){
+            System.out.println("Incorrect file format.Enter correct video file with extension \".mp4\"");
+            fileName = scan.nextLine();
+            fileNameLength = fileName.length();
+        }
+        Date date = new Date();
+        String currentDate = date.toString();
+        LectureVideo newVideo = new LectureVideo(title, currentDate, instructor.name, fileName);
+        course.lectureVideos.put(currentDate, newVideo);
     }
 }
