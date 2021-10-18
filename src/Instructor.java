@@ -117,12 +117,12 @@ public class Instructor implements CourseMember{
         Assessment assessmentToBeGraded = course.allAssessments.get(assessmentID);
         if (assessmentToBeGraded instanceof Assignment assignmentToBeGraded) {
             if (assignmentToBeGraded.submittedByStudents.isEmpty()){
-                System.out.println("No submissions yet");
+                System.out.println("Either No submissions yet OR all submissions graded");
                 return;
             }
         } else if (assessmentToBeGraded instanceof Quiz quizToBeGraded) {
             if (quizToBeGraded.submittedByStudents.isEmpty()){
-                System.out.println("No submissions yet");
+                System.out.println("Either No submissions yet OR all submissions graded");
                 return;
             }
         }
@@ -157,8 +157,10 @@ public class Instructor implements CourseMember{
             assignmentToBeGraded.grade = grade;
             assignmentToBeGraded.graded = true;
             assignmentToBeGraded.gradedBy = this.name;
+            Assignment assignmentGradedInCourseClass = (Assignment) course.allAssessments.get(assessmentID);
+            assignmentGradedInCourseClass.submittedByStudents.remove(studentWhoseAssessmentToBeGraded);
         }
-        if (assessmentToBeGraded instanceof Quiz quizToBeGraded) {
+        else if (assessmentToBeGraded instanceof Quiz quizToBeGraded) {
             System.out.println("Answer submitted: " + quizToBeGraded.answer);
             System.out.println("-------------------------------");
             System.out.println("Marks marks: " + quizToBeGraded.maxMarks);
@@ -167,6 +169,8 @@ public class Instructor implements CourseMember{
             quizToBeGraded.grade = grade;
             quizToBeGraded.graded = true;
             quizToBeGraded.gradedBy = this.name;
+            Quiz quizGradedInCourseClass = (Quiz)course.allAssessments.get(assessmentID);
+            quizGradedInCourseClass.submittedByStudents.remove(studentWhoseAssessmentToBeGraded);
         }
     }
 
