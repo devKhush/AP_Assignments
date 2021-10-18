@@ -59,7 +59,8 @@ public class Assignment implements Assessment{
         String fileName = scan.nextLine().trim();
         int fileNameLength = fileName.length();
         while(!((fileName.charAt(fileNameLength-1)=='p')&&(fileName.charAt(fileNameLength-2)=='i')&&(fileName.charAt(fileNameLength-3)=='z')&&(fileName.charAt(fileNameLength-4)=='.'))){
-            System.out.println("Incorrect file format.Enter correct zip file with extension \".zip\"");
+            System.out.println("Incorrect file format. Enter correct zip file with extension \".zip\"");
+            System.out.printf("Enter filename of assignment submission: ");
             fileName = scan.nextLine().trim();
             fileNameLength = fileName.length();
         }

@@ -27,10 +27,12 @@ public class Main {
 
         mainWhile:
         while(true){
+            System.out.println("\n==========================================================");
             System.out.println("Welcome to Backpack\n" +
                     "1. Enter as instructor\n" +
                     "2. Enter as student\n" +
                     "3. Exit");
+            System.out.printf("> ");
             int option = Integer.parseInt(scan.nextLine().trim());
 
             if (option==3){
@@ -94,7 +96,7 @@ public class Main {
                 }
                 System.out.printf("Choose ID: ");
                 int studentIDChosen = Integer.parseInt(scan.nextLine().trim());
-                student = AP.allStudents.get("I"+studentIDChosen);
+                student = AP.allStudents.get("S"+studentIDChosen);
 
                 studentWhile:
                 while(true){

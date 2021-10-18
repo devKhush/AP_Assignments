@@ -29,6 +29,7 @@ public class Instructor implements CourseMember{
             currentComment = course.allComments.get(str);
             System.out.println(currentComment.message+" - "+currentComment.uploadedByMember);
             System.out.println(currentComment.uploadDate);
+            System.out.println();
         }
     }
 
@@ -104,14 +105,33 @@ public class Instructor implements CourseMember{
         course.viewAssessment();
         System.out.printf("Enter ID of assessment to grade submissions: ");
         int assessmentID = Integer.parseInt(scan.nextLine().trim());
-        System.out.println("Choose ID from these ungraded submissions");
         Assessment assessmentToBeGraded = course.allAssessments.get(assessmentID);
         if (assessmentToBeGraded instanceof Assignment assignmentToBeGraded) {
-            for (Student studentSubmitted : assignmentToBeGraded.submittedByStudents) {
-                System.out.println(studentSubmitted.id + ". " + studentSubmitted.name);
+            if (assignmentToBeGraded.submittedByStudents.isEmpty()){
+                System.out.println("No submissions yet");
+                return;
             }
         } else if (assessmentToBeGraded instanceof Quiz quizToBeGraded) {
+            if (quizToBeGraded.submittedByStudents.isEmpty()){
+                System.out.println("No submissions yet");
+                return;
+            }
+        }
+
+
+        System.out.println("Choose student IDs from these ungraded submissions");
+        if (assessmentToBeGraded instanceof Assignment assignmentToBeGraded) {
+            for (Student studentSubmitted : assignmentToBeGraded.submittedByStudents) {
+                Student currentStudent = course.allStudents.get(studentSubmitted.name);
+                Assignment toBeGraded = (Assignment) currentStudent.allAssessments.get(assessmentID);
+                if (!toBeGraded.graded) {
+                    System.out.println(studentSubmitted.id + ". " + studentSubmitted.name);
+                }
+            }
+        }
+        else if (assessmentToBeGraded instanceof Quiz quizToBeGraded) {
             for (Student studentSubmitted : quizToBeGraded.submittedByStudents) {
+                if (!((Quiz)course.allStudents.get(studentSubmitted.name).allAssessments.get(assessmentID)).graded)
                 System.out.println(studentSubmitted.id + ". " + studentSubmitted.name);
             }
         }

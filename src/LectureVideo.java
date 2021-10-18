@@ -33,10 +33,11 @@ public class LectureVideo implements LectureMaterials{
         System.out.printf("Enter topic of video: ");
         String title = scan.nextLine().trim();
         System.out.printf("Enter filename of video: ");
-        String fileName = scan.nextLine();
+        String fileName = scan.nextLine().trim();
         int fileNameLength = fileName.length();
         while(!((fileName.charAt(fileNameLength-1)=='4')&&(fileName.charAt(fileNameLength-2)=='p')&&(fileName.charAt(fileNameLength-3)=='m')&&(fileName.charAt(fileNameLength-4)=='.'))){
-            System.out.println("Incorrect file format.Enter correct video file with extension \".mp4\"");
+            System.out.println("Incorrect file format. Enter correct video file with extension \".mp4\"");
+            System.out.printf("Enter filename of video: ");
             fileName = scan.nextLine().trim();
             fileNameLength = fileName.length();
         }

@@ -31,6 +31,7 @@ public class Student implements CourseMember{
             currentComment = course.allComments.get(str);
             System.out.println(currentComment.message+" - "+currentComment.uploadedByMember);
             System.out.println(currentComment.uploadDate);
+            System.out.println();
         }
     }
 
@@ -40,8 +41,31 @@ public class Student implements CourseMember{
     }
 
     public void studentSubmitAssessment(Course course){
-        System.out.println("Pending assessments :");
+        if (course.allAssessments.keySet().isEmpty()){
+            System.out.println("No assessments uploaded yet");
+            return;
+        }
+        boolean pendingAssessmentAvailable = false;
         Assessment toBeSubmitted;
+        for( int id : this.allAssessments.keySet()){
+            toBeSubmitted = this.allAssessments.get(id);
+            if (toBeSubmitted instanceof Assignment assignment){
+                if ((assignment.isOpen) && (!assignment.submitted)) {
+                    pendingAssessmentAvailable = true;
+                }
+            }
+            else if (toBeSubmitted instanceof Quiz quiz){
+                if ((quiz.isOpen) && (!quiz.submitted)) {
+                    pendingAssessmentAvailable = true;
+                }
+            }
+        }
+        if (!pendingAssessmentAvailable){
+            System.out.println("No pending assessments");
+            return;
+        }
+
+        System.out.println("Pending assessments :");
         for( int id : this.allAssessments.keySet()){
             toBeSubmitted = this.allAssessments.get(id);
             if (toBeSubmitted instanceof Assignment assignment){
@@ -76,7 +100,7 @@ public class Student implements CourseMember{
                 if (assignment.graded) {
                     System.out.println("Submission: "+assignment.submission);
                     System.out.printf("Marks scored: %.2f \n",assignment.grade);
-                    System.out.println("Graded by: ");
+                    System.out.println("Graded by: "+assignment.gradedBy);
                     System.out.println("----------------------------");
                 }
             }
@@ -84,28 +108,30 @@ public class Student implements CourseMember{
                 if (quiz.graded) {
                     System.out.println("Your answer: "+quiz.answer);
                     System.out.printf("Marks scored: %.2f \n",quiz.grade);
-                    System.out.println("Graded by: ");
+                    System.out.println("Graded by: "+quiz.gradedBy);
                     System.out.println("----------------------------");
                 }
             }
         }
+        System.out.println();
 
         System.out.println("UnGraded submissions: ");
         for( int id : this.allAssessments.keySet()){
             toBeChecked = this.allAssessments.get(id);
             if (toBeChecked instanceof Assignment assignment){
                 if ((!assignment.graded) && (assignment.submitted)) {
-                    System.out.println("Assignment Problem Statement: "+assignment.problemStatement);
+                    System.out.println("Assignment Problem Statement Submission: "+assignment.submission);
                     System.out.println("----------------------------");
                 }
             }
             else if (toBeChecked instanceof Quiz quiz){
                 if ((!quiz.graded) && (quiz.submitted)) {
-                    System.out.println("Question: "+quiz.question);
+                    System.out.println("Quiz Question: "+quiz.question);
                     System.out.println("----------------------------");
                 }
             }
         }
+        System.out.println();
     }
 
     @Override
