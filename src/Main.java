@@ -10,17 +10,21 @@ public class Main {
         Student S2 = new Student("S2", 2);
         Student S3 = new Student("S3", 3);
         Student S4 = new Student("S4", 4);
+        Student S5 = new Student("S5", 5);
         AP.allStudents.put("S0",S0);
         AP.allStudents.put("S1",S1);
         AP.allStudents.put("S2",S2);
         AP.allStudents.put("S3",S3);
         AP.allStudents.put("S4",S4);
+        AP.allStudents.put("S5",S5);
         Instructor I0 = new Instructor("I0", 0);
         Instructor I1 = new Instructor("I1", 1);
         Instructor I2 = new Instructor("I2", 2);
+        Instructor I3 = new Instructor("I3", 3);
         AP.allInstructors.put("I0", I0);
         AP.allInstructors.put("I1", I1);
         AP.allInstructors.put("I2", I2);
+        AP.allInstructors.put("I3", I3);
 
         Student student;
         Instructor instructor;
