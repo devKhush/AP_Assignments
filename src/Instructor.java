@@ -70,6 +70,11 @@ public class Instructor implements CourseMember{
 
     public void closeAssessmentByInstructor(Course course){
         Scanner scan = new Scanner(System.in);
+        if (course.allAssessments.keySet().isEmpty()){
+            System.out.println("No assessments uploaded yet");
+            return;
+        }
+
         Assessment currentAssessment;
         System.out.println("List of Open Assessments: ");
         for(int id : course.allAssessments.keySet()){
@@ -100,6 +105,10 @@ public class Instructor implements CourseMember{
 
     public void instructorGradeAssessment(Course course) {
         Scanner scan = new Scanner(System.in);
+        if (course.allAssessments.keySet().isEmpty()){
+            System.out.println("No assessments uploaded yet");
+            return;
+        }
 
         System.out.println("List of assessments: ");
         course.viewAssessment();
