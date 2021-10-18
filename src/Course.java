@@ -24,10 +24,10 @@ public class Course {
         //allQuizzes = new LinkedHashMap<>();
     }
 
-    public void viewAssessment(Course course){
+    public void viewAssessment(){
         Assessment currentAssessment;
-        for(int id : course.allAssessments.keySet()){
-            currentAssessment = course.allAssessments.get(id);
+        for(int id : this.allAssessments.keySet()){
+            currentAssessment = this.allAssessments.get(id);
             if (currentAssessment instanceof Assignment currentAssignment){
                 System.out.printf("ID: %d, Assignment: %s, Max Marks: %d \n",id,currentAssignment.problemStatement,currentAssignment.maxMarks);
                 System.out.println("--------------------");

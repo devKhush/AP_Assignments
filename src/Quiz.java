@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Quiz implements Assessment{
@@ -9,6 +10,7 @@ public class Quiz implements Assessment{
     boolean graded;
     String answer;
     String gradedBy;
+    ArrayList<Student> submittedByStudents;
 
     public Quiz(String question){
         this.question = question;
@@ -19,6 +21,7 @@ public class Quiz implements Assessment{
         this.grade = -1.00;
         this.answer = "";
         this.gradedBy = "";
+        this.submittedByStudents = new ArrayList<Student>();
     }
 
     @Override
@@ -47,12 +50,14 @@ public class Quiz implements Assessment{
     }
 
     @Override
-    public void submitAssessment(Student student, int id){
+    public void submitAssessment(Student student, int id, Course course){
         Scanner scan = new Scanner(System.in);
         Quiz toBeSubmitted = (Quiz) student.allAssessments.get(id);
         System.out.printf(toBeSubmitted.question +"? ");
         String solution = scan.nextLine().trim();
         toBeSubmitted.submitted=true;
         toBeSubmitted.answer = solution;
+        Quiz quizOnTheCourse = (Quiz) course.allAssessments.get(id);
+        quizOnTheCourse.submittedByStudents.add(student);
     }
 }

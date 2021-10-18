@@ -1,15 +1,24 @@
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.Scanner;
 
 public class Instructor implements CourseMember{
+    int id;
     String name;
 
-    public void addComment(Course course, Instructor instructor){
+    public Instructor(String name, int id){
+        this.name=name;
+        this.id = id;
+    }
+
+    @Override
+    public void addComment(Course course, CourseMember instructor){
         Scanner scan = new Scanner(System.in);
         System.out.printf("Enter comment: ");
         String message = scan.nextLine().trim();
         String dateString = new Date().toString();
-        Comment commentToBeAdded = new Comment(message, dateString, instructor.name);
+        Comment commentToBeAdded = new Comment(message, dateString, ((Instructor)instructor).name);
         course.allComments.put(commentToBeAdded.uploadDate, commentToBeAdded);
     }
 
@@ -86,4 +95,26 @@ public class Instructor implements CourseMember{
             new Quiz("XYZ").closeAssessment(course, id);
         }
     }
+
+    public void instructorGradeAssessment(Course course){
+        Scanner scan = new Scanner(System.in);
+
+        System.out.println("List of assessments: ");
+        course.viewAssessment();
+        System.out.printf("Enter ID of assessment to view submissions: ");
+        int id = Integer.parseInt(scan.nextLine().trim());
+        System.out.println("Choose ID from these ungraded submissions");
+        Assessment assessmentToBeGraded = course.allAssessments.get(id);
+        if (assessmentToBeGraded instanceof Assignment assignmentToBeGraded){
+            for (Student studentSubmitted: assignmentToBeGraded.submittedByStudents){
+                System.out.println(studentSubmitted.id +". "+studentSubmitted.name);
+            }
+        }
+        else if (assessmentToBeGraded instanceof Quiz quizToBeGraded){
+            for (Student studentSubmitted: quizToBeGraded.submittedByStudents){
+                System.out.println(studentSubmitted.id +". "+studentSubmitted.name);
+            }
+        }
+    }
+
 }

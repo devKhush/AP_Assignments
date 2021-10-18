@@ -1,4 +1,5 @@
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -7,12 +8,19 @@ public class Student implements CourseMember{
     int id;
     Map<Integer, Assessment> allAssessments;
 
-    public void addComment(Course course, Student student){
+    public Student(String name, int id){
+        this.name=name;
+        this.id = id;
+        this.allAssessments=new LinkedHashMap<>();
+    }
+
+    @Override
+    public void addComment(Course course, CourseMember student){
         Scanner scan = new Scanner(System.in);
         System.out.printf("Enter comment: ");
         String message = scan.nextLine().trim();
         String dateString = new Date().toString();
-        Comment commentToBeAdded = new Comment(message, dateString, student.name);
+        Comment commentToBeAdded = new Comment(message, dateString, ((Student)student).name);
         course.allComments.put(commentToBeAdded.uploadDate, commentToBeAdded);
     }
 
@@ -52,10 +60,10 @@ public class Student implements CourseMember{
         int id = Integer.parseInt(scan.nextLine().trim());
         Assessment assessmentToBeSubmitted =  this.allAssessments.get(id);
         if (assessmentToBeSubmitted instanceof Assignment assignmentToBeClosed){
-            new Assignment("XYZ", 0).submitAssessment(this,id);
+            new Assignment("XYZ", 0).submitAssessment(this,id, course);
         }
         else if (assessmentToBeSubmitted instanceof Quiz quizToBeClosed){
-            new Quiz("XYZ").submitAssessment(this, id);
+            new Quiz("XYZ").submitAssessment(this, id, course);
         }
     }
 

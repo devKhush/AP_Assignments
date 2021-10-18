@@ -36,7 +36,7 @@ public class LectureVideo implements LectureMaterials{
         int fileNameLength = fileName.length();
         while(!((fileName.charAt(fileNameLength-1)=='4')&&(fileName.charAt(fileNameLength-2)=='p')&&(fileName.charAt(fileNameLength-3)=='m')&&(fileName.charAt(fileNameLength-4)=='.'))){
             System.out.println("Incorrect file format.Enter correct video file with extension \".mp4\"");
-            fileName = scan.nextLine();
+            fileName = scan.nextLine().trim();
             fileNameLength = fileName.length();
         }
         Date date = new Date();

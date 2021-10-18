@@ -1,4 +1,5 @@
 import javax.print.attribute.standard.OutputDeviceAssigned;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Assignment implements Assessment{
@@ -10,6 +11,7 @@ public class Assignment implements Assessment{
     boolean graded;
     String submission;
     String gradedBy;
+    ArrayList<Student> submittedByStudents;
 
     public Assignment(String problemStatement, int maxMarks){
         this.maxMarks = maxMarks;
@@ -20,6 +22,7 @@ public class Assignment implements Assessment{
         this.grade = -1.00;
         this.submission = "";
         this.gradedBy = "";
+        this.submittedByStudents = new ArrayList<Student>();
     }
 
     @Override
@@ -50,19 +53,21 @@ public class Assignment implements Assessment{
     }
 
     @Override
-    public void submitAssessment(Student student, int id){
+    public void submitAssessment(Student student, int id, Course course){
         Scanner scan = new Scanner(System.in);
-        System.out.printf("Enter filename of assignment: ");
+        System.out.printf("Enter filename of assignment submission: ");
         String fileName = scan.nextLine().trim();
         int fileNameLength = fileName.length();
         while(!((fileName.charAt(fileNameLength-1)=='p')&&(fileName.charAt(fileNameLength-2)=='i')&&(fileName.charAt(fileNameLength-3)=='z')&&(fileName.charAt(fileNameLength-4)=='.'))){
             System.out.println("Incorrect file format.Enter correct zip file with extension \".zip\"");
-            fileName = scan.nextLine();
+            fileName = scan.nextLine().trim();
             fileNameLength = fileName.length();
         }
         Assignment toBeSubmitted = (Assignment) student.allAssessments.get(id);
         toBeSubmitted.submitted=true;
         toBeSubmitted.submission = fileName;
+        Assignment assignmentOnTheCourse = (Assignment) course.allAssessments.get(id);
+        assignmentOnTheCourse.submittedByStudents.add(student);
     }
 
 }
