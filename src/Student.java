@@ -15,12 +15,12 @@ public class Student implements CourseMember{
     }
 
     @Override
-    public void addComment(Course course, CourseMember student){
+    public void addComment(Course course){
         Scanner scan = new Scanner(System.in);
         System.out.printf("Enter comment: ");
         String message = scan.nextLine().trim();
         String dateString = new Date().toString();
-        Comment commentToBeAdded = new Comment(message, dateString, ((Student)student).name);
+        Comment commentToBeAdded = new Comment(message, dateString, this.name);
         course.allComments.put(commentToBeAdded.uploadDate, commentToBeAdded);
     }
 
@@ -36,7 +36,7 @@ public class Student implements CourseMember{
 
     @Override
     public void logOut(){
-
+        // logged out successfully
     }
 
     public void studentSubmitAssessment(Course course){
@@ -106,5 +106,11 @@ public class Student implements CourseMember{
                 }
             }
         }
+    }
+
+    @Override
+    public void viewLectureMaterial(Course course){
+        new LectureSlides("", 1, "", "", new String[1]).viewLectureMaterials(course);
+        new LectureVideo("", "", "", "").viewLectureMaterials(course);
     }
 }

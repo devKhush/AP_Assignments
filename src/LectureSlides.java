@@ -28,6 +28,7 @@ public class LectureSlides implements LectureMaterials{
             System.out.println("Number of Slides: "+currentSlide.numOfSlides);
             System.out.println("Date of upload: "+currentSlide.dateOfUpload);
             System.out.println("Uploaded by: "+currentSlide.uploadedByInstructor);
+            System.out.println();
         }
     }
 

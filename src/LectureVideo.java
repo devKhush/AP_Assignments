@@ -23,6 +23,7 @@ public class LectureVideo implements LectureMaterials{
             System.out.println("Video file: "+currentVideo.videoFileName);
             System.out.println("Date of upload: "+currentVideo.dateOfUpload);
             System.out.println("Uploaded by: "+currentVideo.uploadedByInstructor);
+            System.out.println();
         }
     }
 

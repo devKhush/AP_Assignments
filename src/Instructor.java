@@ -13,12 +13,12 @@ public class Instructor implements CourseMember{
     }
 
     @Override
-    public void addComment(Course course, CourseMember instructor){
+    public void addComment(Course course){
         Scanner scan = new Scanner(System.in);
         System.out.printf("Enter comment: ");
         String message = scan.nextLine().trim();
         String dateString = new Date().toString();
-        Comment commentToBeAdded = new Comment(message, dateString, ((Instructor)instructor).name);
+        Comment commentToBeAdded = new Comment(message, dateString, this.name);
         course.allComments.put(commentToBeAdded.uploadDate, commentToBeAdded);
     }
 
@@ -34,6 +34,7 @@ public class Instructor implements CourseMember{
 
     @Override
     public void logOut(){
+        //logged out successfully
     }
 
     public void addLectureMaterials(Course course){
@@ -42,7 +43,7 @@ public class Instructor implements CourseMember{
                 "2. Add Lecture Video"));
         int option = Integer.parseInt(scan.nextLine().trim());
         if (option==1){
-            LectureSlides dummy = new LectureSlides("", 0, "", "", new String[0]);
+            LectureSlides dummy = new LectureSlides("", 0, "", "", new String[1]);
             dummy.addLectureMaterial(course, this);
         }
         else if (option==2){
@@ -96,25 +97,54 @@ public class Instructor implements CourseMember{
         }
     }
 
-    public void instructorGradeAssessment(Course course){
+    public void instructorGradeAssessment(Course course) {
         Scanner scan = new Scanner(System.in);
 
         System.out.println("List of assessments: ");
         course.viewAssessment();
-        System.out.printf("Enter ID of assessment to view submissions: ");
-        int id = Integer.parseInt(scan.nextLine().trim());
+        System.out.printf("Enter ID of assessment to grade submissions: ");
+        int assessmentID = Integer.parseInt(scan.nextLine().trim());
         System.out.println("Choose ID from these ungraded submissions");
-        Assessment assessmentToBeGraded = course.allAssessments.get(id);
-        if (assessmentToBeGraded instanceof Assignment assignmentToBeGraded){
-            for (Student studentSubmitted: assignmentToBeGraded.submittedByStudents){
-                System.out.println(studentSubmitted.id +". "+studentSubmitted.name);
+        Assessment assessmentToBeGraded = course.allAssessments.get(assessmentID);
+        if (assessmentToBeGraded instanceof Assignment assignmentToBeGraded) {
+            for (Student studentSubmitted : assignmentToBeGraded.submittedByStudents) {
+                System.out.println(studentSubmitted.id + ". " + studentSubmitted.name);
+            }
+        } else if (assessmentToBeGraded instanceof Quiz quizToBeGraded) {
+            for (Student studentSubmitted : quizToBeGraded.submittedByStudents) {
+                System.out.println(studentSubmitted.id + ". " + studentSubmitted.name);
             }
         }
-        else if (assessmentToBeGraded instanceof Quiz quizToBeGraded){
-            for (Student studentSubmitted: quizToBeGraded.submittedByStudents){
-                System.out.println(studentSubmitted.id +". "+studentSubmitted.name);
-            }
+        System.out.printf("> ");
+        int studentID = Integer.parseInt(scan.nextLine().trim());
+        Student studentWhoseAssessmentToBeGraded = course.allStudents.get("S" + studentID);
+        assessmentToBeGraded = studentWhoseAssessmentToBeGraded.allAssessments.get(assessmentID);
+        if (assessmentToBeGraded instanceof Assignment assignmentToBeGraded) {
+            System.out.println("Submission: " + assignmentToBeGraded.submission);
+            System.out.println("-------------------------------");
+            System.out.println("Marks marks: " + assignmentToBeGraded.maxMarks);
+            System.out.printf("Marks scored: ");
+            double grade = Double.parseDouble(scan.nextLine().trim());
+            assignmentToBeGraded.grade = grade;
+            assignmentToBeGraded.graded = true;
+            assignmentToBeGraded.gradedBy = this.name;
         }
+        if (assessmentToBeGraded instanceof Quiz quizToBeGraded) {
+            System.out.println("Answer submitted: " + quizToBeGraded.answer);
+            System.out.println("-------------------------------");
+            System.out.println("Marks marks: " + quizToBeGraded.maxMarks);
+            System.out.printf("Marks scored: ");
+            double grade = Double.parseDouble(scan.nextLine().trim());
+            quizToBeGraded.grade = grade;
+            quizToBeGraded.graded = true;
+            quizToBeGraded.gradedBy = this.name;
+        }
+    }
+
+    @Override
+    public void viewLectureMaterial(Course course){
+        new LectureSlides("", 1, "", "", new String[1]).viewLectureMaterials(course);
+        new LectureVideo("", "", "", "").viewLectureMaterials(course);
     }
 
 }

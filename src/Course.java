@@ -2,6 +2,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class Course {
+    String name;
     Map<String, LectureSlides> lectureSlides;
     Map<String, LectureVideo> lectureVideos;
     Map<String, Student> allStudents;
@@ -13,7 +14,8 @@ public class Course {
     // helper variables
     int assessmentCounter;
 
-    {
+    public Course(String name){
+        this.name=name;
         lectureSlides = new LinkedHashMap<>();
         lectureVideos = new LinkedHashMap<>();
         allStudents = new LinkedHashMap<>();
