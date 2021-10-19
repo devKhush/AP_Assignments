@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
 public class Main {
+    // DONE
     public static void main(String[] args) {
         Course AP = new Course("Advanced Programming");
         Scanner scan = new Scanner(System.in);
