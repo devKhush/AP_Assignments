@@ -90,9 +90,9 @@ public class Quiz implements Assessment{
         System.out.printf("Enter quiz question: ");
         String quizQuestion = scan.nextLine().trim();
         Quiz quiz = new Quiz(quizQuestion);
-        course.allAssessments.put(course.getAssessmentCounter(),quiz);
-        for (String name : course.allStudents.keySet()){
-            Student currentStudent = course.allStudents.get(name);
+        course.getAllAssessments().put(course.getAssessmentCounter(),quiz);
+        for (String name : course.getAllStudents().keySet()){
+            Student currentStudent = course.getAllStudents().get(name);
             currentStudent.getAllAssessments().put(course.getAssessmentCounter(), new Quiz(quizQuestion));
         }
         int currentCounter = course.getAssessmentCounter();
@@ -102,10 +102,10 @@ public class Quiz implements Assessment{
 
     @Override
     public void closeAssessment(Course course,int id){
-        Quiz quizToBeClosed = (Quiz) course.allAssessments.get(id);
+        Quiz quizToBeClosed = (Quiz) course.getAllAssessments().get(id);
         quizToBeClosed.isOpen = false;
-        for (String studentName: course.allStudents.keySet()){
-            Student currentStudent = course.allStudents.get(studentName);
+        for (String studentName: course.getAllStudents().keySet()){
+            Student currentStudent = course.getAllStudents().get(studentName);
             quizToBeClosed = (Quiz) currentStudent.getAllAssessments().get(id);
             quizToBeClosed.isOpen = false;
         }
@@ -119,7 +119,7 @@ public class Quiz implements Assessment{
         String solution = scan.nextLine().trim();
         toBeSubmitted.submitted=true;
         toBeSubmitted.answer = solution;
-        Quiz quizOnTheCourse = (Quiz) course.allAssessments.get(id);
+        Quiz quizOnTheCourse = (Quiz) course.getAllAssessments().get(id);
         quizOnTheCourse.submittedByStudents.add(student);
     }
 }

@@ -3,13 +3,38 @@ import java.util.Map;
 
 public class Course {
     private String name;
-    Map<String, LectureSlides> lectureSlides;
-    Map<String, LectureVideo> lectureVideos;
-    Map<String, Student> allStudents;
-    Map<String, Instructor> allInstructors;
-    Map<String, Comment> allComments;
-    Map<Integer, Assessment> allAssessments;
+    private Map<String, LectureSlides> lectureSlides;
+    private Map<String, LectureVideo> lectureVideos;
+    private Map<String, Student> allStudents;
+    private Map<String, Instructor> allInstructors;
+    private Map<String, Comment> allComments;
+    private Map<Integer, Assessment> allAssessments;
     // Map<Integer, Quiz> allQuizzes;
+
+
+    public Map<Integer, Assessment> getAllAssessments() {
+        return allAssessments;
+    }
+
+    public Map<String, Student> getAllStudents() {
+        return allStudents;
+    }
+
+    public Map<String, Instructor> getAllInstructors() {
+        return allInstructors;
+    }
+
+    public Map<String, LectureVideo> getLectureVideos() {
+        return lectureVideos;
+    }
+
+    public Map<String, Comment> getAllComments() {
+        return allComments;
+    }
+
+    public Map<String, LectureSlides> getLectureSlides() {
+        return lectureSlides;
+    }
 
     // helper variables
     private int assessmentCounter;

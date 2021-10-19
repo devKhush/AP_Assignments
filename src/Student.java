@@ -33,14 +33,14 @@ public class Student implements CourseMember{
         String message = scan.nextLine().trim();
         String dateString = new Date().toString();
         Comment commentToBeAdded = new Comment(message, dateString, this.name);
-        course.allComments.put(commentToBeAdded.getUploadDate(), commentToBeAdded);
+        course.getAllComments().put(commentToBeAdded.getUploadDate(), commentToBeAdded);
     }
 
     @Override
     public void viewComments(Course course){
         Comment currentComment;
-        for (String str : course.allComments.keySet()){
-            currentComment = course.allComments.get(str);
+        for (String str : course.getAllComments().keySet()){
+            currentComment = course.getAllComments().get(str);
             System.out.println(currentComment.getMessage()+" - "+currentComment.getUploadedByMember());
             System.out.println(currentComment.getUploadDate());
             System.out.println();
@@ -53,7 +53,7 @@ public class Student implements CourseMember{
     }
 
     public void studentSubmitAssessment(Course course){
-        if (course.allAssessments.keySet().isEmpty()){
+        if (course.getAllAssessments().keySet().isEmpty()){
             System.out.println("No assessments uploaded yet");
             return;
         }

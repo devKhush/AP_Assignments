@@ -93,9 +93,9 @@ public class Assignment implements Assessment{
         System.out.printf("Enter max marks: ");
         int maxMarks = Integer.parseInt(scan.nextLine().trim());
         Assignment assignment = new Assignment(problemStatement, maxMarks);
-        course.allAssessments.put(course.getAssessmentCounter(),assignment);
-        for (String name : course.allStudents.keySet()){
-            Student currentStudent = course.allStudents.get(name);
+        course.getAllAssessments().put(course.getAssessmentCounter(),assignment);
+        for (String name : course.getAllStudents().keySet()){
+            Student currentStudent = course.getAllStudents().get(name);
             currentStudent.getAllAssessments().put(course.getAssessmentCounter(), new Assignment(problemStatement, maxMarks));
         }
         int currentCounter = course.getAssessmentCounter();
@@ -105,10 +105,10 @@ public class Assignment implements Assessment{
 
     @Override
     public void closeAssessment(Course course,int id){
-        Assignment assignmentToBeClosed = (Assignment) course.allAssessments.get(id);
+        Assignment assignmentToBeClosed = (Assignment) course.getAllAssessments().get(id);
         assignmentToBeClosed.isOpen = false;
-        for (String studentName: course.allStudents.keySet()){
-            Student currentStudent = course.allStudents.get(studentName);
+        for (String studentName: course.getAllStudents().keySet()){
+            Student currentStudent = course.getAllStudents().get(studentName);
             assignmentToBeClosed = (Assignment) currentStudent.getAllAssessments().get(id);
             assignmentToBeClosed.isOpen = false;
         }
@@ -129,7 +129,7 @@ public class Assignment implements Assessment{
         Assignment toBeSubmitted = (Assignment) student.getAllAssessments().get(id);
         toBeSubmitted.submitted=true;
         toBeSubmitted.submission = fileName;
-        Assignment assignmentOnTheCourse = (Assignment) course.allAssessments.get(id);
+        Assignment assignmentOnTheCourse = (Assignment) course.getAllAssessments().get(id);
         assignmentOnTheCourse.submittedByStudents.add(student);
     }
 

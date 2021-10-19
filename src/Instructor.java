@@ -27,14 +27,14 @@ public class Instructor implements CourseMember{
         String message = scan.nextLine().trim();
         String dateString = new Date().toString();
         Comment commentToBeAdded = new Comment(message, dateString, this.name);
-        course.allComments.put(commentToBeAdded.getUploadDate(), commentToBeAdded);
+        course.getAllComments().put(commentToBeAdded.getUploadDate(), commentToBeAdded);
     }
 
     @Override
     public void viewComments(Course course){
         Comment currentComment;
-        for (String str : course.allComments.keySet()){
-            currentComment = course.allComments.get(str);
+        for (String str : course.getAllComments().keySet()){
+            currentComment = course.getAllComments().get(str);
             System.out.println(currentComment.getMessage()+" - "+currentComment.getUploadedByMember());
             System.out.println(currentComment.getUploadDate());
             System.out.println();
@@ -78,15 +78,15 @@ public class Instructor implements CourseMember{
 
     public void closeAssessmentByInstructor(Course course){
         Scanner scan = new Scanner(System.in);
-        if (course.allAssessments.keySet().isEmpty()){
+        if (course.getAllAssessments().keySet().isEmpty()){
             System.out.println("No assessments uploaded yet");
             return;
         }
 
         Assessment currentAssessment;
         System.out.println("List of Open Assessments: ");
-        for(int id : course.allAssessments.keySet()){
-            currentAssessment = course.allAssessments.get(id);
+        for(int id : course.getAllAssessments().keySet()){
+            currentAssessment = course.getAllAssessments().get(id);
             if (currentAssessment instanceof Assignment currentAssignment){
                 if (currentAssignment.isOpen()) {
                     System.out.printf("ID: %d, Assignment: %s, Max Marks: %d \n", id, currentAssignment.getProblemStatement(), currentAssignment.getMaxMarks());
@@ -102,7 +102,7 @@ public class Instructor implements CourseMember{
         }
         System.out.printf("Enter id of assessment to close: ");
         int id = Integer.parseInt(scan.nextLine().trim());
-        Assessment assessmentToBeClosed =  course.allAssessments.get(id);
+        Assessment assessmentToBeClosed =  course.getAllAssessments().get(id);
         if (assessmentToBeClosed instanceof Assignment assignmentToBeClosed){
             new Assignment("XYZ", 0).closeAssessment(course,id);
         }
@@ -113,7 +113,7 @@ public class Instructor implements CourseMember{
 
     public void instructorGradeAssessment(Course course) {
         Scanner scan = new Scanner(System.in);
-        if (course.allAssessments.keySet().isEmpty()){
+        if (course.getAllAssessments().keySet().isEmpty()){
             System.out.println("No assessments uploaded yet");
             return;
         }
@@ -122,7 +122,7 @@ public class Instructor implements CourseMember{
         course.viewAssessment();
         System.out.printf("Enter ID of assessment to grade submissions: ");
         int assessmentID = Integer.parseInt(scan.nextLine().trim());
-        Assessment assessmentToBeGraded = course.allAssessments.get(assessmentID);
+        Assessment assessmentToBeGraded = course.getAllAssessments().get(assessmentID);
         if (assessmentToBeGraded instanceof Assignment assignmentToBeGraded) {
             if (assignmentToBeGraded.submittedByStudents.isEmpty()){
                 System.out.println("Either No submissions yet OR all submissions graded");
@@ -139,7 +139,7 @@ public class Instructor implements CourseMember{
         System.out.println("Choose student IDs from these ungraded submissions");
         if (assessmentToBeGraded instanceof Assignment assignmentToBeGraded) {
             for (Student studentSubmitted : assignmentToBeGraded.submittedByStudents) {
-                Student currentStudent = course.allStudents.get(studentSubmitted.getName());
+                Student currentStudent = course.getAllStudents().get(studentSubmitted.getName());
                 Assignment toBeGraded = (Assignment) currentStudent.getAllAssessments().get(assessmentID);
                 if (!toBeGraded.isGraded()) {
                     System.out.println(studentSubmitted.getId() + ". " + studentSubmitted.getName());
@@ -148,7 +148,7 @@ public class Instructor implements CourseMember{
         }
         else if (assessmentToBeGraded instanceof Quiz quizToBeGraded) {
             for (Student studentSubmitted : quizToBeGraded.submittedByStudents) {
-                Student currentStudent = course.allStudents.get(studentSubmitted.getName());
+                Student currentStudent = course.getAllStudents().get(studentSubmitted.getName());
                 Quiz toBeGraded = (Quiz) currentStudent.getAllAssessments().get(assessmentID);
                 if (!toBeGraded.isGraded()) {
                     System.out.println(studentSubmitted.getId() + ". " + studentSubmitted.getName());
@@ -157,7 +157,7 @@ public class Instructor implements CourseMember{
         }
         System.out.printf("> ");
         int studentID = Integer.parseInt(scan.nextLine().trim());
-        Student studentWhoseAssessmentToBeGraded = course.allStudents.get("S" + studentID);
+        Student studentWhoseAssessmentToBeGraded = course.getAllStudents().get("S" + studentID);
         assessmentToBeGraded = studentWhoseAssessmentToBeGraded.getAllAssessments().get(assessmentID);
         if (assessmentToBeGraded instanceof Assignment assignmentToBeGraded) {
             System.out.println("Submission: " + assignmentToBeGraded.getSubmission());
@@ -168,7 +168,7 @@ public class Instructor implements CourseMember{
             assignmentToBeGraded.setGrade(grade); //= grade;
             assignmentToBeGraded.setGraded(true); // = true;
             assignmentToBeGraded.setGradedBy(this.name); // = this.name;
-            Assignment assignmentGradedInCourseClass = (Assignment) course.allAssessments.get(assessmentID);
+            Assignment assignmentGradedInCourseClass = (Assignment) course.getAllAssessments().get(assessmentID);
             assignmentGradedInCourseClass.submittedByStudents.remove(studentWhoseAssessmentToBeGraded);
         }
         else if (assessmentToBeGraded instanceof Quiz quizToBeGraded) {
@@ -180,7 +180,7 @@ public class Instructor implements CourseMember{
             quizToBeGraded.setGrade(grade); // = grade;
             quizToBeGraded.setGraded(true); // = true;
             quizToBeGraded.setGradedBy(this.name); // = this.name;
-            Quiz quizGradedInCourseClass = (Quiz)course.allAssessments.get(assessmentID);
+            Quiz quizGradedInCourseClass = (Quiz)course.getAllAssessments().get(assessmentID);
             quizGradedInCourseClass.submittedByStudents.remove(studentWhoseAssessmentToBeGraded);
         }
     }

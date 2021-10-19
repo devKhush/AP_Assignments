@@ -11,20 +11,20 @@ public class Main {
         Student S3 = new Student("S3", 3);
         Student S4 = new Student("S4", 4);
         Student S5 = new Student("S5", 5);
-        AP.allStudents.put("S0",S0);
-        AP.allStudents.put("S1",S1);
-        AP.allStudents.put("S2",S2);
-        AP.allStudents.put("S3",S3);
-        AP.allStudents.put("S4",S4);
-        AP.allStudents.put("S5",S5);
+        AP.getAllStudents().put("S0",S0);
+        AP.getAllStudents().put("S1",S1);
+        AP.getAllStudents().put("S2",S2);
+        AP.getAllStudents().put("S3",S3);
+        AP.getAllStudents().put("S4",S4);
+        AP.getAllStudents().put("S5",S5);
         Instructor I0 = new Instructor("I0", 0);
         Instructor I1 = new Instructor("I1", 1);
         Instructor I2 = new Instructor("I2", 2);
         Instructor I3 = new Instructor("I3", 3);
-        AP.allInstructors.put("I0", I0);
-        AP.allInstructors.put("I1", I1);
-        AP.allInstructors.put("I2", I2);
-        AP.allInstructors.put("I3", I3);
+        AP.getAllInstructors().put("I0", I0);
+        AP.getAllInstructors().put("I1", I1);
+        AP.getAllInstructors().put("I2", I2);
+        AP.getAllInstructors().put("I3", I3);
 
         Student student;
         Instructor instructor;
@@ -47,12 +47,12 @@ public class Main {
             else if (option==1){
                 //instructor
                 System.out.println("Instructors: ");
-                for (String instructorName: AP.allInstructors.keySet()){
-                    System.out.println(AP.allInstructors.get(instructorName).getId() + " - "+instructorName);
+                for (String instructorName: AP.getAllInstructors().keySet()){
+                    System.out.println(AP.getAllInstructors().get(instructorName).getId() + " - "+instructorName);
                 }
                 System.out.printf("Choose ID: ");
                 int instructorIDChosen = Integer.parseInt(scan.nextLine().trim());
-                instructor = AP.allInstructors.get("I"+instructorIDChosen);
+                instructor = AP.getAllInstructors().get("I"+instructorIDChosen);
 
                 instructorWhile:
                 while (true){
@@ -95,12 +95,12 @@ public class Main {
             else if (option==2){
                 //student
                 System.out.println("Students: ");
-                for (String studentName: AP.allStudents.keySet()){
-                    System.out.println(AP.allStudents.get(studentName).getId() + " - "+studentName);
+                for (String studentName: AP.getAllStudents().keySet()){
+                    System.out.println(AP.getAllStudents().get(studentName).getId() + " - "+studentName);
                 }
                 System.out.printf("Choose ID: ");
                 int studentIDChosen = Integer.parseInt(scan.nextLine().trim());
-                student = AP.allStudents.get("S"+studentIDChosen);
+                student = AP.getAllStudents().get("S"+studentIDChosen);
 
                 studentWhile:
                 while(true){

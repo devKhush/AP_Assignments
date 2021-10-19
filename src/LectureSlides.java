@@ -19,8 +19,8 @@ public class LectureSlides implements LectureMaterials{
     @Override
     public void viewLectureMaterials(Course course){
         LectureSlides currentSlide;
-        for (String str: course.lectureSlides.keySet()){
-            currentSlide = course.lectureSlides.get(str);
+        for (String str: course.getLectureSlides().keySet()){
+            currentSlide = course.getLectureSlides().get(str);
             System.out.println("Title: "+currentSlide.title);
             for (int i=0; i<currentSlide.content.length; i++){
                 System.out.printf("Slide %d: %s \n",(i+1), currentSlide.content[i]);
@@ -48,6 +48,6 @@ public class LectureSlides implements LectureMaterials{
         Date date = new Date();
         String currentDate = date.toString();
         LectureSlides newSlide = new LectureSlides(title, slideNum, currentDate, instructor.getName(), slideContent);
-        course.lectureSlides.put(currentDate, newSlide);
+        course.getLectureSlides().put(currentDate, newSlide);
     }
 }

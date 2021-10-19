@@ -33,8 +33,8 @@ public class LectureVideo implements LectureMaterials{
     @Override
     public void viewLectureMaterials(Course course){
         LectureVideo currentVideo;
-        for (String str: course.lectureVideos.keySet()){
-            currentVideo = course.lectureVideos.get(str);
+        for (String str: course.getLectureVideos().keySet()){
+            currentVideo = course.getLectureVideos().get(str);
             System.out.println("Title: "+currentVideo.title);
             System.out.println("Video file: "+currentVideo.videoFileName);
             System.out.println("Date of upload: "+currentVideo.dateOfUpload);
@@ -60,6 +60,6 @@ public class LectureVideo implements LectureMaterials{
         Date date = new Date();
         String currentDate = date.toString();
         LectureVideo newVideo = new LectureVideo(title, currentDate, instructor.getName(), fileName);
-        course.lectureVideos.put(currentDate, newVideo);
+        course.getLectureVideos().put(currentDate, newVideo);
     }
 }
