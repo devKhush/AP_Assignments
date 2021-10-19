@@ -4,14 +4,26 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class Student implements CourseMember{
-    String name;
-    int id;
-    Map<Integer, Assessment> allAssessments;
+    private String name;
+    private int id;
+    private Map<Integer, Assessment> allAssessments;
 
     public Student(String name, int id){
         this.name=name;
         this.id = id;
         this.allAssessments=new LinkedHashMap<>();
+    }
+
+    public Map<Integer, Assessment> getAllAssessments() {
+        return allAssessments;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public int getId() {
+        return id;
     }
 
     @Override
@@ -21,7 +33,7 @@ public class Student implements CourseMember{
         String message = scan.nextLine().trim();
         String dateString = new Date().toString();
         Comment commentToBeAdded = new Comment(message, dateString, this.name);
-        course.allComments.put(commentToBeAdded.uploadDate, commentToBeAdded);
+        course.allComments.put(commentToBeAdded.getUploadDate(), commentToBeAdded);
     }
 
     @Override
@@ -29,8 +41,8 @@ public class Student implements CourseMember{
         Comment currentComment;
         for (String str : course.allComments.keySet()){
             currentComment = course.allComments.get(str);
-            System.out.println(currentComment.message+" - "+currentComment.uploadedByMember);
-            System.out.println(currentComment.uploadDate);
+            System.out.println(currentComment.getMessage()+" - "+currentComment.getUploadedByMember());
+            System.out.println(currentComment.getUploadDate());
             System.out.println();
         }
     }
@@ -50,12 +62,12 @@ public class Student implements CourseMember{
         for( int id : this.allAssessments.keySet()){
             toBeSubmitted = this.allAssessments.get(id);
             if (toBeSubmitted instanceof Assignment assignment){
-                if ((assignment.isOpen) && (!assignment.submitted)) {
+                if ((assignment.isOpen()) && (!assignment.isSubmitted())) {
                     pendingAssessmentAvailable = true;
                 }
             }
             else if (toBeSubmitted instanceof Quiz quiz){
-                if ((quiz.isOpen) && (!quiz.submitted)) {
+                if ((quiz.isOpen()) && (!quiz.isSubmitted())) {
                     pendingAssessmentAvailable = true;
                 }
             }
@@ -69,13 +81,13 @@ public class Student implements CourseMember{
         for( int id : this.allAssessments.keySet()){
             toBeSubmitted = this.allAssessments.get(id);
             if (toBeSubmitted instanceof Assignment assignment){
-                if ((assignment.isOpen) && (!assignment.submitted)) {
-                    System.out.printf("ID: %d, Assignment: %s, Max Marks: %d \n", id, assignment.problemStatement, assignment.maxMarks);
+                if ((assignment.isOpen()) && (!assignment.isSubmitted())) {
+                    System.out.printf("ID: %d, Assignment: %s, Max Marks: %d \n", id, assignment.getProblemStatement(), assignment.getMaxMarks());
                 }
             }
             else if (toBeSubmitted instanceof Quiz quiz){
-                if ((quiz.isOpen) && (!quiz.submitted)) {
-                    System.out.printf("ID: %d, Question: %s\n", id, quiz.question);
+                if ((quiz.isOpen()) && (!quiz.isSubmitted())) {
+                    System.out.printf("ID: %d, Question: %s\n", id, quiz.getQuestion());
                 }
             }
         }
@@ -97,18 +109,18 @@ public class Student implements CourseMember{
         for( int id : this.allAssessments.keySet()){
             toBeChecked = this.allAssessments.get(id);
             if (toBeChecked instanceof Assignment assignment){
-                if (assignment.graded) {
-                    System.out.println("Submission: "+assignment.submission);
-                    System.out.printf("Marks scored: %.2f \n",assignment.grade);
-                    System.out.println("Graded by: "+assignment.gradedBy);
+                if (assignment.isGraded()) {
+                    System.out.println("Submission: "+assignment.getSubmission());
+                    System.out.printf("Marks scored: %.2f \n",assignment.getGrade());
+                    System.out.println("Graded by: "+assignment.getGradedBy());
                     System.out.println("----------------------------");
                 }
             }
             else if (toBeChecked instanceof Quiz quiz){
-                if (quiz.graded) {
-                    System.out.println("Your answer: "+quiz.answer);
-                    System.out.printf("Marks scored: %.2f \n",quiz.grade);
-                    System.out.println("Graded by: "+quiz.gradedBy);
+                if (quiz.isGraded()) {
+                    System.out.println("Your answer: "+quiz.getAnswer());
+                    System.out.printf("Marks scored: %.2f \n",quiz.getGrade());
+                    System.out.println("Graded by: "+quiz.getGradedBy());
                     System.out.println("----------------------------");
                 }
             }
@@ -119,14 +131,14 @@ public class Student implements CourseMember{
         for( int id : this.allAssessments.keySet()){
             toBeChecked = this.allAssessments.get(id);
             if (toBeChecked instanceof Assignment assignment){
-                if ((!assignment.graded) && (assignment.submitted)) {
-                    System.out.println("Assignment Problem Statement Submission: "+assignment.submission);
+                if ((!assignment.isGraded()) && (assignment.isSubmitted())) {
+                    System.out.println("Assignment Submission: "+assignment.getSubmission());
                     System.out.println("----------------------------");
                 }
             }
             else if (toBeChecked instanceof Quiz quiz){
-                if ((!quiz.graded) && (quiz.submitted)) {
-                    System.out.println("Quiz Question: "+quiz.question);
+                if ((!quiz.isGraded()) && (quiz.isSubmitted())) {
+                    System.out.println("Quiz Question: "+quiz.getQuestion()+", Answer: "+quiz.getAnswer());
                     System.out.println("----------------------------");
                 }
             }

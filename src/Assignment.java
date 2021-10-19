@@ -3,15 +3,75 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Assignment implements Assessment{
-    String problemStatement;
-    int maxMarks;
-    boolean isOpen;
-    double grade;
-    boolean submitted;
-    boolean graded;
-    String submission;
-    String gradedBy;
+    private String problemStatement;
+    private int maxMarks;
+    private boolean isOpen;
+    private double grade;
+    private boolean submitted;
+    private boolean graded;
+    private String submission;
+    private String gradedBy;
     ArrayList<Student> submittedByStudents;
+
+    public String getProblemStatement() {
+        return problemStatement;
+    }
+
+    public int getMaxMarks() {
+        return maxMarks;
+    }
+
+    public boolean isOpen() {
+        return isOpen;
+    }
+
+    public double getGrade() {
+        return grade;
+    }
+
+    public boolean isSubmitted() {
+        return submitted;
+    }
+
+    public boolean isGraded() {
+        return graded;
+    }
+
+    public String getSubmission() {
+        return submission;
+    }
+
+    public String getGradedBy() {
+        return gradedBy;
+    }
+
+    public ArrayList<Student> getSubmittedByStudents() {
+        return submittedByStudents;
+    }
+
+    public void setOpen(boolean open) {
+        isOpen = open;
+    }
+
+    public void setGrade(double grade) {
+        this.grade = grade;
+    }
+
+    public void setSubmitted(boolean submitted) {
+        this.submitted = submitted;
+    }
+
+    public void setGraded(boolean graded) {
+        this.graded = graded;
+    }
+
+    public void setSubmission(String submission) {
+        this.submission = submission;
+    }
+
+    public void setGradedBy(String gradedBy) {
+        this.gradedBy = gradedBy;
+    }
 
     public Assignment(String problemStatement, int maxMarks){
         this.maxMarks = maxMarks;
@@ -33,12 +93,14 @@ public class Assignment implements Assessment{
         System.out.printf("Enter max marks: ");
         int maxMarks = Integer.parseInt(scan.nextLine().trim());
         Assignment assignment = new Assignment(problemStatement, maxMarks);
-        course.allAssessments.put(course.assessmentCounter,assignment);
+        course.allAssessments.put(course.getAssessmentCounter(),assignment);
         for (String name : course.allStudents.keySet()){
             Student currentStudent = course.allStudents.get(name);
-            currentStudent.allAssessments.put(course.assessmentCounter, new Assignment(problemStatement, maxMarks));
+            currentStudent.getAllAssessments().put(course.getAssessmentCounter(), new Assignment(problemStatement, maxMarks));
         }
-        course.assessmentCounter++;
+        int currentCounter = course.getAssessmentCounter();
+        currentCounter++;
+        course.setAssessmentCounter(currentCounter);
     }
 
     @Override
@@ -47,7 +109,7 @@ public class Assignment implements Assessment{
         assignmentToBeClosed.isOpen = false;
         for (String studentName: course.allStudents.keySet()){
             Student currentStudent = course.allStudents.get(studentName);
-            assignmentToBeClosed = (Assignment) currentStudent.allAssessments.get(id);
+            assignmentToBeClosed = (Assignment) currentStudent.getAllAssessments().get(id);
             assignmentToBeClosed.isOpen = false;
         }
     }
@@ -64,7 +126,7 @@ public class Assignment implements Assessment{
             fileName = scan.nextLine().trim();
             fileNameLength = fileName.length();
         }
-        Assignment toBeSubmitted = (Assignment) student.allAssessments.get(id);
+        Assignment toBeSubmitted = (Assignment) student.getAllAssessments().get(id);
         toBeSubmitted.submitted=true;
         toBeSubmitted.submission = fileName;
         Assignment assignmentOnTheCourse = (Assignment) course.allAssessments.get(id);

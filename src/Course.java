@@ -2,7 +2,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class Course {
-    String name;
+    private String name;
     Map<String, LectureSlides> lectureSlides;
     Map<String, LectureVideo> lectureVideos;
     Map<String, Student> allStudents;
@@ -12,7 +12,15 @@ public class Course {
     // Map<Integer, Quiz> allQuizzes;
 
     // helper variables
-    int assessmentCounter;
+    private int assessmentCounter;
+
+    public int getAssessmentCounter() {
+        return assessmentCounter;
+    }
+
+    public void setAssessmentCounter(int assessmentCounter) {
+        this.assessmentCounter = assessmentCounter;
+    }
 
     public Course(String name){
         this.name=name;
@@ -31,11 +39,11 @@ public class Course {
         for(int id : this.allAssessments.keySet()){
             currentAssessment = this.allAssessments.get(id);
             if (currentAssessment instanceof Assignment currentAssignment){
-                System.out.printf("ID: %d, Assignment: %s, Max Marks: %d \n",id,currentAssignment.problemStatement,currentAssignment.maxMarks);
+                System.out.printf("ID: %d, Assignment: %s, Max Marks: %d \n",id,currentAssignment.getProblemStatement(),currentAssignment.getMaxMarks());
                 System.out.println("--------------------");
             }
             else if (currentAssessment instanceof Quiz currentQuiz){
-                System.out.printf("ID: %d, Question: %s\n",id,currentQuiz.question);
+                System.out.printf("ID: %d, Question: %s\n",id,currentQuiz.getQuestion());
                 System.out.println("--------------------");
             }
         }

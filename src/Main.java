@@ -48,7 +48,7 @@ public class Main {
                 //instructor
                 System.out.println("Instructors: ");
                 for (String instructorName: AP.allInstructors.keySet()){
-                    System.out.println(AP.allInstructors.get(instructorName).id + " - "+instructorName);
+                    System.out.println(AP.allInstructors.get(instructorName).getId() + " - "+instructorName);
                 }
                 System.out.printf("Choose ID: ");
                 int instructorIDChosen = Integer.parseInt(scan.nextLine().trim());
@@ -57,7 +57,7 @@ public class Main {
                 instructorWhile:
                 while (true){
                     System.out.println("-----------------------------------------------------------------------");
-                    System.out.println("Welcome "+instructor.name);
+                    System.out.println("Welcome "+instructor.getName());
                     System.out.println("{INSTRUCTOR MENU}");
                     System.out.printf("> ");
                     int optionByInstructor = Integer.parseInt(scan.nextLine().trim());
@@ -96,7 +96,7 @@ public class Main {
                 //student
                 System.out.println("Students: ");
                 for (String studentName: AP.allStudents.keySet()){
-                    System.out.println(AP.allStudents.get(studentName).id + " - "+studentName);
+                    System.out.println(AP.allStudents.get(studentName).getId() + " - "+studentName);
                 }
                 System.out.printf("Choose ID: ");
                 int studentIDChosen = Integer.parseInt(scan.nextLine().trim());
@@ -105,7 +105,7 @@ public class Main {
                 studentWhile:
                 while(true){
                     System.out.println("-----------------------------------------------------------------------");
-                    System.out.println("Welcome "+student.name);
+                    System.out.println("Welcome "+student.getName());
                     System.out.println("{STUDENT MENU}");
                     System.out.printf("> ");
                     int optionByStudent = Integer.parseInt(scan.nextLine().trim());

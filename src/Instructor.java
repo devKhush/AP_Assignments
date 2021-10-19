@@ -4,12 +4,20 @@ import java.util.LinkedHashMap;
 import java.util.Scanner;
 
 public class Instructor implements CourseMember{
-    int id;
-    String name;
+    private int id;
+    private String name;
 
     public Instructor(String name, int id){
         this.name=name;
         this.id = id;
+    }
+
+    public String getName(){
+        return this.name;
+    }
+
+    public int getId() {
+        return id;
     }
 
     @Override
@@ -19,7 +27,7 @@ public class Instructor implements CourseMember{
         String message = scan.nextLine().trim();
         String dateString = new Date().toString();
         Comment commentToBeAdded = new Comment(message, dateString, this.name);
-        course.allComments.put(commentToBeAdded.uploadDate, commentToBeAdded);
+        course.allComments.put(commentToBeAdded.getUploadDate(), commentToBeAdded);
     }
 
     @Override
@@ -27,8 +35,8 @@ public class Instructor implements CourseMember{
         Comment currentComment;
         for (String str : course.allComments.keySet()){
             currentComment = course.allComments.get(str);
-            System.out.println(currentComment.message+" - "+currentComment.uploadedByMember);
-            System.out.println(currentComment.uploadDate);
+            System.out.println(currentComment.getMessage()+" - "+currentComment.getUploadedByMember());
+            System.out.println(currentComment.getUploadDate());
             System.out.println();
         }
     }
@@ -80,14 +88,14 @@ public class Instructor implements CourseMember{
         for(int id : course.allAssessments.keySet()){
             currentAssessment = course.allAssessments.get(id);
             if (currentAssessment instanceof Assignment currentAssignment){
-                if (currentAssignment.isOpen) {
-                    System.out.printf("ID: %d, Assignment: %s, Max Marks: %d \n", id, currentAssignment.problemStatement, currentAssignment.maxMarks);
+                if (currentAssignment.isOpen()) {
+                    System.out.printf("ID: %d, Assignment: %s, Max Marks: %d \n", id, currentAssignment.getProblemStatement(), currentAssignment.getMaxMarks());
                     System.out.println("--------------------");
                 }
             }
             else if (currentAssessment instanceof Quiz currentQuiz){
-                if (currentQuiz.isOpen) {
-                    System.out.printf("ID: %d, Question: %s\n", id, currentQuiz.question);
+                if (currentQuiz.isOpen()) {
+                    System.out.printf("ID: %d, Question: %s\n", id, currentQuiz.getQuestion());
                     System.out.println("--------------------");
                 }
             }
@@ -131,44 +139,47 @@ public class Instructor implements CourseMember{
         System.out.println("Choose student IDs from these ungraded submissions");
         if (assessmentToBeGraded instanceof Assignment assignmentToBeGraded) {
             for (Student studentSubmitted : assignmentToBeGraded.submittedByStudents) {
-                Student currentStudent = course.allStudents.get(studentSubmitted.name);
-                Assignment toBeGraded = (Assignment) currentStudent.allAssessments.get(assessmentID);
-                if (!toBeGraded.graded) {
-                    System.out.println(studentSubmitted.id + ". " + studentSubmitted.name);
+                Student currentStudent = course.allStudents.get(studentSubmitted.getName());
+                Assignment toBeGraded = (Assignment) currentStudent.getAllAssessments().get(assessmentID);
+                if (!toBeGraded.isGraded()) {
+                    System.out.println(studentSubmitted.getId() + ". " + studentSubmitted.getName());
                 }
             }
         }
         else if (assessmentToBeGraded instanceof Quiz quizToBeGraded) {
             for (Student studentSubmitted : quizToBeGraded.submittedByStudents) {
-                if (!((Quiz)course.allStudents.get(studentSubmitted.name).allAssessments.get(assessmentID)).graded)
-                System.out.println(studentSubmitted.id + ". " + studentSubmitted.name);
+                Student currentStudent = course.allStudents.get(studentSubmitted.getName());
+                Quiz toBeGraded = (Quiz) currentStudent.getAllAssessments().get(assessmentID);
+                if (!toBeGraded.isGraded()) {
+                    System.out.println(studentSubmitted.getId() + ". " + studentSubmitted.getName());
+                }
             }
         }
         System.out.printf("> ");
         int studentID = Integer.parseInt(scan.nextLine().trim());
         Student studentWhoseAssessmentToBeGraded = course.allStudents.get("S" + studentID);
-        assessmentToBeGraded = studentWhoseAssessmentToBeGraded.allAssessments.get(assessmentID);
+        assessmentToBeGraded = studentWhoseAssessmentToBeGraded.getAllAssessments().get(assessmentID);
         if (assessmentToBeGraded instanceof Assignment assignmentToBeGraded) {
-            System.out.println("Submission: " + assignmentToBeGraded.submission);
+            System.out.println("Submission: " + assignmentToBeGraded.getSubmission());
             System.out.println("-------------------------------");
-            System.out.println("Marks marks: " + assignmentToBeGraded.maxMarks);
+            System.out.println("Marks marks: " + assignmentToBeGraded.getMaxMarks());
             System.out.printf("Marks scored: ");
             double grade = Double.parseDouble(scan.nextLine().trim());
-            assignmentToBeGraded.grade = grade;
-            assignmentToBeGraded.graded = true;
-            assignmentToBeGraded.gradedBy = this.name;
+            assignmentToBeGraded.setGrade(grade); //= grade;
+            assignmentToBeGraded.setGraded(true); // = true;
+            assignmentToBeGraded.setGradedBy(this.name); // = this.name;
             Assignment assignmentGradedInCourseClass = (Assignment) course.allAssessments.get(assessmentID);
             assignmentGradedInCourseClass.submittedByStudents.remove(studentWhoseAssessmentToBeGraded);
         }
         else if (assessmentToBeGraded instanceof Quiz quizToBeGraded) {
-            System.out.println("Answer submitted: " + quizToBeGraded.answer);
+            System.out.println("Answer submitted: " + quizToBeGraded.getAnswer());
             System.out.println("-------------------------------");
-            System.out.println("Marks marks: " + quizToBeGraded.maxMarks);
+            System.out.println("Marks marks: " + quizToBeGraded.getMaxMarks());
             System.out.printf("Marks scored: ");
             double grade = Double.parseDouble(scan.nextLine().trim());
-            quizToBeGraded.grade = grade;
-            quizToBeGraded.graded = true;
-            quizToBeGraded.gradedBy = this.name;
+            quizToBeGraded.setGrade(grade); // = grade;
+            quizToBeGraded.setGraded(true); // = true;
+            quizToBeGraded.setGradedBy(this.name); // = this.name;
             Quiz quizGradedInCourseClass = (Quiz)course.allAssessments.get(assessmentID);
             quizGradedInCourseClass.submittedByStudents.remove(studentWhoseAssessmentToBeGraded);
         }

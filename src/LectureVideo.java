@@ -2,12 +2,28 @@ import java.util.Date;
 import java.util.Scanner;
 
 public class LectureVideo implements LectureMaterials{
-    String title;
-    String videoFileName;
-    String dateOfUpload;
-    String uploadedByInstructor;
+    private String title;
+    private String videoFileName;
+    private String dateOfUpload;
+    private String uploadedByInstructor;
 
-    public LectureVideo(String title,  String dateOfUpload, String uploadedByInstructor, String videoFileName){
+    public String getTitle() {
+        return this.title;
+    }
+
+    public String getVideoFileName() {
+        return videoFileName;
+    }
+
+    public String getDateOfUpload() {
+        return dateOfUpload;
+    }
+
+    public String getUploadedByInstructor() {
+        return uploadedByInstructor;
+    }
+
+    public LectureVideo(String title, String dateOfUpload, String uploadedByInstructor, String videoFileName){
         this.title = title;
         this.dateOfUpload = dateOfUpload;
         this.uploadedByInstructor = uploadedByInstructor;
@@ -43,7 +59,7 @@ public class LectureVideo implements LectureMaterials{
         }
         Date date = new Date();
         String currentDate = date.toString();
-        LectureVideo newVideo = new LectureVideo(title, currentDate, instructor.name, fileName);
+        LectureVideo newVideo = new LectureVideo(title, currentDate, instructor.getName(), fileName);
         course.lectureVideos.put(currentDate, newVideo);
     }
 }

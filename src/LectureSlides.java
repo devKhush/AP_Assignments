@@ -2,11 +2,11 @@ import java.util.Date;
 import java.util.Scanner;
 
 public class LectureSlides implements LectureMaterials{
-    String title;
-    int numOfSlides;
-    String[] content;
-    String dateOfUpload;
-    String uploadedByInstructor;
+    private String title;
+    private int numOfSlides;
+    private String[] content;
+    private String dateOfUpload;
+    private String uploadedByInstructor;
 
     public LectureSlides(String title, int numOfSlides, String dateOfUpload, String uploadedByInstructor, String[] content){
         this.title = title;
@@ -47,7 +47,7 @@ public class LectureSlides implements LectureMaterials{
         }
         Date date = new Date();
         String currentDate = date.toString();
-        LectureSlides newSlide = new LectureSlides(title, slideNum, currentDate, instructor.name, slideContent);
+        LectureSlides newSlide = new LectureSlides(title, slideNum, currentDate, instructor.getName(), slideContent);
         course.lectureSlides.put(currentDate, newSlide);
     }
 }
