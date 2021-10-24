@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class ColumnMatrix extends Matrix{
@@ -20,7 +19,6 @@ public class ColumnMatrix extends Matrix{
             }
         }
         this.id = staticID;
-        System.out.println(Arrays.deepToString(this.matrix));
     }
 
     public static void main(String[] args) {

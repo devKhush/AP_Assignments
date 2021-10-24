@@ -24,7 +24,6 @@ public class RowMatrix extends Matrix{
             }
         }
         this.id = staticID;
-        System.out.println(Arrays.deepToString(this.matrix));
     }
 
 //    @Override
@@ -50,6 +49,8 @@ public class RowMatrix extends Matrix{
         System.out.println(rm.getId());
         System.out.println(rm.getRows());
         System.out.println(rm.getColumns());
+        System.out.println(Arrays.deepToString(rm.getMatrix()));
+        System.out.println(Arrays.deepToString(rm.getTransposeMatrix()));
 
         Matrix cm = new ColumnMatrix();
         cm.inputMatrix();

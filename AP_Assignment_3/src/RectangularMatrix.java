@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class RectangularMatrix extends Matrix{
@@ -27,8 +26,23 @@ public class RectangularMatrix extends Matrix{
             }
         }
         this.id = staticID;
-        System.out.println(Arrays.deepToString(this.matrix));
-        System.out.println(this.staticID);
     }
+
+//    @Override
+//    public double[][] calculateTranspose(){
+//        double[][] transpose = new double[this.rows][this.columns];
+//
+//        for(int i=0; i<this.rows; i++){
+//            for (int j=0; j<this.columns; j++){
+//                transpose[j][i]=this.matrix[i][j];
+//            }
+//        }
+//        return transpose;
+//    }
+//
+//    @Override
+//    public double[][] getTransposeMatrix(){
+//        return this.calculateTranspose();
+//    }
 
 }
