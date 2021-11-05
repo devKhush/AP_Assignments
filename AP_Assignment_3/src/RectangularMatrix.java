@@ -9,23 +9,26 @@ public class RectangularMatrix extends Matrix{
     @Override
     public void inputMatrix(){
         Scanner sc = new Scanner(System.in);
-        System.out.printf("Enter Dimensions as <rows> <columns>: ");
+        System.out.printf("Enter Dimensions as <rows><space><columns>: ");
         String dimension = sc.nextLine().trim();
         String[] dimMatrix = dimension.split(" ");
         int row = Integer.parseInt(dimMatrix[0]);
         int column = Integer.parseInt(dimMatrix[1]);
-        this.matrix = new double[row][column];
-        this.rows=row;
-        this.columns=column;
+        this.setMatrix(new double[row][column]);
+        this.setRows(row);
+        this.setColumns(column);
         for (int i=0; i<row; i++){
             System.out.printf("Enter %dth row input (Space separated): ",i);
             String rowInput = sc.nextLine().trim();
             String[] rowInputArray = rowInput.split(" ");
             for (int j=0; j<column; j++){
-                this.matrix[i][j] = Double.parseDouble(rowInputArray[j]);
+                double matrixElement = Double.parseDouble(rowInputArray[j]);
+                this.changeElementOfMatrix(i,j , matrixElement);
+//                this.matrix[i][j] = Double.parseDouble(rowInputArray[j]);
             }
         }
-        this.id = staticID;
+        //this.id = staticID;
+        this.setID();
     }
 
 //    @Override
@@ -44,5 +47,25 @@ public class RectangularMatrix extends Matrix{
 //    public double[][] getTransposeMatrix(){
 //        return this.calculateTranspose();
 //    }
+
+    public static void main(String[] args) {
+        Matrix rm = new RectangularMatrix();
+        rm.inputMatrix();
+        rm.printMatrix();
+        System.out.println(rm.getRows());
+        System.out.println(rm.getColumns());
+        System.out.println(rm.getClass().getName());
+        System.out.println(rm.getId());
+
+        System.out.println();
+        Matrix rm1 = new RectangularMatrix();
+        rm1.inputMatrix();
+        rm1.printMatrix();
+        rm1.printMatrix(rm1.getTransposeMatrix());
+        System.out.println(rm1.getRows());
+        System.out.println(rm1.getColumns());
+        System.out.println(rm1.getClass().getName());
+        System.out.println(rm1.getId());
+    }
 
 }

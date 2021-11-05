@@ -13,21 +13,22 @@ public class IdentityMatrix extends ScalarMatrix{
         Scanner sc = new Scanner(System.in);
         System.out.printf("Enter dimension of Identity matrix (one number): ");
         int dimension = Integer.parseInt(sc.nextLine().trim());
-        this.matrix = new double[dimension][dimension];
-        this.rows=dimension;
-        this.columns=dimension;
+        this.setMatrix(new double[dimension][dimension]);
+        this.setRows(dimension);
+        this.setColumns(dimension);
         this.scalarElement=1;
         for (int i=0; i<dimension; i++){
             for (int j=0; j<dimension; j++){
                 if (i==j) {
-                    this.matrix[i][j]=1;
+                    this.changeElementOfMatrix(i, j, 1);
                 }
                 else{
-                    this.matrix[i][j]=0;
+                    this.changeElementOfMatrix(i, j, 0);
                 }
             }
         }
-        this.id = this.staticID;
+        //this.id = this.staticID;
+        this.setID();
     }
 
     public static void main(String[] args) {

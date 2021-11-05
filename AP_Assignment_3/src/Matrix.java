@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Matrix {
     protected int rows;
     protected int columns;
@@ -8,8 +10,6 @@ public class Matrix {
     public Matrix(){
         staticID++;
     }
-
-    public void inputMatrix(){}
 
     public double[][] calculateTranspose(){
         double[][] transpose = new double[this.columns][this.rows];
@@ -68,10 +68,107 @@ public class Matrix {
         }
     }
 
-    public boolean isSymmetric(){return false;}
+    public void setID(){
+        this.id = this.staticID;
+    }
+
+    public void matrixAddition(Matrix B){
+        if ((this.getRows()!=B.getRows()) | (this.getColumns()!=B.getColumns())){
+            System.out.println("Can't perform addition as Dimension of two matrices doesn't match");
+            return;
+        }
+        double[][] addition = new double[this.getRows()][this.getColumns()];
+
+        for(int i = 0; i<this.getRows(); i++){
+            for (int j =0; j<this.getColumns(); j++){
+                addition[i][j] = this.getElementOfMatrix(i,j)+B.getElementOfMatrix(i,j);
+            }
+        }
+        this.printMatrix(addition);
+    }
+
+    public void matrixSubtraction(Matrix B){
+        if ((this.getRows()!=B.getRows()) | (this.getColumns()!=B.getColumns())){
+            System.out.println("Can't perform subtraction as Dimension of two matrices doesn't match");
+            return;
+        }
+        double[][] subtraction = new double[this.getRows()][this.getColumns()];
+
+        for(int i = 0; i<this.getRows(); i++){
+            for (int j =0; j<this.getColumns(); j++){
+                subtraction[i][j] = this.getElementOfMatrix(i,j) - B.getElementOfMatrix(i,j);
+            }
+        }
+        this.printMatrix(subtraction);
+    }
+
+    public void matrixMultiplication(Matrix B){
+        if (this.getColumns()!=B.getRows()){
+            System.out.println("Can't perform multiplication as the condition for matrix multiplication doesn't satisfy");
+            return;
+        }
+        double[][] product = new double[this.getRows()][B.getColumns()];
+        for (int i = 0; i < this.getRows(); i++) {
+            for (int j = 0; j < B.getColumns(); j++) {
+                product[i][j] = 0;
+                for (int k = 0; k < this.getColumns(); k++)
+                    product[i][j] += (this.getElementOfMatrix(i,k))*B.getElementOfMatrix(k,j);
+            }
+        }
+        this.printMatrix(product);
+    }
+
+    public void matrixElementWiseMultiplication(Matrix B){
+        if ((this.getRows()!=B.getRows()) | (this.getColumns()!=B.getColumns())){
+            System.out.println("Can't perform Element wise multiplication as Dimension of two matrices doesn't match");
+            return;
+        }
+        double[][] product = new double[this.getRows()][this.getColumns()];
+
+        for(int i = 0; i<this.getRows(); i++){
+            for (int j =0; j<this.getColumns(); j++){
+                product[i][j] = this.getElementOfMatrix(i,j) * B.getElementOfMatrix(i,j);
+            }
+        }
+        this.printMatrix(product);
+    }
+
+    public void matrixElementWiseDivision(Matrix B){
+        if ((this.getRows()!=B.getRows()) | (this.getColumns()!=B.getColumns())){
+            System.out.println("Can't perform Element wise division as Dimension of two matrices doesn't match");
+            return;
+        }
+        double[][] product = new double[this.getRows()][this.getColumns()];
+
+        for(int i = 0; i<this.getRows(); i++){
+            for (int j =0; j<this.getColumns(); j++){
+                product[i][j] = this.getElementOfMatrix(i,j) / B.getElementOfMatrix(i,j);
+            }
+        }
+        this.printMatrix(product);
+    }
+
+
+    public void inputMatrix(){}
     double getScalarElement(){
+        return -1;
+    }
+    public boolean isSymmetric(){
+        return false;
+    }
+    double[] getDiagonalElements(){
+        return new double[1];
+    }
+    void setDiagonalElements(double[] diagonalElements){}
+    void changeDiagonalElement(int i, double value){ }
+    public double getNullElement() {
         return 0;
     }
+    public double getOnesElement() {
+        return 1;
+    }
+
+
     public int getColumns(){
         return this.columns;
     }
@@ -84,5 +181,19 @@ public class Matrix {
     public int getId(){
         return this.id;
     }
-
+    public void setRows(int rows) {
+        this.rows = rows;
+    }
+    public void setMatrix(double[][] matrix) {
+        this.matrix = matrix;
+    }
+    public void setColumns(int columns){
+        this.columns=columns;
+    }
+    public void changeElementOfMatrix(int i, int j, double element){
+        this.matrix[i][j] = element;
+    }
+    public double getElementOfMatrix(int i, int j){
+        return this.getMatrix()[i][j];
+    }
 }
