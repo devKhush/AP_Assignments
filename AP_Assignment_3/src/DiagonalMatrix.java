@@ -16,6 +16,13 @@ public class DiagonalMatrix extends SquareMatrix{
         this.diagonalElements[i] = value;
     }
 
+    public double calculateDeterminant(){
+        double determinant = 1;
+        for (int i=0; i<this.getRows(); i++)
+            determinant *= this.getElementOfMatrix(i,i);
+        return determinant;
+    }
+
     @Override
     public void inputMatrix(){
         Scanner sc = new Scanner(System.in);

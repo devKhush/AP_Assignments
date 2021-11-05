@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class ColumnMatrix extends Matrix{
+public class ColumnMatrix extends RectangularMatrix{
 
     @Override
     public void inputMatrix(){

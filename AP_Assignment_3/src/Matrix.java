@@ -11,6 +11,13 @@ public class Matrix {
         staticID++;
     }
 
+    public void getAllTypes(){
+        System.out.println(this.getClass().getName());
+        if (!this.getClass().getSuperclass().getName().equals("Matrix")){
+            System.out.println(this.getClass().getSuperclass().getName());
+        }
+    }
+
     public double[][] calculateTranspose(){
         double[][] transpose = new double[this.columns][this.rows];
 
@@ -148,10 +155,39 @@ public class Matrix {
         this.printMatrix(product);
     }
 
+    public void calculateRowWiseMean(int rowNumber){
+        double sumOfRow=0;
+        for (int j=0; j<this.getColumns(); j++){
+            sumOfRow += this.getElementOfMatrix(rowNumber-1, j);
+        }
+        double mean = sumOfRow/this.getColumns();
+        System.out.printf("Mean of Row no. %d of this matrix is %.2f\n",rowNumber,mean);
+    }
+
+    public void calculateColumnWiseMean(int columnNumber){
+        double sumOfColumn =0;
+        for (int i=0; i<this.getRows(); i++){
+            sumOfColumn += this.getElementOfMatrix(i,columnNumber-1);
+        }
+        double mean = sumOfColumn/this.getRows();
+        System.out.printf("Mean of Column no. %d of this matrix is %.2f\n",columnNumber,mean);
+    }
+
+    public void meanOfAllElements(){
+        double sum=0;
+        for(int i=0; i<this.getRows(); i++){
+            for (int j=0; j<this.getColumns(); j++){
+                sum+= this.getElementOfMatrix(i,j);
+            }
+        }
+        double mean = sum/(this.getRows()*this.getColumns());
+        System.out.printf("Mean of all the elements in this matrix is %.2f\n",mean);
+    }
+
 
     public void inputMatrix(){}
     double getScalarElement(){
-        return -1;
+        return Double.MIN_VALUE;
     }
     public boolean isSymmetric(){
         return false;

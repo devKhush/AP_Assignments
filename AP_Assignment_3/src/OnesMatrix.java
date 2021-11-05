@@ -8,6 +8,15 @@ public class OnesMatrix extends Matrix{
     }
 
     @Override
+    public void getAllTypes(){
+        System.out.println("OnesMatrix");
+        if (this.getRows()==this.getColumns())
+            System.out.println("SquareMatrix");
+        else
+            System.out.println("RectangularMatrix");
+    }
+
+    @Override
     public boolean isSymmetric(){
         return this.getRows() == this.getColumns();
     }

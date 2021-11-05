@@ -8,6 +8,18 @@ public class SquareMatrix extends Matrix{
         return this.calculateTranspose();
     }
 
+    public double calculateDeterminant(){
+        if (this.getRows()==2){
+            return (this.getElementOfMatrix(0,0)*this.getElementOfMatrix(1,1))-(this.getElementOfMatrix(0,1)*this.getElementOfMatrix(1,0));
+        }
+        else{
+            double term1 = (this.getElementOfMatrix(1,1)*this.getElementOfMatrix(2,2))-(this.getElementOfMatrix(1,2)*this.getElementOfMatrix(2,1));
+            double term2 = (this.getElementOfMatrix(1,0)*this.getElementOfMatrix(2,2))-(this.getElementOfMatrix(1,2)*this.getElementOfMatrix(2,0));
+            double term3 = (this.getElementOfMatrix(1,0)*this.getElementOfMatrix(2,1))-(this.getElementOfMatrix(1,1)*this.getElementOfMatrix(2,0));
+            return (this.getElementOfMatrix(0,0)*term1)-(this.getElementOfMatrix(0,1)*term2)+(this.getElementOfMatrix(0,2)*term3);
+        }
+    }
+
     @Override
     public boolean isSymmetric(){
         return Arrays.deepEquals(this.getMatrix(), this.getTransposeMatrix());
@@ -70,6 +82,7 @@ public class SquareMatrix extends Matrix{
         System.out.println(sm.getId());
         System.out.println(sm.getRows());
         System.out.println(sm.getColumns());
+        sm.getAllTypes();
         System.out.println();
 
         Matrix rm = new RectangularMatrix();

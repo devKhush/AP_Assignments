@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class SingletonMatrix extends SquareMatrix{
+public class SingletonMatrix extends ScalarMatrix{
     double elementInSingletonMatrix;
 
     public double getElementInSingletonMatrix() {
@@ -9,6 +9,19 @@ public class SingletonMatrix extends SquareMatrix{
 
     public void setElementInSingletonMatrix(double elementInSingletonMatrix) {
         this.elementInSingletonMatrix = elementInSingletonMatrix;
+    }
+
+    @Override
+    public double calculateDeterminant(){
+        return elementInSingletonMatrix;
+    }
+
+    @Override
+    public void getAllTypes(){
+        System.out.println(this.getClass().getName());
+        System.out.println(this.getClass().getSuperclass().getName());
+        System.out.println("DiagonalMatrix");
+        System.out.println("SquareMatrix");
     }
 
     @Override

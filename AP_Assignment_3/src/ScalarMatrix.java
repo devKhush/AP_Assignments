@@ -1,7 +1,15 @@
 import java.util.Scanner;
 
-public class ScalarMatrix extends SquareMatrix{
+public class ScalarMatrix extends DiagonalMatrix{
     double scalarElement;
+
+    @Override
+    public void getAllTypes(){
+        System.out.println(this.getClass().getName());
+        System.out.println(this.getClass().getSuperclass().getName());
+        System.out.println("SquareMatrix");
+    }
+
 
     @Override
     double getScalarElement(){

@@ -4,6 +4,14 @@ public class IdentityMatrix extends ScalarMatrix{
     double scalarElement=1;
 
     @Override
+    public void getAllTypes(){
+        System.out.println(this.getClass().getName());
+        System.out.println(this.getClass().getSuperclass().getName());
+        System.out.println("DiagonalMatrix");
+        System.out.println("SquareMatrix");
+    }
+
+    @Override
     double getScalarElement(){
         return this.scalarElement;
     }

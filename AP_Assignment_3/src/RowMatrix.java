@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class RowMatrix extends Matrix{
+public class RowMatrix extends RectangularMatrix{
 //    private int rows=1;
 //    private int columns;
 //    private double[][] matrix;

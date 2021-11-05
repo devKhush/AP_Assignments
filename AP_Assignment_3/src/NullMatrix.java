@@ -1,3 +1,4 @@
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class NullMatrix extends RectangularMatrix{
@@ -5,6 +6,15 @@ public class NullMatrix extends RectangularMatrix{
 
     public double getNullElement() {
         return nullElement;
+    }
+
+    @Override
+    public void getAllTypes(){
+        System.out.println("NullMatrix");
+        if (this.getRows()==this.getColumns())
+            System.out.println("SquareMatrix");
+        else
+            System.out.println("RectangularMatrix");
     }
 
     @Override
