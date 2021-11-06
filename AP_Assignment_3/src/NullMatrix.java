@@ -1,10 +1,14 @@
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class NullMatrix extends RectangularMatrix{
     double nullElement = 0;
 
     public double getNullElement() {
+        return nullElement;
+    }
+
+    @Override
+    public double getElementOfMatrix(int i,int j){
         return nullElement;
     }
 
@@ -40,6 +44,63 @@ public class NullMatrix extends RectangularMatrix{
         }
         // this.id = this.staticID++;
         this.setID();
+    }
+
+    @Override
+    public void matrixMultiplicationWithMatrix(Matrix B){
+        if (this.getColumns()!=B.getRows()){
+            System.out.println("Can't perform multiplication as the condition for matrix multiplication doesn't satisfy");
+            return;
+        }
+        double[][] nullMatrix = new double[this.getRows()][B.getColumns()];
+        for(int i = 0; i<this.getRows(); i++){
+            for (int j =0; j<B.getColumns(); j++){
+                nullMatrix[i][j] = 0;
+            }
+        }
+        this.printMatrix(nullMatrix);
+    }
+
+    @Override
+    public void matrixElementWiseMultiplication(Matrix B){
+        if ((this.getRows()!=B.getRows()) | (this.getColumns()!=B.getColumns())){
+            System.out.println("Can't perform Element wise multiplication as Dimension of two matrices doesn't match");
+            return;
+        }
+        double[][] product = new double[this.getRows()][this.getColumns()];
+
+        for(int i = 0; i<this.getRows(); i++){
+            for (int j =0; j<this.getColumns(); j++){
+                product[i][j] = 0;
+            }
+        }
+        this.printMatrix(product);
+    }
+
+    @Override
+    public void matrixMultiplicationWithScalar(double scalar){
+        double[][] product = new double[this.getRows()][this.getColumns()];
+
+        for(int i = 0; i<this.getRows(); i++){
+            for (int j =0; j<this.getColumns(); j++){
+                product[i][j] = 0;
+            }
+        }
+        this.printMatrix(product);
+    }
+
+    @Override
+    public double[][] matrixAddition(Matrix B, boolean toBeReturned){
+        if ((this.getRows()!=B.getRows()) | (this.getColumns()!=B.getColumns())){
+            System.out.println("Can't perform addition as Dimension of two matrices doesn't match");
+            return new double[][]{{Double.MIN_VALUE}};
+        }
+        return B.getMatrix();
+    }
+
+    @Override
+    public void changeElement(){
+        System.out.println("Can't change element of a null matrix");
     }
 
     public static void main(String[] args) {

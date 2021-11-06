@@ -38,6 +38,14 @@ public class SingletonMatrix extends ScalarMatrix{
         this.setID();
     }
 
+    @Override
+    public void changeElement(){
+        Scanner sc = new Scanner(System.in);
+        System.out.printf("Enter the new value :");
+        double value = Double.parseDouble(sc.nextLine());
+        this.changeElementOfMatrix(0,0,value);
+    }
+
     public static void main(String[] args) {
         Matrix sm = new SingletonMatrix();
         sm.inputMatrix();

@@ -8,6 +8,11 @@ public class OnesMatrix extends Matrix{
     }
 
     @Override
+    public double getElementOfMatrix(int i,int j){
+        return onesElement;
+    }
+
+    @Override
     public void getAllTypes(){
         System.out.println("OnesMatrix");
         if (this.getRows()==this.getColumns())
@@ -39,6 +44,39 @@ public class OnesMatrix extends Matrix{
         }
         //this.id = this.staticID++;
         this.setID();
+    }
+
+    @Override
+    public void matrixElementWiseMultiplication(Matrix B){
+        if ((this.getRows()!=B.getRows()) | (this.getColumns()!=B.getColumns())){
+            System.out.println("Can't perform Element wise multiplication as Dimension of two matrices doesn't match");
+            return;
+        }
+        double[][] product = new double[this.getRows()][this.getColumns()];
+
+        for(int i = 0; i<this.getRows(); i++){
+            for (int j =0; j<this.getColumns(); j++){
+                product[i][j] =  B.getElementOfMatrix(i,j);
+            }
+        }
+        this.printMatrix(product);
+    }
+
+    @Override
+    public void matrixMultiplicationWithScalar(double scalar){
+        double[][] product = new double[this.getRows()][this.getColumns()];
+
+        for(int i = 0; i<this.getRows(); i++){
+            for (int j =0; j<this.getColumns(); j++){
+                product[i][j] = scalar;
+            }
+        }
+        this.printMatrix(product);
+    }
+
+    @Override
+    public void changeElement(){
+        System.out.println("Can't change element of a ones matrix");
     }
 
     public static void main(String[] args) {

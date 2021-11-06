@@ -21,6 +21,11 @@ public class SymmetricMatrix extends SquareMatrix{
 //        this.id = this.staticID;
 //    }
 
+    @Override
+    public void changeElement(){
+        System.out.println("Can't change value of this Matrix");
+    }
+
     public static void main(String[] args) {
         Matrix sm = new SquareMatrix();
         sm.inputMatrix();

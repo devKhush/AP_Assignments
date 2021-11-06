@@ -1,11 +1,9 @@
-import java.util.Arrays;
-
-public class Matrix {
-    protected int rows;
-    protected int columns;
-    protected double[][] matrix;
-    protected int id;
-    protected static int staticID=0;
+    public class Matrix {
+    private int rows;
+    private int columns;
+    private double[][] matrix;
+    private int id;
+    private static int staticID=0;
 
     public Matrix(){
         staticID++;
@@ -79,10 +77,10 @@ public class Matrix {
         this.id = this.staticID;
     }
 
-    public void matrixAddition(Matrix B){
+    public double[][] matrixAddition(Matrix B, boolean toBeReturned){
         if ((this.getRows()!=B.getRows()) | (this.getColumns()!=B.getColumns())){
             System.out.println("Can't perform addition as Dimension of two matrices doesn't match");
-            return;
+            return new double[][]{{Double.MIN_VALUE}};
         }
         double[][] addition = new double[this.getRows()][this.getColumns()];
 
@@ -91,7 +89,10 @@ public class Matrix {
                 addition[i][j] = this.getElementOfMatrix(i,j)+B.getElementOfMatrix(i,j);
             }
         }
+        if (toBeReturned)
+            return addition;
         this.printMatrix(addition);
+        return new double[][]{{Double.MIN_VALUE}};
     }
 
     public void matrixSubtraction(Matrix B){
@@ -109,7 +110,7 @@ public class Matrix {
         this.printMatrix(subtraction);
     }
 
-    public void matrixMultiplication(Matrix B){
+    public void matrixMultiplicationWithMatrix(Matrix B){
         if (this.getColumns()!=B.getRows()){
             System.out.println("Can't perform multiplication as the condition for matrix multiplication doesn't satisfy");
             return;
@@ -123,6 +124,22 @@ public class Matrix {
             }
         }
         this.printMatrix(product);
+    }
+
+    public double[][] matrixMultiplicationWithMatrixReturn(Matrix B){
+        if (this.getColumns()!=B.getRows()){
+            System.out.println("Can't perform multiplication as the condition for matrix multiplication doesn't satisfy");
+            return new double[1][1];
+        }
+        double[][] product = new double[this.getRows()][B.getColumns()];
+        for (int i = 0; i < this.getRows(); i++) {
+            for (int j = 0; j < B.getColumns(); j++) {
+                product[i][j] = 0;
+                for (int k = 0; k < this.getColumns(); k++)
+                    product[i][j] += (this.getElementOfMatrix(i,k))*B.getElementOfMatrix(k,j);
+            }
+        }
+        return product;
     }
 
     public void matrixElementWiseMultiplication(Matrix B){
@@ -140,6 +157,56 @@ public class Matrix {
         this.printMatrix(product);
     }
 
+    public void matrixMultiplicationWithScalar(double scalar){
+        double[][] product = new double[this.getRows()][this.getColumns()];
+
+        for(int i = 0; i<this.getRows(); i++){
+            for (int j =0; j<this.getColumns(); j++){
+                product[i][j] = this.getElementOfMatrix(i,j) * scalar;
+            }
+        }
+        this.printMatrix(product);
+    }
+
+    public void matrixDivisionWithScalar(double scalar){
+        if (scalar==0){
+            System.out.println("Can't perform Division with a zero scalar");
+            return;
+        }
+        double[][] product = new double[this.getRows()][this.getColumns()];
+        for(int i = 0; i<this.getRows(); i++){
+            for (int j =0; j<this.getColumns(); j++){
+                product[i][j] = this.getElementOfMatrix(i,j) / scalar;
+            }
+        }
+        this.printMatrix(product);
+    }
+
+    public double[][] matrixMultiplicationWithScalarReturn(double scalar){
+        double[][] product = new double[this.getRows()][this.getColumns()];
+
+        for(int i = 0; i<this.getRows(); i++){
+            for (int j =0; j<this.getColumns(); j++){
+                product[i][j] = this.getElementOfMatrix(i,j) * scalar;
+            }
+        }
+        return product;
+    }
+
+    public double[][] matrixDivisionWithScalarReturn(double scalar){
+        if (scalar==0){
+            return new double[][]{{Double.MIN_VALUE}};
+        }
+        double[][] product = new double[this.getRows()][this.getColumns()];
+
+        for(int i = 0; i<this.getRows(); i++){
+            for (int j =0; j<this.getColumns(); j++){
+                product[i][j] = this.getElementOfMatrix(i,j) / scalar;
+            }
+        }
+        return product;
+    }
+
     public void matrixElementWiseDivision(Matrix B){
         if ((this.getRows()!=B.getRows()) | (this.getColumns()!=B.getColumns())){
             System.out.println("Can't perform Element wise division as Dimension of two matrices doesn't match");
@@ -155,22 +222,30 @@ public class Matrix {
         this.printMatrix(product);
     }
 
-    public void calculateRowWiseMean(int rowNumber){
-        double sumOfRow=0;
-        for (int j=0; j<this.getColumns(); j++){
-            sumOfRow += this.getElementOfMatrix(rowNumber-1, j);
+    public void calculateRowWiseMean(){
+        double[][] rowMean = new double[this.getRows()][1];
+        for (int i=0; i<this.getRows(); i++) {
+            double sumOfRow=0;
+            for (int j = 0; j < this.getColumns(); j++) {
+                sumOfRow += this.getElementOfMatrix(i, j);
+            }
+            double[] mean = {sumOfRow / this.getColumns()};
+            rowMean[i] = mean;
         }
-        double mean = sumOfRow/this.getColumns();
-        System.out.printf("Mean of Row no. %d of this matrix is %.2f\n",rowNumber,mean);
+        this.printMatrix(rowMean);
     }
 
     public void calculateColumnWiseMean(int columnNumber){
-        double sumOfColumn =0;
-        for (int i=0; i<this.getRows(); i++){
-            sumOfColumn += this.getElementOfMatrix(i,columnNumber-1);
+        double[][] columnMean = new double[1][this.getColumns()];
+        for (int j=0; j<this.getColumns(); j++) {
+            double sumOfColumn=0;
+            for (int i = 0; i < this.getRows(); i++) {
+                sumOfColumn += this.getElementOfMatrix(i, j);
+            }
+            double[] mean = {sumOfColumn / this.getRows()};
+            columnMean[j] = mean;
         }
-        double mean = sumOfColumn/this.getRows();
-        System.out.printf("Mean of Column no. %d of this matrix is %.2f\n",columnNumber,mean);
+        this.printMatrix(columnMean);
     }
 
     public void meanOfAllElements(){
@@ -184,6 +259,11 @@ public class Matrix {
         System.out.printf("Mean of all the elements in this matrix is %.2f\n",mean);
     }
 
+    public double getDeterminant(){
+        System.out.println("Can't find determinant as this matrix is not a Square matrix");
+        return Double.MIN_VALUE;
+    }
+
 
     public void inputMatrix(){}
     double getScalarElement(){
@@ -193,7 +273,7 @@ public class Matrix {
         return false;
     }
     double[] getDiagonalElements(){
-        return new double[1];
+        return new double[]{0};
     }
     void setDiagonalElements(double[] diagonalElements){}
     void changeDiagonalElement(int i, double value){ }
@@ -203,6 +283,20 @@ public class Matrix {
     public double getOnesElement() {
         return 1;
     }
+    public double[][] getInverse(boolean toBeReturned){
+        System.out.println("Can't find inverse as the matrix is not square");
+        return new double[][]{{Double.MIN_VALUE}};
+    }
+    public void matrixDivisionWithMatrix(Matrix B){
+        System.out.println("Can't perform A/B as both of them are not square matrix");
+    }
+    public void solveLinearEquation(Matrix B){
+        System.out.println("Can't solve equations as matrix is not invertible");
+    }
+    public void matrixPlusItsTranspose(){
+        System.out.println("Can't perform as Matrix is not square");
+    }
+    public void changeElement(){}
 
 
     public int getColumns(){

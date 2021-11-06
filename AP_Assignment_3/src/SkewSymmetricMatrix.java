@@ -20,6 +20,11 @@ public class SkewSymmetricMatrix extends SquareMatrix{
 //        this.id = this.staticID;
 //    }
 
+    @Override
+    public void changeElement(){
+        System.out.println("Can't change value of this Matrix");
+    }
+
     public static void main(String[] args) {
         Matrix ssm = new SkewSymmetricMatrix();
         ssm.inputMatrix();

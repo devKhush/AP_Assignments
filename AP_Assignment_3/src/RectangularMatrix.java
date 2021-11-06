@@ -7,6 +7,18 @@ public class RectangularMatrix extends Matrix{
 //    private int id;
 
     @Override
+    public void changeElement(){
+        Scanner sc = new Scanner(System.in);
+        System.out.printf("Enter the row number to change element :");
+        int i = Integer.parseInt(sc.nextLine());
+        System.out.printf("Enter the column number to change element :");
+        int j = Integer.parseInt(sc.nextLine());
+        System.out.printf("Enter the new value :");
+        double value = Double.parseDouble(sc.nextLine());
+        this.changeElementOfMatrix(i,j,value);
+    }
+
+    @Override
     public void inputMatrix(){
         Scanner sc = new Scanner(System.in);
         System.out.printf("Enter Dimensions as <rows><space><columns>: ");

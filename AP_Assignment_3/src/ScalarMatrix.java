@@ -43,6 +43,11 @@ public class ScalarMatrix extends DiagonalMatrix{
         this.setID();
     }
 
+    @Override
+    public void changeElement(){
+        System.out.println("Can't change value of this Matrix");
+    }
+
     public static void main(String[] args) {
         Matrix sm = new ScalarMatrix();
         sm.inputMatrix();
