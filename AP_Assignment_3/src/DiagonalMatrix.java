@@ -63,6 +63,7 @@ public class DiagonalMatrix extends SquareMatrix{
         System.out.printf("Enter the new value :");
         double value = Double.parseDouble(sc.nextLine());
         this.changeElementOfMatrix(i,j,value);
+        this.changeDiagonalElement(i,value);
     }
 
     public static void main(String[] args) {

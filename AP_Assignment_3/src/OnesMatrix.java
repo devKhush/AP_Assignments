@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class OnesMatrix extends Matrix{
+public class OnesMatrix extends RectangularMatrix{
     double onesElement = 1;
 
     public double getOnesElement() {

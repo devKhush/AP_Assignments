@@ -1,4 +1,6 @@
-    public class Matrix {
+import java.util.Arrays;
+
+public class Matrix {
     private int rows;
     private int columns;
     private double[][] matrix;
@@ -95,6 +97,16 @@
         return new double[][]{{Double.MIN_VALUE}};
     }
 
+    public void matrixAdditionWithScalar(double scalar){
+        double[][] addition = new double[this.getRows()][this.getColumns()];
+        for(int i = 0; i<this.getRows(); i++){
+            for (int j =0; j<this.getColumns(); j++){
+                addition[i][j] = this.getElementOfMatrix(i,j)+scalar;
+            }
+        }
+        this.printMatrix(addition);
+    }
+
     public void matrixSubtraction(Matrix B){
         if ((this.getRows()!=B.getRows()) | (this.getColumns()!=B.getColumns())){
             System.out.println("Can't perform subtraction as Dimension of two matrices doesn't match");
@@ -105,6 +117,16 @@
         for(int i = 0; i<this.getRows(); i++){
             for (int j =0; j<this.getColumns(); j++){
                 subtraction[i][j] = this.getElementOfMatrix(i,j) - B.getElementOfMatrix(i,j);
+            }
+        }
+        this.printMatrix(subtraction);
+    }
+
+    public void matrixSubtractionWithScalar(double scalar){
+        double[][] subtraction = new double[this.getRows()][this.getColumns()];
+        for(int i = 0; i<this.getRows(); i++){
+            for (int j =0; j<this.getColumns(); j++){
+                subtraction[i][j] = this.getElementOfMatrix(i,j)-scalar;
             }
         }
         this.printMatrix(subtraction);
@@ -235,7 +257,7 @@
         this.printMatrix(rowMean);
     }
 
-    public void calculateColumnWiseMean(int columnNumber){
+    public void calculateColumnWiseMean(){
         double[][] columnMean = new double[1][this.getColumns()];
         for (int j=0; j<this.getColumns(); j++) {
             double sumOfColumn=0;
@@ -256,7 +278,7 @@
             }
         }
         double mean = sum/(this.getRows()*this.getColumns());
-        System.out.printf("Mean of all the elements in this matrix is %.2f\n",mean);
+        System.out.printf("\nMean of all the elements in this matrix is %.2f\n",mean);
     }
 
     public double getDeterminant(){
@@ -270,6 +292,9 @@
         return Double.MIN_VALUE;
     }
     public boolean isSymmetric(){
+        return false;
+    }
+    public boolean isSkewSymmetric(){
         return false;
     }
     double[] getDiagonalElements(){
@@ -288,7 +313,7 @@
         return new double[][]{{Double.MIN_VALUE}};
     }
     public void matrixDivisionWithMatrix(Matrix B){
-        System.out.println("Can't perform A/B as both of them are not square matrix");
+        System.out.println("Can't perform A/B as B is not a square matrix");
     }
     public void solveLinearEquation(Matrix B){
         System.out.println("Can't solve equations as matrix is not invertible");

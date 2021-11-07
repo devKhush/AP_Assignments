@@ -7,6 +7,11 @@ public class SingletonMatrix extends ScalarMatrix{
         return elementInSingletonMatrix;
     }
 
+    @Override
+    double getScalarElement(){
+        return this.elementInSingletonMatrix;
+    }
+
     public void setElementInSingletonMatrix(double elementInSingletonMatrix) {
         this.elementInSingletonMatrix = elementInSingletonMatrix;
     }
@@ -22,6 +27,12 @@ public class SingletonMatrix extends ScalarMatrix{
         System.out.println(this.getClass().getSuperclass().getName());
         System.out.println("DiagonalMatrix");
         System.out.println("SquareMatrix");
+        if (elementInSingletonMatrix==0){
+            System.out.println("Null Matrix");
+        }
+        if (elementInSingletonMatrix==1){
+            System.out.println("Ones Matrix");
+        }
     }
 
     @Override
@@ -44,6 +55,7 @@ public class SingletonMatrix extends ScalarMatrix{
         System.out.printf("Enter the new value :");
         double value = Double.parseDouble(sc.nextLine());
         this.changeElementOfMatrix(0,0,value);
+        this.setElementInSingletonMatrix(value);
     }
 
     public static void main(String[] args) {

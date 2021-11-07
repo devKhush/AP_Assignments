@@ -34,6 +34,21 @@ public class SquareMatrix extends Matrix{
     }
 
     @Override
+    public boolean isSkewSymmetric(){
+        double[][] negativeOfMatrix = this.matrixMultiplicationWithScalarReturn(-1);
+        double[][] transpose = this.getTransposeMatrix();
+        boolean isSkewSymmetric = true;
+        for (int i=0; i<this.getRows(); i++){
+            for (int j=0; j<this.getColumns(); j++){
+                if (negativeOfMatrix[i][j]!=transpose[i][j])
+                    isSkewSymmetric=false;
+            }
+        }
+        return isSkewSymmetric;
+        //return Arrays.deepEquals(this.matrixMultiplicationWithScalarReturn(-1), this.getTransposeMatrix());
+    }
+
+    @Override
     public void inputMatrix(){
         Scanner sc = new Scanner(System.in);
         switch (this.getClass().getName()) {
@@ -48,6 +63,9 @@ public class SquareMatrix extends Matrix{
                 break;
             case "UpperTriangularMatrix":
                 System.out.printf("Enter dimension of Upper-Traingular square matrix (one number): ");
+                break;
+            case "SingularMatrix":
+                System.out.println("Enter dimension of Singular square matrix (one number):");
                 break;
             default:
                 System.out.printf("Enter dimension of square matrix (one number): ");
@@ -127,11 +145,15 @@ public class SquareMatrix extends Matrix{
 
     @Override
     public void matrixDivisionWithMatrix(Matrix B){
+        if (B.getRows()!=B.getColumns()){
+            System.out.println("Divisor must be Square Matrix");
+            return;
+        }
         if (B.getDeterminant()==0){
             System.out.println("Can't perform division as determinant of second matrix is 0");
             return;
         }
-        if (this.getRows()!=B.getRows()){
+        if (this.getColumns()!=B.getRows()){
             System.out.println("Dimensions of both the matrix should be same for Division");
             return;
         }
@@ -145,7 +167,7 @@ public class SquareMatrix extends Matrix{
     @Override
     public void solveLinearEquation(Matrix B){
         if (this.getDeterminant()==0){
-            System.out.println("Can't perform division as determinant of the matrix is 0");
+            System.out.println("Can't solve equations as determinant of the matrix is 0");
             return;
         }
         if (B.getColumns()!=1){
@@ -160,7 +182,7 @@ public class SquareMatrix extends Matrix{
         A_Inverse.setRows(this.getRows());
         A_Inverse.setColumns(this.getColumns());
         A_Inverse.setMatrix(this.getInverse(true));
-        this.printMatrix(A_Inverse.matrixMultiplicationWithMatrixReturn(B));
+        A_Inverse.printMatrix(A_Inverse.matrixMultiplicationWithMatrixReturn(B));
     }
 
     @Override
