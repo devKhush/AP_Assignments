@@ -96,7 +96,7 @@ public class SquareMatrix extends Matrix{
         }
         if (this.getRows()==1){
             double[][] adjointMatrix = new double[this.getRows()][this.getRows()];
-            adjointMatrix[0][0] = this.getElementOfMatrix(0,0);
+            adjointMatrix[0][0] = 1.0;
             Matrix adjoint = new Matrix();
             adjoint.setRows(this.getRows());
             adjoint.setColumns(this.getColumns());

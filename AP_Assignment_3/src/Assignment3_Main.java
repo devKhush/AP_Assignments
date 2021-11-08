@@ -7,7 +7,7 @@ public class Assignment3_Main {
     static double scalar;
     static boolean scalarAvailable = false;
 
-    static void showMean(){
+    void showMean(){
         System.out.println("""
                 9.1 Compute Row wise mean
                 9.2 Compute Column wise mean
@@ -15,7 +15,7 @@ public class Assignment3_Main {
                 """);
     }
 
-    static void showAllLabelTypesOfMatricesAvailable(){
+    void showAllLabelTypesOfMatricesAvailable(){
             System.out.println("""
                 15.1 Rectangular Matrix
                 15.2 Row Matrix
@@ -34,7 +34,7 @@ public class Assignment3_Main {
                 15.16 Null Matrix""");
     }
 
-    static void printAllOperationOnMatrices(){
+    void printAllOperationOnMatrices(){
         System.out.println("""
                 5.1 Addition of two Matrices
                 5.2 Subtraction of two Matrices
@@ -42,7 +42,7 @@ public class Assignment3_Main {
                 5.4 Division of two Matrices""");
     }
 
-    static void printAllElementWiseOperationOnMatrix(){
+    void printAllElementWiseOperationOnMatrix(){
         System.out.println("6.1 Matrix Element wise Addition");
         System.out.println("6.2 Matrix Element wise Addition by a scalar");
         System.out.println("6.3 Matrix Element wise Subtraction");
@@ -53,8 +53,10 @@ public class Assignment3_Main {
         System.out.println("6.8 Matrix Element wise Division with a scalar");
     }
 
-    static void printInstructions(){
+    void printInstructions(){
         System.out.println("""
+                All options available in the Main thread are :
+                
                 1. Take matrices as input and label them with appropriate matrix-types.
                 2. Create matrices of requested matrix-types and label them with appropriate matrix-types.
                 3. Change the elements of a matrix as long as the fixed matrix-type labels remain valid.
@@ -73,7 +75,7 @@ public class Assignment3_Main {
                 16. To exit the program""");
     }
 
-    static void printAllMatricesAvailable(){
+void printAllMatricesAvailable(){
         System.out.println("""
                 2.1 Rectangular Matrix
                 2.2 Row Matrix
@@ -94,20 +96,21 @@ public class Assignment3_Main {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        Assignment3_Main a3 = new Assignment3_Main();
 
         Map<Integer, Matrix> allMatricesMade = new LinkedHashMap<>();
         int option;
-        printInstructions();
+        a3.printInstructions();
 
         System.out.println();
         while(true){
             System.out.println();
-
+            System.out.println("You're Currently in Main thread");
             System.out.printf("Enter option number (else Enter '0' for repeating all available options)\n> ");
             option = Integer.parseInt(sc.nextLine().trim());
 
             if (option==0) {
-                printInstructions();
+                a3.printInstructions();
             }
 
             else if (option==1){
@@ -115,7 +118,7 @@ public class Assignment3_Main {
             }
 
             else if (option==2){
-                printAllMatricesAvailable();
+                a3.printAllMatricesAvailable();
                 System.out.println();
                 System.out.printf("Enter ID of the Matrix to be made from above :");
                 double decimalIdOfMatrix = Double.parseDouble(sc.nextLine().trim());
@@ -279,7 +282,7 @@ public class Assignment3_Main {
             }
 
             else if (option==5){
-                printAllOperationOnMatrices();
+                a3.printAllOperationOnMatrices();
                 System.out.println();
                 System.out.printf("Enter the ID of the operation to be perform from above :");
                 double opID = Double.parseDouble(sc.nextLine().trim());
@@ -329,7 +332,7 @@ public class Assignment3_Main {
             }
 
             else if (option==6){
-                printAllElementWiseOperationOnMatrix();
+                a3.printAllElementWiseOperationOnMatrix();
                 System.out.println();
                 System.out.printf("Enter the ID of the operation to be perform from above :");
                 double opID = Double.parseDouble(sc.nextLine().trim());
@@ -484,7 +487,7 @@ public class Assignment3_Main {
             }
 
             else if (option==9){
-                showMean();
+                a3.showMean();
                 System.out.println();
                 System.out.printf("Enter the ID of the operation to be perform from above :");
                 double opID = Double.parseDouble(sc.nextLine().trim());
@@ -574,7 +577,7 @@ public class Assignment3_Main {
             }
 
             else if (option==15){
-                showAllLabelTypesOfMatricesAvailable();
+                a3.showAllLabelTypesOfMatricesAvailable();
                 System.out.println();
                 System.out.println("To Retrieve all the existing matrices having requested matrix-type labels");
                 System.out.printf("Enter the option ID from above :");
@@ -592,7 +595,7 @@ public class Assignment3_Main {
                                     System.out.println();
                                 }
                             }
-                            else {
+                            else if (currentMatrix.getRows()!=currentMatrix.getColumns()){
                                 currentMatrix.printMatrix();
                                 System.out.println("ID = "+ currentMatrix.getId());
                                 System.out.println();
@@ -640,6 +643,11 @@ public class Assignment3_Main {
                         if (currentMatrix.getClass().getName().equals("SquareMatrix")||currentMatrix.getClass().getName().equals("DiagonalMatrix")||currentMatrix.getClass().getName().equals("IdentityMatrix")||currentMatrix.getClass().getName().equals("LowerTriangularMatrix")||
                                 currentMatrix.getClass().getName().equals("ScalarMatrix")||currentMatrix.getClass().getName().equals("SingletonMatrix")||currentMatrix.getClass().getName().equals("SingularMatrix")||currentMatrix.getClass().getName().equals("SkewSymmetricMatrix")||
                                 currentMatrix.getClass().getName().equals("SymmetricMatrix")||currentMatrix.getClass().getName().equals("UpperTriangularMatrix")){
+                            currentMatrix.printMatrix();
+                            System.out.println("ID = "+ currentMatrix.getId());
+                            System.out.println();
+                        }
+                        else if (currentMatrix.getRows()==currentMatrix.getColumns()){
                             currentMatrix.printMatrix();
                             System.out.println("ID = "+ currentMatrix.getId());
                             System.out.println();

@@ -13,7 +13,10 @@ public class Matrix {
 
     public void getAllTypes(){
         System.out.println(this.getClass().getName());
-        if (!this.getClass().getSuperclass().getName().equals("Matrix")){
+        if (this.getRows()==this.getColumns()){
+            System.out.println("Square Matrix");
+        }
+        if ((!this.getClass().getSuperclass().getName().equals("Matrix")) && (this.getRows()!=this.getColumns())){
             System.out.println(this.getClass().getSuperclass().getName());
         }
     }

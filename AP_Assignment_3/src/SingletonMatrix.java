@@ -32,6 +32,7 @@ public class SingletonMatrix extends ScalarMatrix{
         }
         if (elementInSingletonMatrix==1){
             System.out.println("Ones Matrix");
+            System.out.println("Identity Matrix");
         }
     }
 
