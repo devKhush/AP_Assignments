@@ -89,6 +89,27 @@ public class SquareMatrix extends Matrix{
     }
 
     @Override
+    public double[][] getAdjointof3x3Matrix(){
+        double[][] cofactorMatrix = new double[this.getRows()][this.getColumns()];
+        cofactorMatrix[0][0] = 1*((this.getElementOfMatrix(1,1)*this.getElementOfMatrix(2,2)) - (this.getElementOfMatrix(2,1)*this.getElementOfMatrix(1,2)));
+        cofactorMatrix[0][1] = -1*((this.getElementOfMatrix(1,0)*this.getElementOfMatrix(2,2)) - (this.getElementOfMatrix(2,0)*this.getElementOfMatrix(1,2)));
+        cofactorMatrix[0][2] = 1*((this.getElementOfMatrix(1,0)*this.getElementOfMatrix(2,1)) - (this.getElementOfMatrix(1,1)*this.getElementOfMatrix(2,0)));
+        cofactorMatrix[1][0] = -1*((this.getElementOfMatrix(0,1)*this.getElementOfMatrix(2,2)) - (this.getElementOfMatrix(2,1)*this.getElementOfMatrix(0,2)));
+        cofactorMatrix[1][1] = 1*((this.getElementOfMatrix(0,0)*this.getElementOfMatrix(2,2)) - (this.getElementOfMatrix(2,0)*this.getElementOfMatrix(0,2)));
+        cofactorMatrix[1][2] = -1*((this.getElementOfMatrix(0,0)*this.getElementOfMatrix(2,1)) - (this.getElementOfMatrix(2,0)*this.getElementOfMatrix(0,1)));
+        cofactorMatrix[2][0] = 1*((this.getElementOfMatrix(0,1)*this.getElementOfMatrix(1,2)) - (this.getElementOfMatrix(1,1)*this.getElementOfMatrix(0,2)));
+        cofactorMatrix[2][1] = -1*((this.getElementOfMatrix(0,0)*this.getElementOfMatrix(1,2)) - (this.getElementOfMatrix(1,0)*this.getElementOfMatrix(0,2)));
+        cofactorMatrix[2][2] = 1*((this.getElementOfMatrix(1,1)*this.getElementOfMatrix(0,0)) - (this.getElementOfMatrix(0,1)*this.getElementOfMatrix(1,0)));
+
+        Matrix cofactor = new SquareMatrix();
+        cofactor.setRows(this.getRows());
+        cofactor.setColumns(this.getColumns());
+        cofactor.setMatrix(cofactorMatrix);
+        double[][] adjointMatrix = cofactor.calculateTranspose();
+        return adjointMatrix;
+    }
+
+    @Override
     public double[][] getInverse(boolean toBeReturned){
         if (this.getDeterminant()==0){
             System.out.println("Can't find inverse as determinant is 0");
@@ -124,12 +145,7 @@ public class SquareMatrix extends Matrix{
             return new double[][]{{Double.MIN_VALUE}};
         }
         else if (this.getRows()==3){
-            double[][] adjointMatrix = new double[this.getRows()][this.getRows()];
-            for (int i=0; i<this.getRows(); i++){
-                for (int j=0; j<this.getRows(); i++){
-                    adjointMatrix[i][j] = ( (adjointMatrix[(j+1)%this.getRows()][(i+1)%this.getRows()] * adjointMatrix[(j+2)%this.getRows()][(i+2)%this.getRows()]) - (adjointMatrix[(j+1)%this.getRows()][(i+2)%this.getRows()] * adjointMatrix[(j+2)%this.getRows()][(i+1)%this.getRows()]));
-                }
-            }
+            double[][] adjointMatrix = this.getAdjointof3x3Matrix();
             Matrix adjoint = new Matrix();
             adjoint.setRows(this.getRows());
             adjoint.setColumns(this.getColumns());

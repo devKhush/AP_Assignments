@@ -12,6 +12,7 @@ public class SingletonMatrix extends ScalarMatrix{
         return this.elementInSingletonMatrix;
     }
 
+    @Override
     public void setElementInSingletonMatrix(double elementInSingletonMatrix) {
         this.elementInSingletonMatrix = elementInSingletonMatrix;
     }

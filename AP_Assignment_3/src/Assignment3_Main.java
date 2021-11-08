@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -75,7 +76,7 @@ public class Assignment3_Main {
                 16. To exit the program""");
     }
 
-void printAllMatricesAvailable(){
+    void printAllMatricesAvailable(){
         System.out.println("""
                 2.1 Rectangular Matrix
                 2.2 Row Matrix
@@ -94,6 +95,122 @@ void printAllMatricesAvailable(){
                 2.16 Null Matrix""");
     }
 
+    boolean checkSingletonMatrix(int row, int column){
+        return (row==1) && (column==1);
+    }
+
+    boolean checkRowMatrix(int row, int column, double[][] matrix){
+        return (row==1) && (column!=1);
+    }
+
+    boolean checkColumnMatrix(int row, int column, double[][] matrix){
+        return (row!=1) && (column==1);
+    }
+
+    boolean checkOnesMatrix(int row, int column, double[][] matrix){
+        boolean isOnesMatrix = true;
+        for (int i=0; i<row; i++){
+            for (int j=0; j<column; j++){
+                if (matrix[i][j] != 1) {
+                    isOnesMatrix = false;
+                    break;
+                }
+            }
+        }
+        return isOnesMatrix;
+    }
+
+    boolean checkNullMatrix(int row, int column, double[][] matrix){
+        boolean isNullMatrix = true;
+        for (int i=0; i<row; i++){
+            for (int j=0; j<column; j++){
+                if (matrix[i][j] != 0) {
+                    isNullMatrix = false;
+                    break;
+                }
+            }
+        }
+        return isNullMatrix;
+    }
+
+    boolean checkRectangularMatrix(int row, int column, double[][] matrix){
+        return (row!=column);
+    }
+
+    boolean checkSquareMatrix(int row, int column, double[][] matrix){
+        return (row==column);
+    }
+
+    boolean checkDiagonalMatrix(int row, int column, double[][] matrix){
+        boolean isDiagonal = true;
+        for (int i=0; i<row; i++){
+            for (int j=0; j< column; j++){
+                if ((i != j) && (matrix[i][j] != 0)) {
+                    isDiagonal = false;
+                    break;
+                }
+            }
+        }
+        return isDiagonal;
+    }
+
+    boolean checkIdentityMatrix(int row, int column, double[][] matrix){
+        boolean isIdentity = true;
+        for (int i=0; i<row; i++){
+            for (int j=0; j< column; j++){
+                if ((i != j) && (matrix[i][j] != 0)) {
+                    isIdentity = false;
+                    break;
+                }
+                if ((i==j) && (matrix[i][j]!=1)){
+                    isIdentity = false;
+                    break;
+                }
+            }
+        }
+        return isIdentity;
+    }
+
+    boolean checkScalarMatrix(int row, int column, double[][] matrix){
+        boolean isScalar = true;
+        double scalarElement = matrix[0][0];
+        for (int i=0; i<row; i++){
+            for (int j=0; j< column; j++){
+                if ((i!=j) && (matrix[i][j]!=0))
+                    isScalar=false;
+                if ((i==j) && (matrix[i][j]!=scalarElement))
+                    isScalar= false;
+            }
+        }
+        return isScalar;
+    }
+
+    boolean checkUpperTraingularMatrix(int row, int column, double[][] matrix){
+        boolean isUpperTriangularMatrix = true;
+        for (int i=0; i<row; i++){
+            for (int j=0; j<column; j++){
+                if ((i > j) && (matrix[i][j] != 0)) {
+                    isUpperTriangularMatrix = false;
+                    break;
+                }
+            }
+        }
+        return isUpperTriangularMatrix;
+    }
+
+    boolean checkLowerTraingularMatrix(int row, int column, double[][] matrix){
+        boolean isLowerTraingularMatrix = true;
+        for (int i=0; i<row; i++){
+            for (int j=0; j<column; j++){
+                if ((i < j) && (matrix[i][j] != 0)) {
+                    isLowerTraingularMatrix = false;
+                    break;
+                }
+            }
+        }
+        return isLowerTraingularMatrix;
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Assignment3_Main a3 = new Assignment3_Main();
@@ -101,8 +218,8 @@ void printAllMatricesAvailable(){
         Map<Integer, Matrix> allMatricesMade = new LinkedHashMap<>();
         int option;
         a3.printInstructions();
-
         System.out.println();
+        System.out.println("--------------------------------------------------------------------------------------------------------------");
         while(true){
             System.out.println();
             System.out.println("You're Currently in Main thread");
@@ -115,6 +232,264 @@ void printAllMatricesAvailable(){
 
             else if (option==1){
                 // To be done. To be done later. Not done yet
+                System.out.printf("Enter the number of rows in the matrix :");
+                int row = Integer.parseInt(sc.nextLine().trim());
+                System.out.printf("Enter the number of column in the matrix :");
+                int column = Integer.parseInt(sc.nextLine().trim());
+                double[][] matrix = new double[row][column];
+                for (int i=0; i<row; i++){
+                    System.out.printf("Enter %dth row input (Space separated): ",i);
+                    String rowInput = sc.nextLine().trim();
+                    String[] rowInputArray = rowInput.split(" ");
+                    for (int j=0; j<column; j++){
+                        double matrixElement = Double.parseDouble(rowInputArray[j]);
+                        matrix[i][j] = matrixElement;
+                    }
+                }
+
+                if (a3.checkSingletonMatrix(row, column)){
+                    Matrix madeAsSingletonMatrix = new SingletonMatrix();
+                    madeAsSingletonMatrix.setRows(1);
+                    madeAsSingletonMatrix.setColumns(1);
+                    madeAsSingletonMatrix.setMatrix(matrix);
+                    madeAsSingletonMatrix.setElementInSingletonMatrix(madeAsSingletonMatrix.getElementOfMatrix(0,0));
+                    madeAsSingletonMatrix.setID();
+                    System.out.println("\nThis Matrix is made Singleton Matrix in Memory = ");
+                    madeAsSingletonMatrix.printMatrix();
+                    System.out.println("ID = "+madeAsSingletonMatrix.getId());
+                    allMatricesMade.put(madeAsSingletonMatrix.getId(), madeAsSingletonMatrix);
+                }
+
+                else if (a3.checkRowMatrix(row,column,matrix)){
+                    if (a3.checkOnesMatrix(row,column,matrix)){
+                        Matrix madeAsOnesMatrix = new OnesMatrix();
+                        madeAsOnesMatrix.setRows(row);
+                        madeAsOnesMatrix.setColumns(column);
+                        madeAsOnesMatrix.setMatrix(matrix);
+                        madeAsOnesMatrix.setID();
+                        System.out.println("\nThis Matrix is made Ones Matrix in Memory = ");
+                        madeAsOnesMatrix.printMatrix();
+                        System.out.println("ID = "+madeAsOnesMatrix.getId());
+                        allMatricesMade.put(madeAsOnesMatrix.getId(), madeAsOnesMatrix);
+                    }
+                    else if (a3.checkNullMatrix(row,column,matrix)){
+                        Matrix madeAsNullMatrix = new NullMatrix();
+                        madeAsNullMatrix.setRows(row);
+                        madeAsNullMatrix.setColumns(column);
+                        madeAsNullMatrix.setMatrix(matrix);
+                        madeAsNullMatrix.setID();
+                        System.out.println("\nThis Matrix is made Null Matrix in Memory = ");
+                        madeAsNullMatrix.printMatrix();
+                        System.out.println("ID = "+madeAsNullMatrix.getId());
+                        allMatricesMade.put(madeAsNullMatrix.getId(), madeAsNullMatrix);
+                    }
+                    else{
+                        Matrix madeAsRowMatrix = new RowMatrix();
+                        madeAsRowMatrix.setRows(row);
+                        madeAsRowMatrix.setColumns(column);
+                        madeAsRowMatrix.setMatrix(matrix);
+                        madeAsRowMatrix.setID();
+                        System.out.println("\nThis Matrix is made Row Matrix in Memory = ");
+                        madeAsRowMatrix.printMatrix();
+                        System.out.println("ID = "+madeAsRowMatrix.getId());
+                        allMatricesMade.put(madeAsRowMatrix.getId(), madeAsRowMatrix);
+                    }
+                }
+
+                else if (a3.checkColumnMatrix(row,column,matrix)){
+                    if (a3.checkOnesMatrix(row,column,matrix)){
+                        Matrix madeAsOnesMatrix = new OnesMatrix();
+                        madeAsOnesMatrix.setRows(row);
+                        madeAsOnesMatrix.setColumns(column);
+                        madeAsOnesMatrix.setMatrix(matrix);
+                        madeAsOnesMatrix.setID();
+                        System.out.println("\nThis Matrix is made Ones Matrix in Memory = ");
+                        madeAsOnesMatrix.printMatrix();
+                        System.out.println("ID = "+madeAsOnesMatrix.getId());
+                        allMatricesMade.put(madeAsOnesMatrix.getId(), madeAsOnesMatrix);
+                    }
+                    else if (a3.checkNullMatrix(row,column,matrix)){
+                        Matrix madeAsNullMatrix = new NullMatrix();
+                        madeAsNullMatrix.setRows(row);
+                        madeAsNullMatrix.setColumns(column);
+                        madeAsNullMatrix.setMatrix(matrix);
+                        madeAsNullMatrix.setID();
+                        System.out.println("\nThis Matrix is made Null Matrix in Memory = ");
+                        madeAsNullMatrix.printMatrix();
+                        System.out.println("ID = "+madeAsNullMatrix.getId());
+                        allMatricesMade.put(madeAsNullMatrix.getId(), madeAsNullMatrix);
+                    }
+                    else{
+                        Matrix madeAsColumnMatrix = new ColumnMatrix();
+                        madeAsColumnMatrix.setRows(row);
+                        madeAsColumnMatrix.setColumns(column);
+                        madeAsColumnMatrix.setMatrix(matrix);
+                        madeAsColumnMatrix.setID();
+                        System.out.println("\nThis Matrix is made Column Matrix in Memory = ");
+                        madeAsColumnMatrix.printMatrix();
+                        System.out.println("ID = "+madeAsColumnMatrix.getId());
+                        allMatricesMade.put(madeAsColumnMatrix.getId(), madeAsColumnMatrix);
+                    }
+                }
+
+                else if(a3.checkOnesMatrix(row,column,matrix)){
+                    Matrix madeAsOnesMatrix = new OnesMatrix();
+                    madeAsOnesMatrix.setRows(row);
+                    madeAsOnesMatrix.setColumns(column);
+                    madeAsOnesMatrix.setMatrix(matrix);
+                    madeAsOnesMatrix.setID();
+                    System.out.println("\nThis Matrix is made Ones Matrix in Memory = ");
+                    madeAsOnesMatrix.printMatrix();
+                    System.out.println("ID = "+madeAsOnesMatrix.getId());
+                    allMatricesMade.put(madeAsOnesMatrix.getId(), madeAsOnesMatrix);
+                }
+
+                else if (a3.checkNullMatrix(row,column,matrix)){
+                    Matrix madeAsNullMatrix = new NullMatrix();
+                    madeAsNullMatrix.setRows(row);
+                    madeAsNullMatrix.setColumns(column);
+                    madeAsNullMatrix.setMatrix(matrix);
+                    madeAsNullMatrix.setID();
+                    System.out.println("\nThis Matrix is made Null Matrix in Memory = ");
+                    madeAsNullMatrix.printMatrix();
+                    System.out.println("ID = "+madeAsNullMatrix.getId());
+                    allMatricesMade.put(madeAsNullMatrix.getId(), madeAsNullMatrix);
+                }
+
+                else if (a3.checkRectangularMatrix(row,column,matrix)){
+                    Matrix madeAsRectangularMatrix = new RectangularMatrix();
+                    madeAsRectangularMatrix.setRows(row);
+                    madeAsRectangularMatrix.setColumns(column);
+                    madeAsRectangularMatrix.setMatrix(matrix);
+                    madeAsRectangularMatrix.setID();
+                    System.out.println("\nThis Matrix is made Rectangular Matrix in Memory = ");
+                    madeAsRectangularMatrix.printMatrix();
+                    System.out.println("ID = "+madeAsRectangularMatrix.getId());
+                    allMatricesMade.put(madeAsRectangularMatrix.getId(),madeAsRectangularMatrix);
+                }
+
+                else if (a3.checkSquareMatrix(row,column,matrix)){
+                    Matrix squareForTesting = new SquareMatrix();
+                    squareForTesting.setRows(row);
+                    squareForTesting.setColumns(column);
+                    squareForTesting.setMatrix(matrix);
+
+                    if(squareForTesting.isSkewSymmetric()){
+                        Matrix madeAsSkewSymmetricMatrix = new SkewSymmetricMatrix();
+                        madeAsSkewSymmetricMatrix.setRows(row);
+                        madeAsSkewSymmetricMatrix.setColumns(column);
+                        madeAsSkewSymmetricMatrix.setMatrix(matrix);
+                        madeAsSkewSymmetricMatrix.setID();
+                        System.out.println("\nThis Matrix is made Skew Symmetric Matrix in Memory = ");
+                        madeAsSkewSymmetricMatrix.printMatrix();
+                        System.out.println("ID = "+madeAsSkewSymmetricMatrix.getId());
+                        allMatricesMade.put(madeAsSkewSymmetricMatrix.getId(),madeAsSkewSymmetricMatrix);
+                    }
+
+                    else if (squareForTesting.getDeterminant()==0){
+                        Matrix madeAsSingularMatrix = new SingularMatrix();
+                        madeAsSingularMatrix.setRows(row);
+                        madeAsSingularMatrix.setColumns(column);
+                        madeAsSingularMatrix.setMatrix(matrix);
+                        madeAsSingularMatrix.setID();
+                        System.out.println("\nThis Matrix is made Singular Matrix in Memory = ");
+                        madeAsSingularMatrix.printMatrix();
+                        System.out.println("ID = "+madeAsSingularMatrix.getId());
+                        allMatricesMade.put(madeAsSingularMatrix.getId(),madeAsSingularMatrix);
+                    }
+
+                    else if (a3.checkDiagonalMatrix(row,column,matrix)){
+                        if (a3.checkIdentityMatrix(row,column,matrix)){
+                            Matrix madeAsIdentityMatrix = new IdentityMatrix();
+                            madeAsIdentityMatrix.setRows(row);
+                            madeAsIdentityMatrix.setColumns(column);
+                            madeAsIdentityMatrix.setMatrix(matrix);
+                            madeAsIdentityMatrix.setID();
+                            System.out.println("\nThis Matrix is made Identity matrix in memory = ");
+                            madeAsIdentityMatrix.printMatrix();
+                            System.out.println("ID = "+madeAsIdentityMatrix.getId());
+                            allMatricesMade.put(madeAsIdentityMatrix.getId(),madeAsIdentityMatrix);
+                        }
+                        else if (a3.checkScalarMatrix(row,column,matrix)){
+                            Matrix madeAsScalarMatrix = new ScalarMatrix();
+                            madeAsScalarMatrix.setRows(row);
+                            madeAsScalarMatrix.setColumns(column);
+                            madeAsScalarMatrix.setMatrix(matrix);
+                            madeAsScalarMatrix.setID();
+                            madeAsScalarMatrix.setScalarElement(matrix[0][0]);
+                            //System.out.println("scalar = "+ madeAsScalarMatrix.getScalarElement());
+                            System.out.println("\nThis Matrix is made Scalar matrix in memory = ");
+                            madeAsScalarMatrix.printMatrix();
+                            System.out.println("ID = "+madeAsScalarMatrix.getId());
+                            allMatricesMade.put(madeAsScalarMatrix.getId(),madeAsScalarMatrix);
+                        }
+                        else{
+                            Matrix madeAsDiagonalMatrix = new DiagonalMatrix();
+                            double[] diagonalElements = new double[row];
+                            for (int i=0; i<row; i++){
+                                diagonalElements[i] = matrix[i][i];
+                            }
+                            madeAsDiagonalMatrix.setRows(row);
+                            madeAsDiagonalMatrix.setColumns(column);
+                            madeAsDiagonalMatrix.setMatrix(matrix);
+                            madeAsDiagonalMatrix.setID();
+                            madeAsDiagonalMatrix.setDiagonalElements(diagonalElements);
+                            //System.out.println(Arrays.toString(diagonalElements));
+                            System.out.println("\nThis Matrix is made Diagonal matrix in memory = ");
+                            madeAsDiagonalMatrix.printMatrix();
+                            System.out.println("ID = "+madeAsDiagonalMatrix.getId());
+                            allMatricesMade.put(madeAsDiagonalMatrix.getId(),madeAsDiagonalMatrix);
+                        }
+                    }
+
+                    else if(a3.checkUpperTraingularMatrix(row,column,matrix)){
+                        Matrix madeAsUpperTraingularMatrix = new UpperTriangularMatrix();
+                        madeAsUpperTraingularMatrix.setRows(row);
+                        madeAsUpperTraingularMatrix.setColumns(column);
+                        madeAsUpperTraingularMatrix.setMatrix(matrix);
+                        madeAsUpperTraingularMatrix.setID();
+                        System.out.println("\nThis Matrix is made Upper Triangular Matrix in Memory = ");
+                        madeAsUpperTraingularMatrix.printMatrix();
+                        System.out.println("ID = "+madeAsUpperTraingularMatrix.getId());
+                        allMatricesMade.put(madeAsUpperTraingularMatrix.getId(),madeAsUpperTraingularMatrix);
+                    }
+
+                    else if(a3.checkLowerTraingularMatrix(row,column,matrix)){
+                        Matrix madeAsLowerTraingularMatrix = new LowerTriangularMatrix();
+                        madeAsLowerTraingularMatrix.setRows(row);
+                        madeAsLowerTraingularMatrix.setColumns(column);
+                        madeAsLowerTraingularMatrix.setMatrix(matrix);
+                        madeAsLowerTraingularMatrix.setID();
+                        System.out.println("\nThis Matrix is made Lower Triangular Matrix in Memory = ");
+                        madeAsLowerTraingularMatrix.printMatrix();
+                        System.out.println("ID = "+madeAsLowerTraingularMatrix.getId());
+                        allMatricesMade.put(madeAsLowerTraingularMatrix.getId(),madeAsLowerTraingularMatrix);
+                    }
+
+                    else if (squareForTesting.isSymmetric()){
+                        Matrix madeAsSymmetricMatrix = new SymmetricMatrix();
+                        madeAsSymmetricMatrix.setRows(row);
+                        madeAsSymmetricMatrix.setColumns(column);
+                        madeAsSymmetricMatrix.setMatrix(matrix);
+                        madeAsSymmetricMatrix.setID();
+                        System.out.println("\nThis Matrix is made Symmetric Matrix in Memory = ");
+                        madeAsSymmetricMatrix.printMatrix();
+                        System.out.println("ID = "+madeAsSymmetricMatrix.getId());
+                        allMatricesMade.put(madeAsSymmetricMatrix.getId(),madeAsSymmetricMatrix);
+                    }
+
+                    else{
+                        Matrix madeAsSquareMatrix = new SquareMatrix();
+                        madeAsSquareMatrix.setRows(row);
+                        madeAsSquareMatrix.setColumns(column);
+                        madeAsSquareMatrix.setMatrix(matrix);
+                        madeAsSquareMatrix.setID();
+                        System.out.println("\nThis Matrix is made Square Matrix in Memory = ");
+                        madeAsSquareMatrix.printMatrix();
+                        System.out.println("ID = "+madeAsSquareMatrix.getId());
+                        allMatricesMade.put(madeAsSquareMatrix.getId(),madeAsSquareMatrix);
+                    }
+                }
             }
 
             else if (option==2){
@@ -266,6 +641,7 @@ void printAllMatricesAvailable(){
                 System.out.printf("Enter the ID of the matrix to change its element :");
                 int id = Integer.parseInt(sc.nextLine().trim());
                 Matrix toBeEdited = allMatricesMade.get(id);
+                System.out.println("NOTE : ROW NUMBER AND COLUMN NUMBER STARTS FROM 0 and ENDS WITH M-1 and N-1 FOR A MxN MATRIX");
                 toBeEdited.changeElement();
                 System.out.println();
                 System.out.println("Matrix = ");
@@ -488,7 +864,6 @@ void printAllMatricesAvailable(){
 
             else if (option==9){
                 a3.showMean();
-                System.out.println();
                 System.out.printf("Enter the ID of the operation to be perform from above :");
                 double opID = Double.parseDouble(sc.nextLine().trim());
                 if (opID==9.1) {

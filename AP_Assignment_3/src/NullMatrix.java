@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class NullMatrix extends RectangularMatrix{
     double nullElement = 0;
 
+    @Override
     public double getNullElement() {
         return nullElement;
     }

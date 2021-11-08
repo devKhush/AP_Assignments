@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class OnesMatrix extends RectangularMatrix{
     double onesElement = 1;
 
+    @Override
     public double getOnesElement() {
         return onesElement;
     }

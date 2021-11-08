@@ -23,6 +23,26 @@ public class ColumnMatrix extends RectangularMatrix{
         this.setID();
     }
 
+    @Override
+    public void getAllTypes(){
+        System.out.println("Column Matrix");
+        if (this.getRows()==this.getColumns()) {
+            System.out.println("Square Matrix");
+            System.out.println("Singleton Matrix");
+            System.out.println("Diagonal Matrix");
+            System.out.println("Scalar Matrix");
+            if (this.getElementOfMatrix(0,0)==1){
+                System.out.println("Ones matrix");
+                System.out.println("Identity matrix");
+            }
+            else if (this.getElementOfMatrix(0,0)==0){
+                System.out.println("Null matrix");
+            }
+        }
+        else
+            System.out.println("Rectangular Matrix");
+    }
+
     public static void main(String[] args) {
         Matrix cm = new ColumnMatrix();
         cm.inputMatrix();

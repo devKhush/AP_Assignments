@@ -1,10 +1,6 @@
 import java.util.Scanner;
 
 public class RowMatrix extends RectangularMatrix{
-//    private int rows=1;
-//    private int columns;
-//    private double[][] matrix;
-//    private int id;
 
     @Override
     public void inputMatrix(){
@@ -28,22 +24,25 @@ public class RowMatrix extends RectangularMatrix{
         this.setID();
     }
 
-//    @Override
-//    public int getRows(){
-//        return this.rows;
-//    }
-//    @Override
-//    public int getColumns(){
-//        return this.columns;
-//    }
-//    @Override
-//    public double[][] getMatrix(){
-//        return this.matrix;
-//    }
-//    @Override
-//    public int getId(){
-//        return this.id;
-//    }
+    @Override
+    public void getAllTypes(){
+        System.out.println("Row Matrix");
+        if (this.getRows()==this.getColumns()) {
+            System.out.println("Square Matrix");
+            System.out.println("Singleton Matrix");
+            System.out.println("Diagonal Matrix");
+            System.out.println("Scalar Matrix");
+            if (this.getElementOfMatrix(0,0)==1){
+                System.out.println("Ones matrix");
+                System.out.println("Identity matrix");
+            }
+            else if (this.getElementOfMatrix(0,0)==0){
+                System.out.println("Null matrix");
+            }
+        }
+        else
+            System.out.println("Rectangular Matrix");
+    }
 
     public static void main(String[] args) {
         Matrix rm = new RowMatrix();

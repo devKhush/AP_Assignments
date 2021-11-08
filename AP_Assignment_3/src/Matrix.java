@@ -8,7 +8,7 @@ public class Matrix {
     private static int staticID=0;
 
     public Matrix(){
-        staticID++;
+        //staticID++;
     }
 
     public void getAllTypes(){
@@ -79,6 +79,7 @@ public class Matrix {
     }
 
     public void setID(){
+        this.staticID++;
         this.id = this.staticID;
     }
 
@@ -267,8 +268,9 @@ public class Matrix {
             for (int i = 0; i < this.getRows(); i++) {
                 sumOfColumn += this.getElementOfMatrix(i, j);
             }
-            double[] mean = {sumOfColumn / this.getRows()};
-            columnMean[j] = mean;
+            /*double[] mean = {sumOfColumn / this.getRows()};*/
+            double mean = sumOfColumn / this.getRows();
+            columnMean[0][j] = mean;
         }
         this.printMatrix(columnMean);
     }
@@ -290,6 +292,8 @@ public class Matrix {
     }
 
 
+
+    // Unused over-ridden methods in Child class
     public void inputMatrix(){}
     double getScalarElement(){
         return Double.MIN_VALUE;
@@ -325,8 +329,12 @@ public class Matrix {
         System.out.println("Can't perform as Matrix is not square");
     }
     public void changeElement(){}
+    public void setElementInSingletonMatrix(double elementInSingletonMatrix) { }
+    void setScalarElement(double scalarElement) { }
+    public double[][] getAdjointof3x3Matrix(){return new double[][]{{Double.MIN_VALUE}};}
 
 
+    // Getters and Setters
     public int getColumns(){
         return this.columns;
     }

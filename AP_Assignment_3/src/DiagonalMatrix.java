@@ -4,18 +4,22 @@ import java.util.Scanner;
 public class DiagonalMatrix extends SquareMatrix{
     double[] diagonalElements;
 
+    @Override
     double[] getDiagonalElements(){
         return this.diagonalElements;
     }
 
+    @Override
     void setDiagonalElements(double[] diagonalElements){
         this.diagonalElements = diagonalElements;
     }
 
+    @Override
     void changeDiagonalElement(int i, double value){
         this.diagonalElements[i] = value;
     }
 
+    @Override
     public double calculateDeterminant(){
         double determinant = 1;
         for (int i=0; i<this.getRows(); i++)
