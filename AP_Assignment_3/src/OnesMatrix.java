@@ -28,7 +28,12 @@ public class OnesMatrix extends RectangularMatrix{
     }
 
     @Override
-    public void inputMatrix(){
+    public boolean isSkewSymmetric(){
+        return false;
+    }
+
+    @Override
+    public boolean inputMatrix(){
         Scanner sc = new Scanner(System.in);
         System.out.printf("Enter Dimensions of Ones matrix as <rows><space><columns>: ");
         String dimension = sc.nextLine().trim();
@@ -45,6 +50,7 @@ public class OnesMatrix extends RectangularMatrix{
         }
         //this.id = this.staticID++;
         this.setID();
+        return true;
     }
 
     @Override
@@ -78,6 +84,44 @@ public class OnesMatrix extends RectangularMatrix{
     @Override
     public void changeElement(){
         System.out.println("Can't change element of a ones matrix");
+    }
+
+    @Override
+    public void solveLinearEquation(Matrix B){
+        if (this.getRows()==this.getColumns())
+            System.out.println("Can't solve equations as this matrix is Singular Matrix");
+        else
+            System.out.println("Can't solve equations as matrix is not Square Matrix");
+    }
+
+    @Override
+    public void matrixPlusItsTranspose(){
+        if (this.getRows()!=this.getColumns()){
+            System.out.println("Can't perform as this Matrix must be a square matrix");
+            return;
+        }
+        Matrix transpose = new SquareMatrix();
+        transpose.setRows(this.getRows());
+        transpose.setColumns(this.getColumns());
+        transpose.setMatrix(this.getTransposeMatrix());
+        this.printMatrix(this.matrixAddition(transpose,true));
+    }
+
+    @Override
+    public double getDeterminant(){
+        if (this.getRows()==this.getColumns())
+            return 0;
+        System.out.println("Can't find determinant as this matrix is not a Square matrix");
+        return Double.MIN_VALUE;
+    }
+
+    @Override
+    public double[][] getInverse(boolean toBeReturned){
+        if (this.getRows()==this.getColumns())
+            System.out.println("Can't find Inverse of this Matrix as it is a Singular Matrix");
+        else
+            System.out.println("Can't find Inverse of this Matrix as it is not a Square Matrix");
+        return new double[][]{{Double.MIN_VALUE}};
     }
 
     public static void main(String[] args) {

@@ -1,4 +1,3 @@
-import java.util.Arrays;
 
 public class Matrix {
     private int rows;
@@ -49,12 +48,12 @@ public class Matrix {
             else
                 System.out.printf("  [");
             for (j=0; j<this.columns-1; j++){
-                System.out.printf("%.2f, ",this.matrix[i][j]);
+                System.out.printf("%.4f, ",this.matrix[i][j]);
             }
             if (i==this.rows-1)
-                System.out.printf("%.2f ] ]\n",this.matrix[i][this.columns-1]);
+                System.out.printf("%.4f ] ]\n",this.matrix[i][this.columns-1]);
             else
-                System.out.printf("%.2f ]\n",this.matrix[i][this.columns-1]);
+                System.out.printf("%.4f ]\n",this.matrix[i][this.columns-1]);
         }
     }
 
@@ -69,12 +68,12 @@ public class Matrix {
             else
                 System.out.printf("  [");
             for (j=0; j<column-1; j++){
-                System.out.printf("%.2f, ",matrixInput[i][j]);
+                System.out.printf("%.4f, ",matrixInput[i][j]);
             }
             if (i==row-1)
-                System.out.printf("%.2f ] ]\n",matrixInput[i][column-1]);
+                System.out.printf("%.4f ] ]\n",matrixInput[i][column-1]);
             else
-                System.out.printf("%.2f ]\n",matrixInput[i][column-1]);
+                System.out.printf("%.4f ]\n",matrixInput[i][column-1]);
         }
     }
 
@@ -286,15 +285,13 @@ public class Matrix {
         System.out.printf("\nMean of all the elements in this matrix is %.2f\n",mean);
     }
 
+
+    // Unused over-ridden methods in Child class
     public double getDeterminant(){
         System.out.println("Can't find determinant as this matrix is not a Square matrix");
         return Double.MIN_VALUE;
     }
-
-
-
-    // Unused over-ridden methods in Child class
-    public void inputMatrix(){}
+    public boolean inputMatrix(){return true;}
     double getScalarElement(){
         return Double.MIN_VALUE;
     }
@@ -316,17 +313,17 @@ public class Matrix {
         return 1;
     }
     public double[][] getInverse(boolean toBeReturned){
-        System.out.println("Can't find inverse as the matrix is not square");
+        System.out.println("Can't find Inverse of this Matrix as the it is not a Square Matrix");
         return new double[][]{{Double.MIN_VALUE}};
     }
     public void matrixDivisionWithMatrix(Matrix B){
         System.out.println("Can't perform A/B as B is not a square matrix");
     }
     public void solveLinearEquation(Matrix B){
-        System.out.println("Can't solve equations as matrix is not invertible");
+        System.out.println("Can't solve equations as matrix is Rectangular Matrix");
     }
     public void matrixPlusItsTranspose(){
-        System.out.println("Can't perform as Matrix is not square");
+        System.out.println("Can't perform as this Matrix is not Square Matrix");
     }
     public void changeElement(){}
     public void setElementInSingletonMatrix(double elementInSingletonMatrix) { }

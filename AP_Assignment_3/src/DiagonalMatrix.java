@@ -28,7 +28,7 @@ public class DiagonalMatrix extends SquareMatrix{
     }
 
     @Override
-    public void inputMatrix(){
+    public boolean inputMatrix(){
         Scanner sc = new Scanner(System.in);
         System.out.printf("Enter the dimension of diagonal matrix (one number): ");
         int dimension = Integer.parseInt(sc.nextLine().trim());
@@ -51,6 +51,7 @@ public class DiagonalMatrix extends SquareMatrix{
         }
 //        this.id = this.staticID;
         this.setID();
+        return true;
     }
 
     @Override

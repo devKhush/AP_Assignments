@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class RowMatrix extends RectangularMatrix{
 
     @Override
-    public void inputMatrix(){
+    public boolean inputMatrix(){
         Scanner sc = new Scanner(System.in);
         System.out.printf("Enter numbers of columns: ");
         int column = Integer.parseInt(sc.nextLine().trim());
@@ -17,11 +17,10 @@ public class RowMatrix extends RectangularMatrix{
             for (int j=0; j<column; j++){
                 double matrixElement = Double.parseDouble(rowInputArray[j]);
                 this.changeElementOfMatrix(i,j , matrixElement);
-//                this.matrix[i][j] = Double.parseDouble(rowInputArray[j]);
             }
         }
-        //this.id = staticID;
         this.setID();
+        return true;
     }
 
     @Override
@@ -42,6 +41,70 @@ public class RowMatrix extends RectangularMatrix{
         }
         else
             System.out.println("Rectangular Matrix");
+    }
+
+    @Override
+    public double getDeterminant(){
+        if (this.getRows()!=this.getColumns()) {
+            System.out.println("Can't find determinant as this matrix is not a Square matrix");
+            return Double.MIN_VALUE;
+        }
+        else
+            return this.getElementOfMatrix(0,0);
+    }
+
+    @Override
+    public boolean isSymmetric(){
+        return this.getRows() == this.getColumns();
+    }
+
+    @Override
+    public boolean isSkewSymmetric(){
+        return false;
+    }
+
+    @Override
+    public double[][] getInverse(boolean toBeReturned){
+        if (this.getRows()!=this.getColumns()) {
+            System.out.println("Can't find Inverse of this Matrix as the it is not a Square Matrix");
+            return new double[][]{{Double.MIN_VALUE}};
+        }
+        else {
+            SquareMatrix demoMatrix = new SquareMatrix();
+            demoMatrix.setMatrix(this.getMatrix());
+            demoMatrix.setRows(this.getRows());
+            demoMatrix.setColumns(this.getColumns());
+            if (toBeReturned)
+                return demoMatrix.getInverse(true);
+            demoMatrix.getInverse(false);
+            return demoMatrix.getInverse(true);
+        }
+    }
+
+    @Override
+    public void solveLinearEquation(Matrix B){
+        if (this.getRows()!=this.getColumns()) {
+            System.out.println("Can't solve equations as this matrix is Singular Matrix");
+            return;
+        }
+        SquareMatrix demoMatrix = new SquareMatrix();
+        demoMatrix.setMatrix(this.getMatrix());
+        demoMatrix.setRows(this.getRows());
+        demoMatrix.setColumns(this.getColumns());
+        demoMatrix.solveLinearEquation(B);
+    }
+
+    @Override
+    public void matrixPlusItsTranspose(){
+        if (this.getRows()!=this.getColumns()){
+            System.out.println("Can't perform as this Matrix must be a square matrix");
+            return;
+        }
+        SquareMatrix demoMatrix = new SquareMatrix();
+        demoMatrix.setMatrix(this.getMatrix());
+        demoMatrix.setRows(this.getRows());
+        demoMatrix.setColumns(this.getColumns());
+        demoMatrix.matrixPlusItsTranspose();
     }
 
     public static void main(String[] args) {

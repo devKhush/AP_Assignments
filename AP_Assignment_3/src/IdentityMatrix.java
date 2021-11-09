@@ -17,7 +17,7 @@ public class IdentityMatrix extends ScalarMatrix{
     }
 
     @Override
-    public void inputMatrix(){
+    public boolean inputMatrix(){
         Scanner sc = new Scanner(System.in);
         System.out.printf("Enter dimension of Identity matrix (one number): ");
         int dimension = Integer.parseInt(sc.nextLine().trim());
@@ -37,6 +37,7 @@ public class IdentityMatrix extends ScalarMatrix{
         }
         //this.id = this.staticID;
         this.setID();
+        return true;
     }
 
     public static void main(String[] args) {

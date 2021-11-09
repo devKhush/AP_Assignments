@@ -22,7 +22,7 @@ public class ScalarMatrix extends DiagonalMatrix{
     }
 
     @Override
-    public void inputMatrix(){
+    public boolean inputMatrix(){
         Scanner sc = new Scanner(System.in);
         System.out.printf("Enter dimension of Scalar matrix (one number): ");
         int dimension = Integer.parseInt(sc.nextLine().trim());
@@ -42,6 +42,7 @@ public class ScalarMatrix extends DiagonalMatrix{
         }
         //this.id = this.staticID;
         this.setID();
+        return true;
     }
 
     @Override

@@ -38,7 +38,7 @@ public class SingletonMatrix extends ScalarMatrix{
     }
 
     @Override
-    public void inputMatrix(){
+    public boolean inputMatrix(){
         Scanner sc = new Scanner(System.in);
         this.setMatrix(new double[1][1]);
         this.setRows(1);
@@ -49,6 +49,7 @@ public class SingletonMatrix extends ScalarMatrix{
         this.setElementInSingletonMatrix(value);
         //this.id = this.staticID;
         this.setID();
+        return true;
     }
 
     @Override

@@ -49,7 +49,7 @@ public class SquareMatrix extends Matrix{
     }
 
     @Override
-    public void inputMatrix(){
+    public boolean inputMatrix(){
         Scanner sc = new Scanner(System.in);
         switch (this.getClass().getName()) {
             case "SymmetricMatrix":
@@ -86,6 +86,7 @@ public class SquareMatrix extends Matrix{
         }
         //this.id = this.staticID;
         this.setID();
+        return true;
     }
 
     @Override

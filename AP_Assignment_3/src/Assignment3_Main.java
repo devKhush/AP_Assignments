@@ -499,12 +499,14 @@ public class Assignment3_Main {
                 double decimalIdOfMatrix = Double.parseDouble(sc.nextLine().trim());
                 if (decimalIdOfMatrix==2.1){
                     Matrix mat = new RectangularMatrix();
-                    mat.inputMatrix();
-                    System.out.println();
-                    System.out.println("Matrix = ");
-                    mat.printMatrix();
-                    System.out.println("ID = "+mat.getId());
-                    allMatricesMade.put(mat.getId(), mat);
+                    boolean isMade = mat.inputMatrix();
+                    if (isMade) {
+                        System.out.println();
+                        System.out.println("Matrix = ");
+                        mat.printMatrix();
+                        System.out.println("ID = " + mat.getId());
+                        allMatricesMade.put(mat.getId(), mat);
+                    }
                 }
                 else if (decimalIdOfMatrix==2.2){
                     Matrix mat = new RowMatrix();
@@ -670,6 +672,7 @@ public class Assignment3_Main {
                     int idB = Integer.parseInt(sc.nextLine().trim());
                     Matrix A = allMatricesMade.get(idA);
                     Matrix B = allMatricesMade.get(idB);
+                    System.out.println("\nResult = ");
                     A.matrixAddition(B,false);
                 }
                 else if (opID==5.2){
@@ -680,6 +683,7 @@ public class Assignment3_Main {
                     int idB = Integer.parseInt(sc.nextLine().trim());
                     Matrix A = allMatricesMade.get(idA);
                     Matrix B = allMatricesMade.get(idB);
+                    System.out.println("\nResult = ");
                     A.matrixSubtraction(B);
                 }
                 else if (opID==5.3){
@@ -690,6 +694,7 @@ public class Assignment3_Main {
                     int idB = Integer.parseInt(sc.nextLine().trim());
                     Matrix A = allMatricesMade.get(idA);
                     Matrix B = allMatricesMade.get(idB);
+                    System.out.println("\nResult = ");
                     A.matrixMultiplicationWithMatrix(B);
                 }
                 else if (opID==5.4){
@@ -700,6 +705,7 @@ public class Assignment3_Main {
                     int idB = Integer.parseInt(sc.nextLine().trim());
                     Matrix A = allMatricesMade.get(idA);
                     Matrix B = allMatricesMade.get(idB);
+                    System.out.println("\nResult = ");
                     A.matrixDivisionWithMatrix(B);
                 }
                 else{
@@ -721,6 +727,7 @@ public class Assignment3_Main {
                     int idB = Integer.parseInt(sc.nextLine().trim());
                     Matrix A = allMatricesMade.get(idA);
                     Matrix B = allMatricesMade.get(idB);
+                    System.out.println("\nResult = ");
                     A.matrixAddition(B,false);
                 }
                 else if (opID==6.2){
@@ -732,15 +739,20 @@ public class Assignment3_Main {
                         System.out.printf("Whether to use previous Singleton Matrix as scalar here? (Yes or No) :");
                         String answer = sc.nextLine().trim();
                         if (answer.equalsIgnoreCase("yes")){
+                            System.out.println("\nResult = ");
                             A.matrixAdditionWithScalar(scalar);
                         }
                         else if (answer.equalsIgnoreCase("no")){
+                            System.out.printf("Enter the scalar :");
                             double newScalar = Double.parseDouble(sc.nextLine().trim());
+                            System.out.println("\nResult = ");
                             A.matrixAdditionWithScalar(newScalar);
                         }
                     }
                     else{
+                        System.out.printf("Enter the scalar :");
                         double newScalar = Double.parseDouble(sc.nextLine().trim());
+                        System.out.println("\nResult = ");
                         A.matrixAdditionWithScalar(newScalar);
                     }
                 }
@@ -752,6 +764,7 @@ public class Assignment3_Main {
                     int idB = Integer.parseInt(sc.nextLine().trim());
                     Matrix A = allMatricesMade.get(idA);
                     Matrix B = allMatricesMade.get(idB);
+                    System.out.println("\nResult = ");
                     A.matrixSubtraction(B);
                 }
                 else if (opID==6.4){
@@ -763,15 +776,20 @@ public class Assignment3_Main {
                         System.out.printf("Whether to use previous Singleton Matrix as scalar here? (Yes or No) :");
                         String answer = sc.nextLine().trim();
                         if (answer.equalsIgnoreCase("yes")){
+                            System.out.println("\nResult = ");
                             A.matrixSubtractionWithScalar(scalar);
                         }
                         else if (answer.equalsIgnoreCase("no")){
+                            System.out.printf("Enter the scalar :");
                             double newScalar = Double.parseDouble(sc.nextLine().trim());
+                            System.out.println("\nResult = ");
                             A.matrixSubtractionWithScalar(newScalar);
                         }
                     }
                     else{
+                        System.out.printf("Enter the scalar :");
                         double newScalar = Double.parseDouble(sc.nextLine().trim());
+                        System.out.println("\nResult = ");
                         A.matrixSubtractionWithScalar(newScalar);
                     }
                 }
@@ -783,6 +801,7 @@ public class Assignment3_Main {
                     int idB = Integer.parseInt(sc.nextLine().trim());
                     Matrix A = allMatricesMade.get(idA);
                     Matrix B = allMatricesMade.get(idB);
+                    System.out.println("\nResult = ");
                     A.matrixElementWiseMultiplication(B);
                 }
                 else if (opID==6.6){
@@ -794,15 +813,20 @@ public class Assignment3_Main {
                         System.out.printf("Whether to use previous Singleton Matrix as scalar here? (Yes or No) :");
                         String answer = sc.nextLine().trim();
                         if (answer.equalsIgnoreCase("yes")){
+                            System.out.println("\nResult = ");
                             A.matrixMultiplicationWithScalar(scalar);
                         }
                         else if (answer.equalsIgnoreCase("no")){
+                            System.out.printf("Enter the scalar :");
                             double newScalar = Double.parseDouble(sc.nextLine().trim());
+                            System.out.println("\nResult = ");
                             A.matrixMultiplicationWithScalar(newScalar);
                         }
                     }
                     else{
+                        System.out.printf("Enter the scalar :");
                         double newScalar = Double.parseDouble(sc.nextLine().trim());
+                        System.out.println("\nResult = ");
                         A.matrixMultiplicationWithScalar(newScalar);
                     }
                 }
@@ -814,6 +838,7 @@ public class Assignment3_Main {
                     int idB = Integer.parseInt(sc.nextLine().trim());
                     Matrix A = allMatricesMade.get(idA);
                     Matrix B = allMatricesMade.get(idB);
+                    System.out.println("\nResult = ");
                     A.matrixElementWiseDivision(B);
                 }
                 else if (opID==6.8){
@@ -825,15 +850,20 @@ public class Assignment3_Main {
                         System.out.printf("Whether to use previous Singleton Matrix as scalar here? (Yes or No) :");
                         String answer = sc.nextLine().trim();
                         if (answer.equalsIgnoreCase("yes")){
+                            System.out.println("\nResult = ");
                             A.matrixDivisionWithScalar(scalar);
                         }
                         else if (answer.equalsIgnoreCase("no")){
+                            System.out.printf("Enter the scalar :");
                             double newScalar = Double.parseDouble(sc.nextLine().trim());
+                            System.out.println("\nResult = ");
                             A.matrixDivisionWithScalar(newScalar);
                         }
                     }
                     else{
+                        System.out.printf("Enter the scalar :");
                         double newScalar = Double.parseDouble(sc.nextLine().trim());
+                        System.out.println("\nResult = ");
                         A.matrixDivisionWithScalar(newScalar);
                     }
                 }
@@ -901,7 +931,8 @@ public class Assignment3_Main {
                 Matrix toDisplayDeterminant = allMatricesMade.get(id);
                 System.out.println("\nThis Matrix is = ");
                 toDisplayDeterminant.printMatrix();
-                System.out.printf("\nDeterminant of this matrix is %.2f\n",toDisplayDeterminant.getDeterminant());
+                if (toDisplayDeterminant.getDeterminant()!=Double.MIN_VALUE)
+                    System.out.printf("\nDeterminant of this matrix is %.2f\n",toDisplayDeterminant.getDeterminant());
             }
 
             else if (option==11){
@@ -923,10 +954,10 @@ public class Assignment3_Main {
                 int id = Integer.parseInt(sc.nextLine().trim());
                 Matrix computeMatrixPlusItsTranspose = allMatricesMade.get(id);
                 if (computeMatrixPlusItsTranspose.getRows()!= computeMatrixPlusItsTranspose.getColumns()){
-                    System.out.println("This matrix must be Square Matrix\nTry again");
+                    System.out.println("Can't perform as this Matrix is not a Square Matrix");
                 }
                 else {
-                    System.out.println("A = ");
+                    System.out.println("\nA = ");
                     computeMatrixPlusItsTranspose.printMatrix();
                     System.out.println("A' (Transpose) = ");
                     computeMatrixPlusItsTranspose.printMatrix(computeMatrixPlusItsTranspose.getTransposeMatrix());

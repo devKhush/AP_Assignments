@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class NullMatrix extends RectangularMatrix{
@@ -28,7 +29,46 @@ public class NullMatrix extends RectangularMatrix{
     }
 
     @Override
-    public void inputMatrix(){
+    public boolean isSkewSymmetric(){
+        return this.getRows() == this.getColumns();
+    }
+
+    @Override
+    public double getDeterminant(){
+        if (this.getRows()==this.getColumns())
+            return 0;
+        System.out.println("Can't find determinant as this matrix is not a Square matrix");
+        return Double.MIN_VALUE;
+    }
+
+    @Override
+    public void solveLinearEquation(Matrix B){
+        if (this.getRows()==this.getColumns())
+            System.out.println("Can't solve equations as this matrix is Singular Matrix");
+        else
+            System.out.println("Can't solve equations as matrix is not Square Matrix");
+    }
+
+    @Override
+    public void matrixPlusItsTranspose(){
+        if (this.getRows()!=this.getColumns()){
+            System.out.println("Can't perform as this Matrix must be a square matrix");
+            return;
+        }
+        this.printMatrix();
+    }
+
+    @Override
+    public double[][] getInverse(boolean toBeReturned){
+        if (this.getRows()==this.getColumns())
+            System.out.println("Can't find Inverse of this Matrix as it is a Singular Matrix");
+        else
+            System.out.println("Can't find Inverse of this Matrix as it is not a Square Matrix");
+        return new double[][]{{Double.MIN_VALUE}};
+    }
+
+    @Override
+    public boolean inputMatrix(){
         Scanner sc = new Scanner(System.in);
         System.out.printf("Enter Dimensions of Null matrix as <rows><space><columns>: ");
         String dimension = sc.nextLine().trim();
@@ -45,6 +85,7 @@ public class NullMatrix extends RectangularMatrix{
         }
         // this.id = this.staticID++;
         this.setID();
+        return true;
     }
 
     @Override
@@ -96,6 +137,9 @@ public class NullMatrix extends RectangularMatrix{
             System.out.println("Can't perform addition as Dimension of two matrices doesn't match");
             return new double[][]{{Double.MIN_VALUE}};
         }
+        if (toBeReturned)
+            return B.getMatrix();
+        B.printMatrix();
         return B.getMatrix();
     }
 
