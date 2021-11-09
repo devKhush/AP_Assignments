@@ -249,7 +249,114 @@ public class SquareMatrix extends Matrix{
             System.out.println("Eigen Vector is   [[1.00]]");
         }
         else if (this.getRows()==2){
+            double a = this.getElementOfMatrix(0,0);
+            double b = this.getElementOfMatrix(0,1);
+            double c = this.getElementOfMatrix(1,0);
+            double d = this.getElementOfMatrix(1,1);
+            double eigenvalue1 = ((a+d) + Math.sqrt( Math.pow(a+d,2) - 4*((a*d) - (b*c))))/2.0;
+            double eigenvalue2 = ((a+d) - Math.sqrt( Math.pow(a+d,2) - 4*((a*d) - (b*c))))/2.0;
+            double[][] eigenVector1 = new double[2][1];
+            double[][] eigenVector2 = new double[2][1];
+            boolean eigenVector1Found = false; boolean eigenVector2Found = false;
 
+            for (double y = 3; y >= -3; y--) {
+                for (double x = 3; x >= -3; x--) {
+                    if ((x!=0) && (y!=0) && ((a-eigenvalue1)*x + b*y == 0) && (c*x + (d-eigenvalue1)*y == 0) && (!eigenVector1Found)) {
+                        eigenVector1[0][0] = x;
+                        eigenVector1[1][0] = y;
+                        eigenVector1Found=true;
+                    }
+                }
+            }
+            for (double y = 3; y >= -3; y--) {
+                for (double x = 3; x >= -3; x--) {
+                    if ((x!=0) && (y!=0) && ((a-eigenvalue2)*x + b*y == 0) && (c*x + (d-eigenvalue2)*y == 0) && (!eigenVector2Found)) {
+                        eigenVector2[0][0] = x;
+                        eigenVector2[1][0] = y;
+                        eigenVector2Found=true;
+                    }
+                }
+            }
+
+            for (double y = 5; y >= -5; y--) {
+                for (double x = 5; x >= -5; x--) {
+                    if ((x!=0) && (y!=0) && ((a-eigenvalue1)*x + b*y == 0) && (c*x + (d-eigenvalue1)*y == 0) && (!eigenVector1Found)) {
+                        eigenVector1[0][0] = x;
+                        eigenVector1[1][0] = y;
+                        eigenVector1Found=true;
+                    }
+                }
+            }
+            for (double y = 5; y >= -5; y--) {
+                for (double x = 5; x >= -5; x--) {
+                    if ((x!=0) && (y!=0) && ((a-eigenvalue2)*x + b*y == 0) && (c*x + (d-eigenvalue2)*y == 0) && (!eigenVector2Found)) {
+                        eigenVector2[0][0] = x;
+                        eigenVector2[1][0] = y;
+                        eigenVector2Found=true;
+                    }
+                }
+            }
+
+            for (double y = 10; y >= -10; y--) {
+                for (double x = 10; x >= -10; x--) {
+                    if ((x!=0) && (y!=0) && ((a-eigenvalue1)*x + b*y == 0) && (c*x + (d-eigenvalue1)*y == 0) && (!eigenVector1Found)) {
+                        eigenVector1[0][0] = x;
+                        eigenVector1[1][0] = y;
+                        eigenVector1Found=true;
+                    }
+                }
+            }
+            for (double y = 10; y >= -10; y--) {
+                for (double x = 10; x >= -10; x--) {
+                    if ((x!=0) && (y!=0) && ((a-eigenvalue2)*x + b*y == 0) && (c*x + (d-eigenvalue2)*y == 0) && (!eigenVector2Found)) {
+                        eigenVector2[0][0] = x;
+                        eigenVector2[1][0] = y;
+                        eigenVector2Found=true;
+                    }
+                }
+            }
+
+            for (double y = 100; y >= -100; y--) {
+                for (double x = 100; x >= -100; x--) {
+                    if ((x!=0) && (y!=0) && ((a-eigenvalue1)*x + b*y == 0) && (c*x + (d-eigenvalue1)*y == 0) && (!eigenVector1Found)) {
+                        eigenVector1[0][0] = x;
+                        eigenVector1[1][0] = y;
+                        eigenVector1Found=true;
+                    }
+                }
+            }
+            for (double y = 100; y >= -100; y--) {
+                for (double x = 100; x >= -100; x--) {
+                    if ((x!=0) && (y!=0) && ((a-eigenvalue2)*x + b*y == 0) && (c*x + (d-eigenvalue2)*y == 0) && (!eigenVector2Found)) {
+                        eigenVector2[0][0] = x;
+                        eigenVector2[1][0] = y;
+                        eigenVector2Found=true;
+                    }
+                }
+            }
+
+            for (double y = 1000; y >= -1000; y--) {
+                for (double x = 1000; x >= -1000; x--) {
+                    if ((x!=0) && (y!=0) && ((a-eigenvalue1)*x + b*y == 0) && (c*x + (d-eigenvalue1)*y == 0) && (!eigenVector1Found)) {
+                        eigenVector1[0][0] = x;
+                        eigenVector1[1][0] = y;
+                        eigenVector1Found=true;
+                    }
+                }
+            }
+            for (double y = 1000; y >= -1000; y--) {
+                for (double x = 1000; x >= -1000; x--) {
+                    if ((x!=0) && (y!=0) && ((a-eigenvalue2)*x + b*y == 0) && (c*x + (d-eigenvalue2)*y == 0) && (!eigenVector2Found)) {
+                        eigenVector2[0][0] = x;
+                        eigenVector2[1][0] = y;
+                        eigenVector2Found=true;
+                    }
+                }
+            }
+            System.out.println("Eigen Vector 1 = ");
+            this.printMatrix(eigenVector1);
+            System.out.println("Eigen Vector 2 = ");
+            this.printMatrix(eigenVector2);
         }
     }
 
