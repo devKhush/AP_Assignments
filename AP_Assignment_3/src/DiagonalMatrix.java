@@ -71,15 +71,16 @@ public class DiagonalMatrix extends SquareMatrix{
         this.changeDiagonalElement(i,value);
     }
 
-    public static void main(String[] args) {
-        Matrix dm = new DiagonalMatrix();
-        dm.inputMatrix();
-        dm.printMatrix();
-        System.out.println(Arrays.toString(((DiagonalMatrix)dm).getDiagonalElements()));
-        dm.printMatrix(dm.getTransposeMatrix());
-        System.out.println(dm.getId());
-        System.out.println(dm.getRows());
-        System.out.println(dm.getColumns());
-        System.out.println(dm.isSymmetric());
+    @Override
+    public void getEigenValues(){
+        System.out.printf("\nEigen Values  =  ");
+        for (int i=0; i<this.getRows(); i++){
+            if (i!=this.getRows()-1)
+                System.out.printf("%.4f, ",this.getElementOfMatrix(i,i));
+            else
+                System.out.printf(" %.4f ",this.getElementOfMatrix(i,i));
+        }
+        System.out.println();
     }
+
 }

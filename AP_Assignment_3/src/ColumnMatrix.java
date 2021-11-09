@@ -106,20 +106,26 @@ public class ColumnMatrix extends RectangularMatrix{
         demoMatrix.matrixPlusItsTranspose();
     }
 
-    public static void main(String[] args) {
-        Matrix cm = new ColumnMatrix();
-        cm.inputMatrix();
-        System.out.println(cm.getId());
-        System.out.println(cm.getRows());
-        System.out.println(cm.getColumns());
-        cm.printMatrix();
-
-        System.out.println();
-        Matrix cm1 = new ColumnMatrix();
-        cm1.inputMatrix();
-        System.out.println(cm1.getId());
-        System.out.println(cm1.getRows());
-        System.out.println(cm1.getColumns());
-        cm1.printMatrix();
+    @Override
+    public void getEigenValues(){
+        if (this.getRows()!=this.getColumns()){
+            System.out.println("\nMatrix must be Square for finding Eigen Values");
+            return;
+        }
+        if (this.getRows()==1){
+            System.out.println("\nEigen Value is  "+this.getElementOfMatrix(0,0));
+        }
     }
+
+    @Override
+    public void getEigenVectors(){
+        if (this.getRows()!=this.getColumns()){
+            System.out.println("\nMatrix must be Square for finding Eigen Values");
+            return;
+        }
+        if (this.getRows()==1){
+            System.out.println("Eigen Vector is   [[1.00]]");
+        }
+    }
+
 }

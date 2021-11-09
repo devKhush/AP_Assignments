@@ -223,34 +223,34 @@ public class SquareMatrix extends Matrix{
         this.changeElementOfMatrix(i,j,value);
     }
 
-    public static void main(String[] args) {
-        Matrix sm = new SquareMatrix();
-        sm.inputMatrix();
-        sm.printMatrix();
-        sm.printMatrix(sm.getTransposeMatrix());
-        System.out.println(sm.isSymmetric());
-        System.out.println(sm.getId());
-        System.out.println(sm.getRows());
-        System.out.println(sm.getColumns());
-        sm.getAllTypes();
-        System.out.println();
-
-        Matrix rm = new RectangularMatrix();
-        rm.inputMatrix();
-        rm.printMatrix();
-        System.out.println(rm.getId());
-        System.out.println(rm.getRows());
-        System.out.println(rm.getColumns());
-        System.out.println();
-
-        Matrix sm1 = new SquareMatrix();
-        sm1.inputMatrix();
-        sm1.printMatrix();
-        System.out.println(sm1.getId());
-        System.out.println(sm1.getRows());
-        System.out.println(sm1.getColumns());
-
-        System.out.println();
-        sm.matrixMultiplicationWithMatrix(rm);
+    @Override
+    public void getEigenValues(){
+        if (this.getRows()==1){
+            System.out.println("\nEigen Value is  "+this.getElementOfMatrix(0,0));
+        }
+        else if (this.getRows()==2){
+            double D = Math.pow(this.getElementOfMatrix(0,0)+this.getElementOfMatrix(1,1), 2) - 4*((this.getElementOfMatrix(0,0)*this.getElementOfMatrix(1,1)) - this.getElementOfMatrix(0,1)*this.getElementOfMatrix(1,0));
+            if (D>=0){
+                double eigenValue1 = ((this.getElementOfMatrix(0,0)+this.getElementOfMatrix(1,1)) + Math.sqrt(D))/2;
+                double eigenValue2 = ((this.getElementOfMatrix(0,0)+this.getElementOfMatrix(1,1)) - Math.sqrt(D))/2;
+                System.out.printf("\nEigen Values are  %.4f  and  %.4f \n",eigenValue1,eigenValue2);
+            }
+            else{
+                double negative_D = Math.sqrt(-D)/2;
+                double a_plus_d = (this.getElementOfMatrix(0,0)+this.getElementOfMatrix(1,1))/2;
+                System.out.printf("\nEigen Values are  %.4f + %.4fi    and    %.4f - %.4fj \n",a_plus_d,negative_D,a_plus_d,negative_D);
+            }
+        }
     }
+
+    @Override
+    public void getEigenVectors(){
+        if (this.getRows()==1){
+            System.out.println("Eigen Vector is   [[1.00]]");
+        }
+        else if (this.getRows()==2){
+
+        }
+    }
+
 }

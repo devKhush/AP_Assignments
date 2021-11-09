@@ -214,24 +214,5 @@ public class RectangularMatrix extends Matrix{
 //        this.printMatrix(this.matrixAddition(transpose,true));
 //    }
 
-    public static void main(String[] args) {
-        Matrix rm = new RectangularMatrix();
-        rm.inputMatrix();
-        rm.printMatrix();
-        System.out.println(rm.getRows());
-        System.out.println(rm.getColumns());
-        System.out.println(rm.getClass().getName());
-        System.out.println(rm.getId());
-
-        System.out.println();
-        Matrix rm1 = new RectangularMatrix();
-        rm1.inputMatrix();
-        rm1.printMatrix();
-        rm1.printMatrix(rm1.getTransposeMatrix());
-        System.out.println(rm1.getRows());
-        System.out.println(rm1.getColumns());
-        System.out.println(rm1.getClass().getName());
-        System.out.println(rm1.getId());
-    }
 
 }

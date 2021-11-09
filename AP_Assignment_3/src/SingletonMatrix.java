@@ -61,15 +61,4 @@ public class SingletonMatrix extends ScalarMatrix{
         this.setElementInSingletonMatrix(value);
     }
 
-    public static void main(String[] args) {
-        Matrix sm = new SingletonMatrix();
-        sm.inputMatrix();
-        sm.printMatrix();
-        sm.printMatrix(sm.getTransposeMatrix());
-        System.out.println(sm.getId());
-        System.out.println(sm.getRows());
-        System.out.println(sm.getColumns());
-        System.out.println(sm.isSymmetric());
-        System.out.println();
-    }
 }

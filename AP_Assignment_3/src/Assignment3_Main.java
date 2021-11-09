@@ -58,21 +58,21 @@ public class Assignment3_Main {
         System.out.println("""
                 All options available in the Main thread are :
                 
-                1. Take matrices as input and label them with appropriate matrix-types.
+                1. Take Any Matrices as input and label them with appropriate matrix-types.
                 2. Create matrices of requested matrix-types and label them with appropriate matrix-types.
-                3. Change the elements of a matrix as long as the fixed matrix-type labels remain valid.
-                4. Display all the matrix-type labels of a requested matrix.
-                5. Perform addition, subtraction, multiplication & division.
-                6. Perform element-wise operations.
+                3. Change the elements of a Matrix.
+                4. Display all the Matrix-type labels of a Requested matrix.
+                5. Perform addition, subtraction, multiplication & division on Matrices.
+                6. Perform element-wise operations on Matrices.
                 7. Transpose matrices.
                 8. Inverse matrices.
-                9. Compute means: row-wise mean, column-wise mean, mean of all the elements.
-                10. Compute determinants.
-                11. Use singleton matrices as scalars.
-                12. Compute A + A' for a matrix A (matrix plus its transpose)
-                13. Compute Eigen vectors and values.
-                14. Solve sets of linear equations using matrices.
-                15. Retrieve all the existing matrices (entered or created) having requested matrix-type labels.
+                9. Compute means: row-wise mean, column-wise mean, mean of all the elements in Matrices.
+                10. Compute determinants of Matrices.
+                11. Use singleton matrices as scalars in Operations 6.
+                12. Compute A + A' for a matrix A (Matrix plus its Transpose)
+                13. Compute Eigen Vectors and Values.
+                14. Solve sets of linear equations using Matrices.
+                15. Retrieve all the existing Matrices having requested matrix-type labels.
                 16. To exit the program""");
     }
 
@@ -231,7 +231,6 @@ public class Assignment3_Main {
             }
 
             else if (option==1){
-                // To be done. To be done later. Not done yet
                 System.out.printf("Enter the number of rows in the matrix :");
                 int row = Integer.parseInt(sc.nextLine().trim());
                 System.out.printf("Enter the number of column in the matrix :");
@@ -968,6 +967,16 @@ public class Assignment3_Main {
 
             else if (option==13){
                 // Compute Eigen Vectors and values. To be done later. Not done yet
+                System.out.printf("Enter the ID Matrix to find its Eigen value and Eigen Vectors :");
+                int id = Integer.parseInt(sc.nextLine().trim());
+                Matrix toFindEigenValueAndVector = allMatricesMade.get(id);
+                if (toFindEigenValueAndVector.getRows()!=toFindEigenValueAndVector.getColumns()){
+                    System.out.println("\nThe Matrix must be square for finding its Eigen values and vectors");
+                }
+                else{
+                    toFindEigenValueAndVector.getEigenValues();
+                    toFindEigenValueAndVector.getEigenVectors();
+                }
             }
 
             else if(option==14){

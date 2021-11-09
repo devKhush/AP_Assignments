@@ -4,6 +4,9 @@ import java.util.Scanner;
 public class Practise{
     public static void main(String[] args) {
 
+        System.out.println(Math.sqrt(-2));
+        System.out.println(Math.pow(3,2));
+
         double[][] matrix = new double[][]{{0,2,4},{-2,0,3},{-4,-3,0}};
         Matrix m = new SquareMatrix();
         m.setRows(3);

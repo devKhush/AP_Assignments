@@ -21,5 +21,4 @@ public class SingularMatrix extends SquareMatrix {
         System.out.println("Can't solve equations as the first matrix is singular");
     }
 
-
 }

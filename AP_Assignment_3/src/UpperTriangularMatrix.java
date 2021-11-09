@@ -18,13 +18,16 @@ public class UpperTriangularMatrix extends SquareMatrix{
         this.changeElementOfMatrix(i,j,value);
     }
 
-    public static void main(String[] args) {
-        Matrix utm = new UpperTriangularMatrix();
-        utm.inputMatrix();
-        System.out.println(utm.getRows());
-        System.out.println(utm.getClass());
-        utm.printMatrix();
-        utm.printMatrix(utm.getTransposeMatrix());
-        System.out.println(utm.getId());
+    @Override
+    public void getEigenValues(){
+        System.out.printf("\nEigen values  =  ");
+        for (int i=0; i<this.getRows(); i++){
+            if (i!=this.getRows()-1)
+                System.out.printf("%.4f, ",this.getElementOfMatrix(i,i));
+            else
+                System.out.printf(" %.4f ",this.getElementOfMatrix(i,i));
+        }
+        System.out.println();
     }
+
 }

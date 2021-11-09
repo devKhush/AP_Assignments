@@ -329,6 +329,8 @@ public class Matrix {
     public void setElementInSingletonMatrix(double elementInSingletonMatrix) { }
     void setScalarElement(double scalarElement) { }
     public double[][] getAdjointof3x3Matrix(){return new double[][]{{Double.MIN_VALUE}};}
+    public void getEigenValues(){}
+    public void getEigenVectors(){}
 
 
     // Getters and Setters

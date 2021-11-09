@@ -107,29 +107,26 @@ public class RowMatrix extends RectangularMatrix{
         demoMatrix.matrixPlusItsTranspose();
     }
 
-    public static void main(String[] args) {
-        Matrix rm = new RowMatrix();
-        rm.inputMatrix();
-        rm.printMatrix();
-        rm.printMatrix(rm.getTransposeMatrix());
-        System.out.println(rm.getId());
-        System.out.println(rm.getRows());
-        System.out.println(rm.getColumns());
-
-        Matrix cm = new ColumnMatrix();
-        cm.inputMatrix();
-        cm.printMatrix();
-        cm.printMatrix(cm.getTransposeMatrix());
-        System.out.println(cm.getId());
-        System.out.println(cm.getRows());
-        System.out.println(cm.getColumns());
-
-        Matrix rm1 = new RowMatrix();
-        rm1.inputMatrix();
-        rm1.printMatrix();
-        rm1.printMatrix(rm1.getTransposeMatrix());
-        System.out.println(rm1.getId());
-        System.out.println(rm1.getRows());
-        System.out.println(rm1.getColumns());
+    @Override
+    public void getEigenValues(){
+        if (this.getRows()!=this.getColumns()){
+            System.out.println("\nMatrix must be Square for finding Eigen Values");
+            return;
+        }
+        if (this.getColumns()==1){
+            System.out.println("\nEigen Value is  "+this.getElementOfMatrix(0,0));
+        }
     }
+
+    @Override
+    public void getEigenVectors(){
+        if (this.getRows()!=this.getColumns()){
+            System.out.println("\nMatrix must be Square for finding Eigen Values");
+            return;
+        }
+        if (this.getColumns()==1){
+            System.out.println("Eigen Vector is   [[1.00]]");
+        }
+    }
+
 }

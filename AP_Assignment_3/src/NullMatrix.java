@@ -148,14 +148,30 @@ public class NullMatrix extends RectangularMatrix{
         System.out.println("Can't change element of a null matrix");
     }
 
-    public static void main(String[] args) {
-        Matrix nm = new NullMatrix();
-        nm.inputMatrix();
-        nm.printMatrix();
-        nm.printMatrix(nm.getTransposeMatrix());
-        System.out.println(nm.getId());
-        System.out.println(nm.getRows());
-        System.out.println(nm.getColumns());
-        System.out.println(nm.isSymmetric());
+    @Override
+    public void getEigenValues(){
+        if (this.getRows()!=this.getColumns()){
+            System.out.println("\nMatrix must be Square for finding Eigen Values");
+            return;
+        }
+        SquareMatrix dummy = new SquareMatrix();
+        dummy.setRows(this.getRows());
+        dummy.setColumns(this.getColumns());
+        dummy.setMatrix(this.getMatrix());
+        dummy.getEigenValues();
     }
+
+    @Override
+    public void getEigenVectors(){
+        if (this.getRows()!=this.getColumns()){
+            System.out.println("\nMatrix must be Square for finding Eigen Values");
+            return;
+        }
+        SquareMatrix dummy = new SquareMatrix();
+        dummy.setRows(this.getRows());
+        dummy.setColumns(this.getColumns());
+        dummy.setMatrix(this.getMatrix());
+        dummy.getEigenVectors();
+    }
+
 }

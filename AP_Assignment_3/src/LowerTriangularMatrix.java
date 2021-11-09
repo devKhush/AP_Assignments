@@ -18,20 +18,16 @@ public class LowerTriangularMatrix extends SquareMatrix{
         this.changeElementOfMatrix(i,j,value);
     }
 
-    public static void main(String[] args) {
-        Matrix ltm = new LowerTriangularMatrix();
-        ltm.inputMatrix();
-        System.out.println(ltm.getRows());
-        System.out.println(ltm.getClass());
-        ltm.printMatrix();
-        ltm.printMatrix(ltm.getTransposeMatrix());
-
+    @Override
+    public void getEigenValues(){
+        System.out.printf("\nEigen values  =  ");
+        for (int i=0; i<this.getRows(); i++){
+            if (i!=this.getRows()-1)
+                System.out.printf("%.4f, ",this.getElementOfMatrix(i,i));
+            else
+                System.out.printf(" %.4f ",this.getElementOfMatrix(i,i));
+        }
         System.out.println();
-        Matrix ltm1 = new LowerTriangularMatrix();
-        ltm1.inputMatrix();
-        System.out.println(ltm1.getRows());
-        System.out.println(ltm1.getClass());
-        ltm1.printMatrix();
-        ltm1.printMatrix(ltm1.getTransposeMatrix());
     }
+
 }

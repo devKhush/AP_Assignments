@@ -50,13 +50,4 @@ public class ScalarMatrix extends DiagonalMatrix{
         System.out.println("Can't change value of Scalar Matrix");
     }
 
-    public static void main(String[] args) {
-        Matrix sm = new ScalarMatrix();
-        sm.inputMatrix();
-        System.out.println(sm.getScalarElement());
-        System.out.println(sm.getId());
-        sm.printMatrix();
-        sm.printMatrix(sm.getTransposeMatrix());
-        System.out.println(sm.isSymmetric());
-    }
 }

@@ -124,14 +124,30 @@ public class OnesMatrix extends RectangularMatrix{
         return new double[][]{{Double.MIN_VALUE}};
     }
 
-    public static void main(String[] args) {
-        Matrix om = new OnesMatrix();
-        om.inputMatrix();
-        om.printMatrix();
-        om.printMatrix(om.getTransposeMatrix());
-        System.out.println(om.getId());
-        System.out.println(om.getRows());
-        System.out.println(om.getColumns());
-        System.out.println(om.isSymmetric());
+    @Override
+    public void getEigenValues(){
+        if (this.getRows()!=this.getColumns()){
+            System.out.println("\nMatrix must be Square for finding Eigen Values");
+            return;
+        }
+        SquareMatrix dummy = new SquareMatrix();
+        dummy.setRows(this.getRows());
+        dummy.setColumns(this.getColumns());
+        dummy.setMatrix(this.getMatrix());
+        dummy.getEigenValues();
     }
+
+    @Override
+    public void getEigenVectors(){
+        if (this.getRows()!=this.getColumns()){
+            System.out.println("\nMatrix must be Square for finding Eigen Values");
+            return;
+        }
+        SquareMatrix dummy = new SquareMatrix();
+        dummy.setRows(this.getRows());
+        dummy.setColumns(this.getColumns());
+        dummy.setMatrix(this.getMatrix());
+        dummy.getEigenVectors();
+    }
+
 }

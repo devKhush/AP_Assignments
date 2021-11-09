@@ -7,6 +7,8 @@ public class IdentityMatrix extends ScalarMatrix{
     public void getAllTypes(){
         System.out.println(this.getClass().getName());
         System.out.println(this.getClass().getSuperclass().getName());
+        if (this.getRows()==1)
+            System.out.println("SingletonMatrix");
         System.out.println("DiagonalMatrix");
         System.out.println("SquareMatrix");
     }
@@ -40,13 +42,4 @@ public class IdentityMatrix extends ScalarMatrix{
         return true;
     }
 
-    public static void main(String[] args) {
-        Matrix im = new IdentityMatrix();
-        im.inputMatrix();
-        System.out.println(im.getScalarElement());
-        System.out.println(im.getId());
-        im.printMatrix();
-        im.printMatrix(im.getTransposeMatrix());
-        System.out.println(im.isSymmetric());
-    }
 }
