@@ -257,6 +257,7 @@ public class Matrix {
             double[] mean = {sumOfRow / this.getColumns()};
             rowMean[i] = mean;
         }
+        System.out.println("Row-wise Mean = ");
         this.printMatrix(rowMean);
     }
 
@@ -271,6 +272,7 @@ public class Matrix {
             double mean = sumOfColumn / this.getRows();
             columnMean[0][j] = mean;
         }
+        System.out.println("Column-wise Mean = ");
         this.printMatrix(columnMean);
     }
 
@@ -282,7 +284,7 @@ public class Matrix {
             }
         }
         double mean = sum/(this.getRows()*this.getColumns());
-        System.out.printf("\nMean of all the elements in this matrix is %.2f\n",mean);
+        System.out.printf("\nMean of all the elements in this matrix is %.4f\n",mean);
     }
 
 
