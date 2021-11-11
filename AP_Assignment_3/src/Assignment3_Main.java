@@ -4,7 +4,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 /*
-    * In this Assignment, the Inheritance principle of OOP was used efficiently.
+    * In this Assignment, the Inheritance, Polymorphism (Method-Overriding and Over-loading too somewhere) and Encapsulation principle of OOP was used efficiently.
     * Since, there are various types of the Matrices but there are matrices that have similar properties
     * For eg, all matrices can be transposed. But we can find determinant of only the Square Matrices
     * (cont.) Similarly not all the Matrices are invertible. So there exist matrices that are very similar to each other.
