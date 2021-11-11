@@ -84,7 +84,7 @@ public class RowMatrix extends RectangularMatrix{
     @Override
     public void solveLinearEquation(Matrix B){
         if (this.getRows()!=this.getColumns()) {
-            System.out.println("Can't solve equations as this matrix is Singular Matrix");
+            System.out.println("Can't solve equations as this matrix is not Square Matrix");
             return;
         }
         SquareMatrix demoMatrix = new SquareMatrix();
