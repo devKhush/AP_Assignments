@@ -47,7 +47,7 @@ public class ScalarMatrix extends DiagonalMatrix{
 
     @Override
     public void changeElement(){
-        System.out.println("Can't change value of Scalar Matrix");
+        System.out.println("Can't change value of "+this.getClass().getName());
     }
 
 }
