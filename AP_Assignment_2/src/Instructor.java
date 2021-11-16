@@ -12,6 +12,7 @@ public class Instructor implements CourseMember{
         this.id = id;
     }
 
+    @Override
     public String getName(){
         return this.name;
     }
@@ -26,7 +27,7 @@ public class Instructor implements CourseMember{
         System.out.printf("Enter comment: ");
         String message = scan.nextLine().trim();
         String dateString = new Date().toString();
-        Comment commentToBeAdded = new Comment(message, dateString, this.name);
+        Comment commentToBeAdded = new Comment(message, dateString, this);
         course.getAllComments().put(commentToBeAdded.getUploadDate(), commentToBeAdded);
     }
 
