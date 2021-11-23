@@ -35,5 +35,7 @@ public class Question1_Main {
         myLibrary.sortAllBooks();
         myLibrary.arrangeBooks();
         myLibrary.showAllSortedBook();
+
+        System.out.println("\nBooks Arranged in Racks Successfully\n");
     }
 }

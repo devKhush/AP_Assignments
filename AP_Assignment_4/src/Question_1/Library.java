@@ -5,11 +5,11 @@ import java.util.Collections;
 import java.util.Scanner;
 
 public class Library {
-    private int numberOfBooks;          // N
-    private int numberOfRacks;          // K
-    private ArrayList<Book> allBooks;
-    private Book[][] sortedBooks;
-    private ArrayList<Long> allBarcodes;
+    private final int numberOfBooks;          // N
+    private final int numberOfRacks;          // K
+    private final ArrayList<Book> allBooks;
+    private final Book[][] sortedBooks;
+    private final ArrayList<Long> allBarcodes;
 
     private static long bookBarcodeCounter = 1000_0000;
 
@@ -123,5 +123,7 @@ public class Library {
         //System.out.println(myLibrary.getAllBooks());
         myLibrary.arrangeBooks();
         myLibrary.showAllSortedBook();
+
+        System.out.println("\nBooks Arranged in Racks Successfully\n");
     }
 }
