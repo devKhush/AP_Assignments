@@ -9,16 +9,22 @@ public class Library {
     private int numberOfRacks;          // K
     private ArrayList<Book> allBooks;
     private Book[][] sortedBooks;
+    private ArrayList<Long> allBarcodes;
+
+    private static long bookBarcodeCounter = 1000_0000;
+
+    public long bookBarcodeGenerator(){
+        long barcode = bookBarcodeCounter;
+        bookBarcodeCounter += 4;
+        return barcode;
+    }
 
     public Library(int N,int K){
         this.allBooks = new ArrayList<Book>();
+        this.allBarcodes = new ArrayList<>();
         this.numberOfBooks = N;
         this.numberOfRacks = K;
-        this.sortedBooks = new Book[getNumberOfRacks()/getNumberOfBooks()][getNumberOfBooks()];
-    }
-
-    public Book[][] getSortedBooks() {
-        return sortedBooks;
+        this.sortedBooks = new Book[getNumberOfRacks()][getNumberOfBooks()/getNumberOfRacks()];
     }
 
     public ArrayList<Book> getAllBooks() {
@@ -27,6 +33,10 @@ public class Library {
 
     public int getNumberOfBooks() {
         return numberOfBooks;
+    }
+
+    public ArrayList<Long> getAllBarcodes() {
+        return allBarcodes;
     }
 
     public int getNumberOfRacks() {
@@ -47,9 +57,8 @@ public class Library {
 
     public void arrangeBooks(){
         int indexOfBook = 0;
-
-        for (int i=0; i<this.getNumberOfRacks()/getNumberOfBooks(); i++){
-            for (int j=0; j<this.getNumberOfBooks(); j++){
+        for (int i=0; i<this.getNumberOfRacks(); i++){
+            for (int j=0; j<this.getNumberOfBooks()/this.getNumberOfRacks(); j++){
                 this.setBookInARack(i,j,getAllBooks().get(indexOfBook));
                 indexOfBook++;
             }
@@ -59,56 +68,59 @@ public class Library {
 
     public void addBookInLibrary(Book toBeAdded){
         this.getAllBooks().add(toBeAdded);
+        this.getAllBarcodes().add(toBeAdded.getBarcode());
     }
 
     public void showAllSortedBook(){
-        System.out.printf("[");
-        int j;
-        for (int i=0; i<this.getNumberOfRacks()/getNumberOfBooks();i++){
-            if (i==0)
-                System.out.printf(" [\n");
-            else
-                System.out.printf("  [");
-            for (j=0; j<this.getNumberOfBooks()-1; j++){
-                System.out.printf(this.getBookInARack(i,j).toString());
+        System.out.println("\n");
+        for (int i=0; i<getNumberOfRacks(); i++){
+            System.out.printf("\nRack %d :\n",i+1);
+            for (int j=0; j<getNumberOfBooks()/getNumberOfRacks(); j++){
+                System.out.println(getBookInARack(i,j));
             }
-            if (i==this.getNumberOfRacks()/getNumberOfBooks()-1)
-                System.out.printf("%s ] ]\n",this.getBookInARack(i,this.getNumberOfBooks()-1).toString());
-            else
-                System.out.printf("%s ]\n",this.getBookInARack(i,this.getNumberOfBooks()-1).toString());
         }
     }
 
     public static void main(String[] args) {
+
+        System.out.println("\nWelcome to my Library!\n");
         Scanner scan = new Scanner(System.in);
-        System.out.printf("Enter number of Books in Library :");
+        System.out.printf("Enter number of Books in Library \n> ");
         int N = Integer.parseInt(scan.nextLine().trim());
-        System.out.printf("Enter number of Racks in Library :");
+        System.out.printf("Enter number of Racks in Library \n> ");
         int K = Integer.parseInt(scan.nextLine().trim());
         while (N%K!=0){
             System.out.println("\nNumber of Books should be a multiple of number of Racks in the Library\nEnter again");
-            System.out.printf("\nEnter number of Books in Library :");
+            System.out.printf("\nEnter number of Books in Library \n> ");
             N = Integer.parseInt(scan.nextLine().trim());
-            System.out.printf("Enter number of Racks in Library :");
+            System.out.printf("Enter number of Racks in Library \n> ");
             K = Integer.parseInt(scan.nextLine().trim());
         }
-        System.out.println();
 
         Library myLibrary = new Library(N,K);
 
         for (int bookNumber=0; bookNumber<N; bookNumber++){
-            System.out.printf("\nEnter the %dth Book details below",bookNumber+1);
+            System.out.printf("\n\nEnter the %dth Book details below \n",bookNumber+1);
             System.out.printf("Book Title Name :");
             String bookTitle = scan.nextLine().trim();
             System.out.printf("Book ISBN :");
             long isbn = Long.parseLong(scan.nextLine().trim());
             System.out.printf("Book Barcode :");
             long barcode = Long.parseLong(scan.nextLine().trim());
-            Book newBook = new Book(bookTitle,barcode,isbn);
-            myLibrary.addBookInLibrary(newBook);
+            if (!myLibrary.getAllBarcodes().contains(barcode)) {
+                Book newBook = new Book(bookTitle, barcode, isbn);
+                myLibrary.addBookInLibrary(newBook);
+            }
+            else{
+                System.out.println("Book with this barcode is already present in Library");
+                System.out.printf("Enter some different Barcode and Try Again");
+                bookNumber--;
+            }
         }
 
+        //System.out.println(myLibrary.getAllBooks());
         myLibrary.sortAllBooks();
+        //System.out.println(myLibrary.getAllBooks());
         myLibrary.arrangeBooks();
         myLibrary.showAllSortedBook();
     }
