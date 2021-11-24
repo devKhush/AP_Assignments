@@ -27,27 +27,27 @@ public class Library {
         this.sortedBooks = new Book[getNumberOfRacks()][getNumberOfBooks()/getNumberOfRacks()];
     }
 
-    public ArrayList<Book> getAllBooks() {
+    private ArrayList<Book> getAllBooks() {
         return allBooks;
     }
 
-    public int getNumberOfBooks() {
+    private int getNumberOfBooks() {
         return numberOfBooks;
     }
 
-    public ArrayList<Long> getAllBarcodes() {
+    private ArrayList<Long> getAllBarcodes() {
         return allBarcodes;
     }
 
-    public int getNumberOfRacks() {
+    private int getNumberOfRacks() {
         return numberOfRacks;
     }
 
-    public void setBookInARack(int rackNumber, int bookPosition, Book toPlace){
+    private void setBookInARack(int rackNumber, int bookPosition, Book toPlace){
         this.sortedBooks[rackNumber][bookPosition] = toPlace;
     }
 
-    public Book getBookInARack(int rackNumber, int bookPosition){
+    private Book getBookInARack(int rackNumber, int bookPosition){
         return this.sortedBooks[rackNumber][bookPosition];
     }
 
