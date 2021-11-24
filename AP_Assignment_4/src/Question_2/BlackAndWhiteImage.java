@@ -24,6 +24,7 @@ public class BlackAndWhiteImage extends Image{
 
     @Override
     public void displayImage(){
+        System.out.println("Black and White Image Pixels");
         System.out.printf("[");
         for (int i=0; i<this.getPixelRows();i++){
             if (i==0)

@@ -3,7 +3,7 @@ package Question_2;
 abstract class Image {
     private int pixelRows;
     private int pixelColumn;
-    private int[][][] imagePixelMatrix;
+    private int[][][] imagePixelMatrix;         // 3-D matrix, (1st for Red, 2nd for Blue, 3rd for Green) for Colour Image or (2-D Gray Matrix) for Black and White Image
     private int ID;
 
     private static int IDcounter = 0;

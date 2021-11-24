@@ -1,7 +1,6 @@
 package Question_2;
 
 public class ColourImage extends Image{
-    // private int[][][] imagePixelMatrix;     // 3-D matrix, 1st for Red, 2nd for Blue, 3rd for Green
 
     ColourImage(int rows, int columns){
         this.setPixelRows(rows);
@@ -16,9 +15,11 @@ public class ColourImage extends Image{
 
     @Override
     public void createDefaultImage(){
-        for (int i =0; i<this.getPixelRows(); i++){
-            for(int j=0; j<this.getPixelColumn(); j++){
-                this.updateImage(i,j,0);
+        for (int colour=0; colour<3; colour++) {
+            for (int i = 0; i < this.getPixelRows(); i++) {
+                for (int j = 0; j < this.getPixelColumn(); j++) {
+                    this.updateImage(i, j, 0);
+                }
             }
         }
     }
