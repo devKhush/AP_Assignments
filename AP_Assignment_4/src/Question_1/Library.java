@@ -72,13 +72,20 @@ public class Library {
     }
 
     public void showAllSortedBook(){
-        System.out.println("\n");
+        System.out.println("\n\n");
+        System.out.println("==========================================================================================");
+        System.out.println("All Books are Sorted as shown");
         for (int i=0; i<getNumberOfRacks(); i++){
-            System.out.printf("\nRack %d :\n",i+1);
+            System.out.println("\n==========================================================================================");
+            System.out.printf("Rack number --> %d \n",i+1);
+            System.out.println("--------------------");
             for (int j=0; j<getNumberOfBooks()/getNumberOfRacks(); j++){
+                System.out.printf("Slot number %d : Book stored --> ",j+1);
                 System.out.println(getBookInARack(i,j));
             }
         }
+        System.out.println("==========================================================================================");
+
     }
 
     public static void main(String[] args) {

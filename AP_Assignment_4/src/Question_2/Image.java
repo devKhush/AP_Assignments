@@ -36,14 +36,16 @@ abstract class Image {
         this.ID = ++IDcounter;
     }
 
-    public abstract void createDefaultImage();
+    public abstract void createDefaultImage(boolean allOnes);
 
     public abstract void displayImage();
 
-    public abstract void updateImage(int i,int j,int value);
+    public abstract void updateImage(int colour, int i,int j,int value);
 
     public abstract int getPixelValueOfImageMatrix(int colour, int i, int j);
 
-    // public abstract void inputImage();
+    public abstract void inputImage();
+
+    public abstract void changePixelValueInImage(int row, int column);
 
 }
