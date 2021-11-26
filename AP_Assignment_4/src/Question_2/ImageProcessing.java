@@ -6,6 +6,7 @@ import java.util.Scanner;
 public class ImageProcessing <M extends Image>{
 
     public void computeNegative(M image){
+        System.out.println("\nComputing the Negative of a Image...");
         int[][][] negativeImage = image.getImagePixelMatrix();
         int k = negativeImage.length;
         int i = negativeImage[0].length;
@@ -18,7 +19,7 @@ public class ImageProcessing <M extends Image>{
                 }
             }
         }
-        System.out.println("\nNegative Image Matrix of this matrix is = ");
+        System.out.println("Negative Image Matrix of this matrix is = ");
         for(int a = 0; a<k; a++){
             String colour =  (k==1)?("Black and White") : ((a==0) ? "Red" : ((a==1) ? "Blue" : "Green"));
             System.out.println(colour+" Negative Image's Pixels");
@@ -41,22 +42,42 @@ public class ImageProcessing <M extends Image>{
 
 
     public void inputImage(M image){
+        System.out.println("\n\nTaking pixel values inputs of the Image...");
         image.inputImage();
+        System.out.println("\nSuccessfully created this Image with given Inputs");
     }
 
     public void displayImage(M image){
+        System.out.println("\nDisplaying the Image with this ID...\n");
         image.displayImage();
+    }
+
+    public void createDefaultImage(M image){
+        System.out.println("\nCreating a Default a Image...");
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Default Images have their all Pixel values as either all 8-bit 0's OR  all 8-bit 1's");
+        System.out.println("Whether you want to make Image with pixel values as all 8-bit Ones values ?");
+        System.out.printf("Enter '1' for Yes OR '0' for No :");
+        int yesOrNo = Integer.parseInt(scan.nextLine().trim());
+        while (yesOrNo!=0 && yesOrNo!=1){
+            System.out.printf("Only Enter '1' for Yes OR '0' for No :");
+            yesOrNo = Integer.parseInt(scan.nextLine().trim());
+        }
+        boolean allOnes = yesOrNo==1;
+        image.createDefaultImage(allOnes);
+        System.out.println("\nSuccessfully created this Default Image");
     }
 
     public void changePixelValueOfImage(M image){
         Scanner scan = new Scanner(System.in);
-        System.out.println("Changing pixel value in a Image...\n");
+        System.out.println("\nChanging pixel value of the Image with this ID...\n");
         System.out.println("NOTE: Indexing starts with 1 ");
         System.out.printf("Enter the Row number to change Pixel value in Image :");
         int row = Integer.parseInt(scan.nextLine().trim());
         System.out.printf("Enter the Column number to change Pixel value in Image :");
         int column = Integer.parseInt(scan.nextLine().trim());
         image.changePixelValueInImage(row,column);
+        System.out.println("\nSuccessfully Updated pixel value of this Image");
     }
 
 

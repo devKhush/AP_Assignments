@@ -36,6 +36,10 @@ abstract class Image {
         this.ID = ++IDcounter;
     }
 
+    public int getID() {
+        return ID;
+    }
+
     public abstract void createDefaultImage(boolean allOnes);
 
     public abstract void displayImage();
@@ -47,5 +51,4 @@ abstract class Image {
     public abstract void inputImage();
 
     public abstract void changePixelValueInImage(int row, int column);
-
 }

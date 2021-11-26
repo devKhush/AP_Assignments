@@ -98,7 +98,6 @@ public class ColourImage extends Image{
             pixelValue = Integer.parseInt(scan.nextLine().trim());
         }
         this.updateImage(rbg,row-1,column-1,pixelValue);
-
     }
 
     public static void main(String[] args) {
