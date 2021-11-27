@@ -35,6 +35,7 @@ public class ColourImage extends Image{
                 }
             }
         }
+        System.out.println();
     }
 
     @Override
@@ -52,7 +53,7 @@ public class ColourImage extends Image{
     }
 
     @Override
-    public void displayImage(){
+    public String toString(){
         for(int colour = 0; colour<3; colour++){
             String rbg = (colour==0) ? "Red" : ((colour==1) ? "Blue" : "Green");
             System.out.println(rbg+" Image's Pixels");
@@ -71,6 +72,7 @@ public class ColourImage extends Image{
                     System.out.printf("%d ]\n",this.getPixelValueOfImageMatrix(colour,i,getPixelColumn()-1));
             }
         }
+        return "";
     }
 
     @Override
@@ -100,16 +102,4 @@ public class ColourImage extends Image{
         this.updateImage(rbg,row-1,column-1,pixelValue);
     }
 
-    public static void main(String[] args) {
-        Image rbg = new ColourImage(2,2);
-        System.out.println(Arrays.deepToString(rbg.getImagePixelMatrix()));
-        rbg.createDefaultImage(true);
-        System.out.println();
-        rbg.displayImage();
-        rbg.updateImage(1,1,1,22);
-        System.out.println();
-        rbg.displayImage();
-        rbg.inputImage();
-        rbg.displayImage();
-    }
 }

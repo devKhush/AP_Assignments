@@ -31,9 +31,8 @@ public class BlackAndWhiteImage extends Image{
     @Override
     public void inputImage(){
         Scanner scan = new Scanner(System.in);
-        System.out.println("NOTE: Indexing starts with 1 ");
+        System.out.println("\nNOTE: Indexing starts with 1 ");
         for (int i =0; i<this.getPixelRows(); i++){
-            System.out.println();
             for(int j=0; j<this.getPixelColumn(); j++){
                 System.out.printf("Enter the pixel value of GrayImage[%d][%d] matrix :",i+1,j+1);
                 int pixelValue = Integer.parseInt(scan.nextLine().trim());
@@ -44,12 +43,12 @@ public class BlackAndWhiteImage extends Image{
                 }
                 this.updateImage(0,i,j,pixelValue);
             }
+            System.out.println();
         }
-        System.out.printf("\nUpdated ");
     }
 
     @Override
-    public void displayImage(){
+    public String toString(){
         System.out.println("Black and White Image's Pixels");
         System.out.printf("[");
         for (int i=0; i<this.getPixelRows();i++){
@@ -65,6 +64,7 @@ public class BlackAndWhiteImage extends Image{
             else
                 System.out.printf("%d ]\n",this.getPixelValueOfImageMatrix(0,i,getPixelColumn()-1));
         }
+        return "";
     }
 
     @Override
@@ -85,16 +85,4 @@ public class BlackAndWhiteImage extends Image{
         this.updateImage(0,row-1,column-1,pixelValue);
     }
 
-    public static void main(String[] args) {
-        Image bw = new BlackAndWhiteImage(3,2);
-        System.out.println(Arrays.deepToString(bw.getImagePixelMatrix()));
-        bw.createDefaultImage(true);
-        System.out.println();
-        bw.displayImage();
-        bw.updateImage(0,2,1,22);
-        System.out.println();
-        bw.displayImage();
-        bw.inputImage();
-        bw.displayImage();
-    }
 }

@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class ImageProcessing <M extends Image>{
 
     public void computeNegative(M image){
-        System.out.println("\nComputing the Negative of a Image...");
+        System.out.println("\nComputing the Negative of a Image...\n");
         int[][][] negativeImage = image.getImagePixelMatrix();
         int k = negativeImage.length;
         int i = negativeImage[0].length;
@@ -19,7 +19,7 @@ public class ImageProcessing <M extends Image>{
                 }
             }
         }
-        System.out.println("Negative Image Matrix of this matrix is = ");
+        System.out.println("Negative Image Matrix of this matrix is shown = \n");
         for(int a = 0; a<k; a++){
             String colour =  (k==1)?("Black and White") : ((a==0) ? "Red" : ((a==1) ? "Blue" : "Green"));
             System.out.println(colour+" Negative Image's Pixels");
@@ -42,21 +42,22 @@ public class ImageProcessing <M extends Image>{
 
 
     public void inputImage(M image){
-        System.out.println("\n\nTaking pixel values inputs of the Image...");
+        System.out.println("\nTaking pixel values inputs of the Image...");
         image.inputImage();
-        System.out.println("\nSuccessfully created this Image with given Inputs");
+        System.out.println("Successfully created this Image with given Inputs...");
     }
 
     public void displayImage(M image){
         System.out.println("\nDisplaying the Image with this ID...\n");
-        image.displayImage();
+        System.out.println(image);
+        System.out.println("This Image's ID = "+image.getID());
     }
 
     public void createDefaultImage(M image){
         System.out.println("\nCreating a Default a Image...");
         Scanner scan = new Scanner(System.in);
-        System.out.println("Default Images have their all Pixel values as either all 8-bit 0's OR  all 8-bit 1's");
-        System.out.println("Whether you want to make Image with pixel values as all 8-bit Ones values ?");
+        // System.out.println("Default Images have their all Pixel values as either all 8-bit 0's OR  all 8-bit 1's");
+        System.out.println("WHETHER YOU WANT TO MAKE A DEFAULT IMAGE WITH ALL PIXEL VALUES AS 8-Bit ONES (i.e, 255) ?");
         System.out.printf("Enter '1' for Yes OR '0' for No :");
         int yesOrNo = Integer.parseInt(scan.nextLine().trim());
         while (yesOrNo!=0 && yesOrNo!=1){
@@ -65,7 +66,7 @@ public class ImageProcessing <M extends Image>{
         }
         boolean allOnes = yesOrNo==1;
         image.createDefaultImage(allOnes);
-        System.out.println("\nSuccessfully created this Default Image");
+        System.out.println("\nSuccessfully created this Default Image...");
     }
 
     public void changePixelValueOfImage(M image){
@@ -77,40 +78,7 @@ public class ImageProcessing <M extends Image>{
         System.out.printf("Enter the Column number to change Pixel value in Image :");
         int column = Integer.parseInt(scan.nextLine().trim());
         image.changePixelValueInImage(row,column);
-        System.out.println("\nSuccessfully Updated pixel value of this Image");
+        System.out.println("\nSuccessfully Updated pixel value of this Image...");
     }
 
-
-    public static void main(String[] args) {
-        ImageProcessing<Image> imageProcessing = new ImageProcessing<>();
-
-        Image rbg = new ColourImage(2,2);
-        System.out.println(Arrays.deepToString(rbg.getImagePixelMatrix()));
-        rbg.createDefaultImage(true);
-        rbg.displayImage();
-        System.out.println();
-        rbg.updateImage(1,1,1,22);
-        System.out.println();
-        rbg.displayImage();
-
-        imageProcessing.computeNegative(rbg);
-        rbg.displayImage();
-
-
-        System.out.println("\n\n\n");
-        Image bw = new BlackAndWhiteImage(3,2);
-        System.out.println(Arrays.deepToString(bw.getImagePixelMatrix()));
-        bw.createDefaultImage(true);
-        System.out.println();
-        bw.displayImage();
-        bw.updateImage(0,2,1,22);
-        System.out.println();
-        bw.displayImage();
-        bw.inputImage();
-        bw.displayImage();
-
-        imageProcessing.computeNegative(bw);
-        bw.displayImage();
-
-    }
 }

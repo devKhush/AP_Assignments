@@ -1,7 +1,5 @@
 package Question_2;
 
-import Question_1.Book;
-
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -34,6 +32,7 @@ public class Question2_Main {
                 6. To exit the program""");
         System.out.println("======================================================================================");
     }
+
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         System.out.println();
@@ -70,7 +69,7 @@ public class Question2_Main {
                 if (imageType!=0 && imageType!=1){
                     System.out.println("""
                             Wrong option entered!
-                            Enter '0' to make a Colourful Image or '0' to make a Black and White Image
+                            Enter '1' to make a Colourful Image or '0' to make a Black and White Image
                             Try again!""");
                     continue;
                 }
@@ -87,7 +86,7 @@ public class Question2_Main {
                 imageToBeMade.setID();
                 imageProcessor.inputImage(imageToBeMade);
                 q2.getImages().put(imageToBeMade.getID(),imageToBeMade);
-                System.out.println("Image ID = "+imageToBeMade.getID());
+                System.out.println("This Image's ID = "+imageToBeMade.getID());
 
             }
 
@@ -98,7 +97,7 @@ public class Question2_Main {
                 if (imageType!=0 && imageType!=1){
                     System.out.println("""
                             Wrong option entered!
-                            Enter '0' to make a Colourful Image or '0' to make a Black and White Image
+                            Enter '1' to make a Colourful Image or '0' to make a Black and White Image
                             Try again!""");
                     continue;
                 }
@@ -115,7 +114,7 @@ public class Question2_Main {
                 imageToBeMade.setID();
                 imageProcessor.createDefaultImage(imageToBeMade);
                 q2.getImages().put(imageToBeMade.getID(),imageToBeMade);
-                System.out.println("Image ID = "+imageToBeMade.getID());
+                System.out.println("This Image's ID = "+imageToBeMade.getID());
             }
 
             else if (option==3){
@@ -136,7 +135,6 @@ public class Question2_Main {
                 Image imageToDisplay = q2.getImages().get(id);
                 if (imageToDisplay!=null){
                     imageProcessor.displayImage(imageToDisplay);
-                    System.out.println("Image ID = "+imageToDisplay.getID());
                 }
                 else{
                     System.out.println("No Image with this ID");
@@ -160,5 +158,4 @@ public class Question2_Main {
         }
 
     }
-
 }

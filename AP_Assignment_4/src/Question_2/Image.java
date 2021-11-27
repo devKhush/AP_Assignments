@@ -42,7 +42,7 @@ abstract class Image {
 
     public abstract void createDefaultImage(boolean allOnes);
 
-    public abstract void displayImage();
+    public abstract String toString();
 
     public abstract void updateImage(int colour, int i,int j,int value);
 

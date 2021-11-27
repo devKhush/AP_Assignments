@@ -24,6 +24,16 @@ public class Book implements Comparable<Book>{
     }
 
     @Override
+    public boolean equals(Object book){
+        if (book!=null && book.getClass()==this.getClass()){
+            Book otherBook = (Book)book;
+            return this.getBookTitle().equals(otherBook.getBookTitle()) && this.getBarcode()== otherBook.getBarcode() && this.getISBN()== otherBook.getISBN();
+        }
+        else
+            return false;
+    }
+
+    @Override
     public int compareTo(Book otherBook){
         if(!this.getBookTitle().equals(otherBook.getBookTitle())){
             return this.getBookTitle().compareTo(otherBook.getBookTitle());
@@ -39,8 +49,8 @@ public class Book implements Comparable<Book>{
     public String toString() {
         return "Book {" +
                 "BookTitle='" + bookTitle + '\'' +
-                ", Barcode=" + barcode +
                 ", ISBN=" + ISBN +
+                ", Barcode=" + barcode +
                 '}';
     }
 }
