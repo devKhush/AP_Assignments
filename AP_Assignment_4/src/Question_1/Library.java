@@ -2,7 +2,6 @@ package Question_1;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Scanner;
 
 public class Library {
     private final int numberOfBooks;          // N
@@ -31,7 +30,7 @@ public class Library {
         return allBooks;
     }
 
-    private int getNumberOfBooks() {
+    public int getNumberOfBooks() {
         return numberOfBooks;
     }
 
@@ -39,7 +38,7 @@ public class Library {
         return allBarcodes;
     }
 
-    private int getNumberOfRacks() {
+    public int getNumberOfRacks() {
         return numberOfRacks;
     }
 
@@ -47,7 +46,7 @@ public class Library {
         this.sortedBooks[rackNumber][bookPosition] = toPlace;
     }
 
-    private Book getBookInARack(int rackNumber, int bookPosition){
+    public Book getBookInARack(int rackNumber, int bookPosition){
         return this.sortedBooks[rackNumber][bookPosition];
     }
 
@@ -71,7 +70,7 @@ public class Library {
     }
 
     public void showAllSortedBook(){
-        System.out.println("==========================================================================================");
+        System.out.println("\n==========================================================================================");
         System.out.printf("All the %d Books are arranged in the %d Racks as shown",this.getNumberOfBooks(),this.getNumberOfRacks());
         for (int i=0; i<getNumberOfRacks(); i++){
             System.out.println("\n==========================================================================================");
@@ -82,7 +81,7 @@ public class Library {
                 System.out.println(getBookInARack(i,j));
             }
         }
-        System.out.println("==========================================================================================");
+        System.out.println("==========================================================================================\n");
     }
 
 }
